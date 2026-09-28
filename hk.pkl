@@ -1,0 +1,34 @@
+amends "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Builtins.pkl"
+
+// Shared steps give check, fix, and pre-commit the same checks.
+// hk isolates staged content, stages fixes, then restores unstaged edits.
+steps {
+  ["lint"] = (Builtins.ox_lint) {
+    prefix = List("bun", "run")
+  }
+  ["format"] = (Builtins.oxfmt) {
+    prefix = List("bun", "run")
+    depends = List("lint")
+  }
+  ["types"] {
+    depends = List("format")
+    check = "bun run check"
+  }
+  ["test"] {
+    depends = List("format")
+    check = "bun test"
+  }
+  ["knip"] {
+    depends = List("format")
+    check = "bun run knip"
+  }
+}
+
+hooks {
+  ["commit-msg"] {
+    steps {
+      ["conventional-commit"] = Builtins.check_conventional_commit
+    }
+  }
+}

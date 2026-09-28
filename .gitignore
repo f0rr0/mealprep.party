@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.env*
+!.env.example
+!.env.test
+data/
+*.tsbuildinfo
+.DS_Store
+.vercel/
+vendor/*
+!vendor/ios-haptics/
+.vercel
+
+work/

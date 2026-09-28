@@ -1,0 +1,10 @@
+.env*
+!.env.example
+vendor/blinkit-mcp
+data/
+node_modules/
+.next/
+.git/
+*.tsbuildinfo
+
+work/
