@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-const people = ["sid", "partner"] as const;
 export const weekdays = [
   "Monday",
   "Tuesday",
@@ -12,12 +11,20 @@ export const weekdays = [
 ] as const;
 export type Weekday = (typeof weekdays)[number];
 export const slots = ["Breakfast", "Lunch", "Snack", "Dinner"] as const;
-const namesSchema = z.strictObject({
-  sid: z.string().trim().min(1).max(40),
-  partner: z.string().trim().min(1).max(40),
-});
-export type Names = z.infer<typeof namesSchema>;
-export const defaultNames: Names = { sid: "Sid", partner: "Shreya" };
+export const memberIdSchema = z
+  .string()
+  .regex(/^[a-z0-9][a-z0-9_-]{0,99}$/u)
+  .refine(
+    (id) => !["__proto__", "constructor", "prototype"].includes(id),
+    "Invalid member ID."
+  );
+const membersSchema = z
+  .record(memberIdSchema, z.string().trim().min(1).max(40))
+  .refine(
+    (members) => Object.keys(members).length > 0,
+    "At least one member is required."
+  );
+export type Members = z.infer<typeof membersSchema>;
 const shortText = z.string().trim().min(1).max(500);
 export const mealSchema = z.strictObject({
   id: z.string().min(1).max(100),
@@ -31,6 +38,7 @@ export const mealSchema = z.strictObject({
 export type Meal = z.infer<typeof mealSchema>;
 export const planSchema = z
   .strictObject({
+    names: membersSchema,
     meals: z.array(mealSchema).max(1000),
     plan: z
       .array(
@@ -38,7 +46,7 @@ export const planSchema = z
           day: z.enum(weekdays),
           slot: z.enum(slots),
           mealId: z.string().min(1),
-          people: z.array(z.enum(people)).min(1).max(2),
+          people: z.array(memberIdSchema).min(1),
         })
       )
       .max(10_000),
@@ -53,6 +61,7 @@ export const planSchema = z
       const key = `${entry.day}:${entry.slot}:${entry.mealId}`;
       if (
         !ids.has(entry.mealId) ||
+        entry.people.some((id) => !Object.hasOwn(data.names, id)) ||
         entries.has(key) ||
         new Set(entry.people).size !== entry.people.length
       ) {
@@ -67,7 +76,6 @@ export const planSchema = z
 type Plan = z.infer<typeof planSchema>;
 export type State = Plan & {
   version: number;
-  names: Names;
   pantry: string[];
   groceries: string[];
 };
@@ -76,11 +84,6 @@ export const kitchenCommand = z.discriminatedUnion("action", [
     action: z.literal("groceries"),
     add: z.array(z.string().min(1).max(200)).max(10_000),
     remove: z.array(z.string().min(1).max(200)).max(10_000),
-    version: z.number().int(),
-  }),
-  z.strictObject({
-    action: z.literal("names"),
-    names: namesSchema,
     version: z.number().int(),
   }),
   z.strictObject({
@@ -110,10 +113,11 @@ export function groceryText(ingredients: string[], pantry: string[]) {
     .filter((name) => !pantry.includes(ingredientKey(name)))
     .join("\n");
 }
-export function withNames(text: string, names: Names) {
+export function withNames(text: string, members: Members) {
   return text.replaceAll(
-    /\{\{(?<person>sid|partner)\}\}/gu,
-    (_, id: keyof Names) => names[id]
+    /\{\{(?<member>[a-z0-9_-]+)\}\}/gu,
+    (placeholder, id: string) =>
+      Object.hasOwn(members, id) ? members[id] : placeholder
   );
 }
 

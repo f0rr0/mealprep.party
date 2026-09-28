@@ -20,9 +20,7 @@ export async function PATCH(req: Request) {
   try {
     const command = kitchenCommand.parse(await req.json());
     const state = await updateState(command.version, (draft) => {
-      if (command.action === "names") {
-        draft.names = command.names;
-      } else if (command.action === "groceries") {
+      if (command.action === "groceries") {
         draft.groceries = updateGroceries(draft, command.add, command.remove);
       } else {
         const key = ingredientKey(command.ingredient);

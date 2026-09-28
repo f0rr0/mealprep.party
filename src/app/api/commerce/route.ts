@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import { sameOrigin } from "@/lib/auth";
 import {
-  accountSchema,
   providerSchema,
   callTool,
   connectionStatus,
@@ -12,10 +11,11 @@ import {
   serialized,
 } from "@/lib/commerce";
 import type { Purchase } from "@/lib/commerce";
-import { getCache, setCache, hash, rateLimit } from "@/lib/db";
+import { getCache, setCache, hash, rateLimit, readState } from "@/lib/db";
+import { memberIdSchema } from "@/lib/model";
 
 const command = z.object({
-  account: accountSchema,
+  account: memberIdSchema,
   action: z.enum(["addresses", "search", "add", "cart", "history"]),
   addressId: z.string().max(200).optional(),
   page: z.number().int().min(1).max(30).optional(),
@@ -49,14 +49,16 @@ export interface ProductResult {
   skuId?: string;
 }
 export async function GET() {
+  const { names } = await readState();
+  const accounts = Object.keys(names);
   return NextResponse.json(
     {
-      accounts: (["sid", "partner"] as const).map((id) => ({
+      accounts: accounts.map((id) => ({
         blinkit: connectionStatus(id, "blinkit"),
         id,
         swiggy: connectionStatus(id, "swiggy"),
       })),
-      history: await pooledHistory(),
+      history: await pooledHistory(accounts),
     },
     { headers: { "Cache-Control": "no-store" } }
   );
@@ -70,6 +72,11 @@ export async function POST(req: Request) {
   }
   try {
     const b = command.parse(await req.json());
+    const { names } = await readState();
+    if (!Object.hasOwn(names, b.account)) {
+      return NextResponse.json({ error: "Unknown member." }, { status: 400 });
+    }
+    const accounts = Object.keys(names);
     const key = `${b.account}:${b.provider}`;
     if (!(await rateLimit(`commerce:${key}`, 150))) {
       return NextResponse.json(
@@ -171,7 +178,7 @@ export async function POST(req: Request) {
       }
       await saveHistory(b.account, b.provider, orders);
       return NextResponse.json({
-        history: await pooledHistory(),
+        history: await pooledHistory(accounts),
         message: `Synced ${orders.length} recent orders.`,
       });
     }

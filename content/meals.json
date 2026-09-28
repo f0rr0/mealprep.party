@@ -1,0 +1,193 @@
+[
+  {
+    "id": "0-breakfast",
+    "title": "Eggs & toast",
+    "recipe": "Cook 2 eggs with 1 tsp oil. Serve with 2 slices of whole-wheat toast.",
+    "ingredients": ["Eggs", "Whole-wheat bread"]
+  },
+  {
+    "id": "0-lunch",
+    "title": "Dal, bhindi & jeera rice",
+    "recipe": "Simmer moong dal with turmeric; finish with cumin, garlic and lemon. Cook bhindi in a wide pan. Serve with measured rice and plain high-protein yogurt.",
+    "ingredients": [
+      "Dal (dry)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "0-snack",
+    "title": "Yogurt, guava & almonds",
+    "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
+    "ingredients": [
+      "High-protein yogurt",
+      "Seasonal fruit",
+      "Nuts or roasted chana"
+    ]
+  },
+  {
+    "id": "0-dinner",
+    "title": "Tandoori chicken & mint raita",
+    "recipe": "Marinate skinless chicken in curd, ginger-garlic, Kashmiri chilli, garam masala and lemon for 30 minutes in the fridge. Air-fry at 190–200°C, turning halfway; start checking at 20 minutes and cook until the thickest meat reaches 74°C away from the bone. Serve with roti, kachumber and mint raita.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "1-lunch",
+    "title": "Paneer bhurji & phulkas",
+    "recipe": "Soften onion, tomato, ginger and cumin. Fold in crumbled lower-fat paneer and peas. Finish with coriander; serve with phulkas and cucumber.",
+    "ingredients": [
+      "Lower-fat paneer",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "1-snack",
+    "title": "Mango yogurt & roasted chana",
+    "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
+    "ingredients": [
+      "High-protein yogurt",
+      "Seasonal fruit",
+      "Nuts or roasted chana"
+    ]
+  },
+  {
+    "id": "1-dinner",
+    "title": "Chicken saag & rice",
+    "recipe": "Cook garlic, ginger, onion and cumin; add chicken and blended spinach. Simmer until chicken reaches 74°C. Finish with lemon and a spoon of curd. Serve measured rice and roasted cauliflower.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "2-lunch",
+    "title": "Rajma rice & crunchy cabbage",
+    "recipe": "Soak rajma overnight, drain and boil vigorously in fresh water for at least 30 minutes before simmering until fully soft. Add cooked tomato masala. Serve with rice, cabbage and high-protein yogurt.",
+    "ingredients": [
+      "Rajma (dry)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "2-snack",
+    "title": "Apple, yogurt & walnuts",
+    "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
+    "ingredients": [
+      "High-protein yogurt",
+      "Seasonal fruit",
+      "Nuts or roasted chana"
+    ]
+  },
+  {
+    "id": "2-dinner",
+    "title": "Hariyali tikka & peppers",
+    "recipe": "Blend mint, coriander, curd, chilli, garlic and lemon. Marinate chicken in the fridge, then air-fry with peppers and onions until chicken reaches 74°C. Serve with roti and yogurt dip.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "3-lunch",
+    "title": "Homestyle chicken curry",
+    "recipe": "Cook onion-tomato masala with ginger, garlic and whole spices. Add chicken and simmer until cooked through to 74°C. Serve with rice and green beans.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "3-dinner",
+    "title": "Soy keema & soft phulkas",
+    "recipe": "Boil dry soy chunks according to packet instructions, squeeze and chop. Cook with onion-tomato masala, peas and keema spices. Serve with phulkas and cucumber raita.",
+    "ingredients": [
+      "Soy chunks (dry)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "4-lunch",
+    "title": "Dal palak & paneer tikka",
+    "recipe": "Cook lentils with spinach. Marinate lower-fat paneer with curd, chilli, cumin and lemon; air-fry until golden. Serve with measured rice.",
+    "ingredients": [
+      "Dal (dry)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt",
+      "Lower-fat paneer"
+    ]
+  },
+  {
+    "id": "4-dinner",
+    "title": "Pepper chicken & vegetables",
+    "recipe": "Toast crushed pepper, curry leaves and cumin in measured oil. Add ginger-garlic and chicken; cook to 74°C. Finish with lemon. Serve roti, sautéed vegetables and curd.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "5-lunch",
+    "title": "Chole, phulkas & kachumber",
+    "recipe": "Simmer fully cooked chickpeas in onion-tomato masala with chole spice. Finish with amchur. Serve with phulkas, chopped salad and high-protein yogurt.",
+    "ingredients": [
+      "Chickpeas (dry)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "5-dinner",
+    "title": "Chicken shawarma wraps",
+    "recipe": "Season chicken with cumin, paprika, garlic, lemon and curd. Air-fry to 74°C and slice. Wrap in phulkas with shredded cabbage, cucumber and garlic-yogurt sauce.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "6-lunch",
+    "title": "Chicken & vegetable pulao",
+    "recipe": "Cook chicken with whole spices, measured rice and plenty of vegetables. Check chicken reaches 74°C. Divide rice and edible meat evenly; serve cucumber raita.",
+    "ingredients": [
+      "Chicken (raw, boneless)",
+      "Rice (dry)",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  },
+  {
+    "id": "6-dinner",
+    "title": "Palak paneer & phulkas",
+    "recipe": "Blanch spinach and blend roughly. Cook garlic, onion, tomato and cumin in measured oil. Add spinach and lower-fat paneer, then simmer briefly. Serve phulkas and fresh salad.",
+    "ingredients": [
+      "Lower-fat paneer",
+      "Atta",
+      "Mixed vegetables",
+      "Plain yogurt"
+    ]
+  }
+]

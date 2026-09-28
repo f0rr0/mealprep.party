@@ -1,383 +1,71 @@
 {
-  "meals": [
-    {
-      "id": "0-breakfast",
-      "title": "Eggs & toast",
-      "recipe": "Cook 2 eggs with 1 tsp oil. Serve with 2 slices of whole-wheat toast.",
-      "ingredients": ["Eggs", "Whole-wheat bread"],
-      "recipeLink": ""
+  "members": {
+    "sid": "Sid",
+    "partner": "Shreya"
+  },
+  "week": {
+    "Monday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "0-lunch",
+      "Snack": "0-snack",
+      "Dinner": "0-dinner"
     },
-    {
-      "id": "0-lunch",
-      "title": "Dal, bhindi & jeera rice",
-      "recipe": "Simmer moong dal with turmeric; finish with cumin, garlic and lemon. Cook bhindi in a wide pan. Serve with measured rice and plain high-protein yogurt.",
-      "ingredients": [
-        "Dal (dry)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
+    "Tuesday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "1-lunch",
+      "Snack": "1-snack",
+      "Dinner": "1-dinner"
     },
-    {
-      "id": "0-snack",
-      "title": "Yogurt, guava & almonds",
-      "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
-      "ingredients": [
-        "High-protein yogurt",
-        "Seasonal fruit",
-        "Nuts or roasted chana"
-      ],
-      "recipeLink": ""
+    "Wednesday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "2-lunch",
+      "Snack": "2-snack",
+      "Dinner": "2-dinner"
     },
-    {
-      "id": "0-dinner",
-      "title": "Tandoori chicken & mint raita",
-      "recipe": "Marinate skinless chicken in curd, ginger-garlic, Kashmiri chilli, garam masala and lemon for 30 minutes in the fridge. Air-fry at 190\u2013200\u00b0C, turning halfway; start checking at 20 minutes and cook until the thickest meat reaches 74\u00b0C away from the bone. Serve with roti, kachumber and mint raita.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
+    "Thursday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "3-lunch",
+      "Snack": "0-snack",
+      "Dinner": "3-dinner"
     },
-    {
-      "id": "1-lunch",
-      "title": "Paneer bhurji & phulkas",
-      "recipe": "Soften onion, tomato, ginger and cumin. Fold in crumbled lower-fat paneer and peas. Finish with coriander; serve with phulkas and cucumber.",
-      "ingredients": [
-        "Lower-fat paneer",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
+    "Friday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "4-lunch",
+      "Snack": "1-snack",
+      "Dinner": "4-dinner"
     },
-    {
-      "id": "1-snack",
-      "title": "Mango yogurt & roasted chana",
-      "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
-      "ingredients": [
-        "High-protein yogurt",
-        "Seasonal fruit",
-        "Nuts or roasted chana"
-      ],
-      "recipeLink": ""
+    "Saturday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "5-lunch",
+      "Snack": "2-snack",
+      "Dinner": "5-dinner"
     },
-    {
-      "id": "1-dinner",
-      "title": "Chicken saag & rice",
-      "recipe": "Cook garlic, ginger, onion and cumin; add chicken and blended spinach. Simmer until chicken reaches 74\u00b0C. Finish with lemon and a spoon of curd. Serve measured rice and roasted cauliflower.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "2-lunch",
-      "title": "Rajma rice & crunchy cabbage",
-      "recipe": "Soak rajma overnight, drain and boil vigorously in fresh water for at least 30 minutes before simmering until fully soft. Add cooked tomato masala. Serve with rice, cabbage and high-protein yogurt.",
-      "ingredients": [
-        "Rajma (dry)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "2-snack",
-      "title": "Apple, yogurt & walnuts",
-      "recipe": "Each: 200 g unsweetened high-protein yogurt, 1 serving whole fruit and 15 g nuts or 25 g roasted chana. Check the yogurt label; ordinary curd has less protein.",
-      "ingredients": [
-        "High-protein yogurt",
-        "Seasonal fruit",
-        "Nuts or roasted chana"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "2-dinner",
-      "title": "Hariyali tikka & peppers",
-      "recipe": "Blend mint, coriander, curd, chilli, garlic and lemon. Marinate chicken in the fridge, then air-fry with peppers and onions until chicken reaches 74\u00b0C. Serve with roti and yogurt dip.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "3-lunch",
-      "title": "Homestyle chicken curry",
-      "recipe": "Cook onion-tomato masala with ginger, garlic and whole spices. Add chicken and simmer until cooked through to 74\u00b0C. Serve with rice and green beans.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "3-dinner",
-      "title": "Soy keema & soft phulkas",
-      "recipe": "Boil dry soy chunks according to packet instructions, squeeze and chop. Cook with onion-tomato masala, peas and keema spices. Serve with phulkas and cucumber raita.",
-      "ingredients": [
-        "Soy chunks (dry)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "4-lunch",
-      "title": "Dal palak & paneer tikka",
-      "recipe": "Cook lentils with spinach. Marinate lower-fat paneer with curd, chilli, cumin and lemon; air-fry until golden. Serve with measured rice.",
-      "ingredients": [
-        "Dal (dry)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt",
-        "Lower-fat paneer"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "4-dinner",
-      "title": "Pepper chicken & vegetables",
-      "recipe": "Toast crushed pepper, curry leaves and cumin in measured oil. Add ginger-garlic and chicken; cook to 74\u00b0C. Finish with lemon. Serve roti, saut\u00e9ed vegetables and curd.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "5-lunch",
-      "title": "Chole, phulkas & kachumber",
-      "recipe": "Simmer fully cooked chickpeas in onion-tomato masala with chole spice. Finish with amchur. Serve with phulkas, chopped salad and high-protein yogurt.",
-      "ingredients": [
-        "Chickpeas (dry)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "5-dinner",
-      "title": "Chicken shawarma wraps",
-      "recipe": "Season chicken with cumin, paprika, garlic, lemon and curd. Air-fry to 74\u00b0C and slice. Wrap in phulkas with shredded cabbage, cucumber and garlic-yogurt sauce.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "6-lunch",
-      "title": "Chicken & vegetable pulao",
-      "recipe": "Cook chicken with whole spices, measured rice and plenty of vegetables. Check chicken reaches 74\u00b0C. Divide rice and edible meat evenly; serve cucumber raita.",
-      "ingredients": [
-        "Chicken (raw, boneless)",
-        "Rice (dry)",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
-    },
-    {
-      "id": "6-dinner",
-      "title": "Palak paneer & phulkas",
-      "recipe": "Blanch spinach and blend roughly. Cook garlic, onion, tomato and cumin in measured oil. Add spinach and lower-fat paneer, then simmer briefly. Serve phulkas and fresh salad.",
-      "ingredients": [
-        "Lower-fat paneer",
-        "Atta",
-        "Mixed vegetables",
-        "Plain yogurt"
-      ],
-      "recipeLink": ""
+    "Sunday": {
+      "Breakfast": {
+        "meal": "0-breakfast",
+        "members": ["sid"]
+      },
+      "Lunch": "6-lunch",
+      "Snack": "0-snack",
+      "Dinner": "6-dinner"
     }
-  ],
-  "plan": [
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Monday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "0-lunch",
-      "people": ["sid", "partner"],
-      "day": "Monday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "0-snack",
-      "people": ["sid", "partner"],
-      "day": "Monday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "0-dinner",
-      "people": ["sid", "partner"],
-      "day": "Monday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Tuesday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "1-lunch",
-      "people": ["sid", "partner"],
-      "day": "Tuesday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "1-snack",
-      "people": ["sid", "partner"],
-      "day": "Tuesday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "1-dinner",
-      "people": ["sid", "partner"],
-      "day": "Tuesday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Wednesday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "2-lunch",
-      "people": ["sid", "partner"],
-      "day": "Wednesday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "2-snack",
-      "people": ["sid", "partner"],
-      "day": "Wednesday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "2-dinner",
-      "people": ["sid", "partner"],
-      "day": "Wednesday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Thursday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "3-lunch",
-      "people": ["sid", "partner"],
-      "day": "Thursday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "0-snack",
-      "people": ["sid", "partner"],
-      "day": "Thursday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "3-dinner",
-      "people": ["sid", "partner"],
-      "day": "Thursday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Friday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "4-lunch",
-      "people": ["sid", "partner"],
-      "day": "Friday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "1-snack",
-      "people": ["sid", "partner"],
-      "day": "Friday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "4-dinner",
-      "people": ["sid", "partner"],
-      "day": "Friday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Saturday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "5-lunch",
-      "people": ["sid", "partner"],
-      "day": "Saturday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "2-snack",
-      "people": ["sid", "partner"],
-      "day": "Saturday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "5-dinner",
-      "people": ["sid", "partner"],
-      "day": "Saturday"
-    },
-    {
-      "slot": "Breakfast",
-      "mealId": "0-breakfast",
-      "people": ["sid"],
-      "day": "Sunday"
-    },
-    {
-      "slot": "Lunch",
-      "mealId": "6-lunch",
-      "people": ["sid", "partner"],
-      "day": "Sunday"
-    },
-    {
-      "slot": "Snack",
-      "mealId": "0-snack",
-      "people": ["sid", "partner"],
-      "day": "Sunday"
-    },
-    {
-      "slot": "Dinner",
-      "mealId": "6-dinner",
-      "people": ["sid", "partner"],
-      "day": "Sunday"
-    }
-  ]
+  }
 }

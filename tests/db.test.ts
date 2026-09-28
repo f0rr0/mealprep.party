@@ -1,11 +1,12 @@
 import { spyOn, test } from "bun:test";
 import assert from "node:assert/strict";
 
-import { db, readState } from "../lib/db";
-import { seedState } from "../lib/seed";
+import { db, readState } from "@/lib/db";
+
+import { createState } from "./fixtures";
 
 test("reads the saved kitchen in one query without seeding, including when missing", async () => {
-  const state = seedState();
+  const state = createState();
   const query = spyOn(db.$client, "unsafe");
   try {
     query.mockReturnValue({

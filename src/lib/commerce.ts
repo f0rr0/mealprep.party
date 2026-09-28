@@ -7,17 +7,15 @@ import { getCache, setCache } from "./db";
 
 export { serialized } from "./db";
 
-export type Account = "sid" | "partner";
 export type Provider = "swiggy" | "blinkit";
 export interface Purchase {
   id: string;
-  account: Account;
+  account: string;
   provider: Provider;
   date: string;
   status: string;
   items: { name: string; quantity: number }[];
 }
-export const accountSchema = z.enum(["sid", "partner"]);
 export const providerSchema = z.enum(["swiggy", "blinkit"]);
 // No arbitrary tool passthrough. Checkout, payment and order placement are unreachable.
 const allowedTools = {
@@ -35,29 +33,21 @@ export function assertAllowed(provider: Provider, name: string) {
     throw new Error("This app cannot place orders or make payments.");
   }
 }
-export function providerConfig(account: Account, provider: Provider) {
-  if (provider === "swiggy") {
-    return {
-      token:
-        account === "sid"
-          ? env.SWIGGY_SID_ACCESS_TOKEN
-          : env.SWIGGY_PARTNER_ACCESS_TOKEN,
-      url: "https://mcp.swiggy.com/im",
-    };
-  }
-  return account === "sid"
-    ? { token: env.BLINKIT_SID_MCP_TOKEN, url: env.BLINKIT_SID_MCP_URL }
-    : {
-        token: env.BLINKIT_PARTNER_MCP_TOKEN,
-        url: env.BLINKIT_PARTNER_MCP_URL,
-      };
+export function providerConfig(account: string, provider: Provider) {
+  const config = Object.hasOwn(env.MCP_ACCOUNTS, account)
+    ? env.MCP_ACCOUNTS[account]
+    : undefined;
+  return provider === "swiggy"
+    ? { token: config?.swiggy?.token, url: "https://mcp.swiggy.com/im" }
+    : { token: config?.blinkit?.token, url: config?.blinkit?.url };
 }
-export function connectionStatus(account: Account, provider: Provider) {
+
+export function connectionStatus(account: string, provider: Provider) {
   const config = providerConfig(account, provider);
   return Boolean(config.url && config.token);
 }
 export async function callTool(
-  account: Account,
+  account: string,
   provider: Provider,
   name: string,
   args: Record<string, unknown> = {}
@@ -112,7 +102,7 @@ export async function callTool(
   }
 }
 export async function saveHistory(
-  account: Account,
+  account: string,
   provider: Provider,
   orders: Purchase[]
 ) {
@@ -121,9 +111,9 @@ export async function saveHistory(
     JSON.stringify({ orders, syncedAt: new Date().toISOString() })
   );
 }
-export async function pooledHistory() {
+export async function pooledHistory(accounts: string[]) {
   const results = await Promise.all(
-    (["sid", "partner"] as const).flatMap((account) =>
+    accounts.flatMap((account) =>
       (["swiggy", "blinkit"] as const).map(async (provider) => {
         const raw = await getCache(`history:${provider}:${account}`);
         return raw ? (JSON.parse(raw).orders as Purchase[]) : [];

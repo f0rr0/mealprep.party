@@ -6,7 +6,7 @@ import react from "ultracite/oxlint/react";
 export default defineConfig({
   extends: [core, react, next],
   jsPlugins: ["@shadcn/lint", "eslint-plugin-better-tailwindcss"],
-  settings: { "better-tailwindcss": { entryPoint: "app/globals.css" } },
+  settings: { "better-tailwindcss": { entryPoint: "src/app/globals.css" } },
   // Keep declarations and domain ordering readable; formatting belongs to Oxfmt.
   rules: {
     // White is the contrast mask for the travelling weekday indicator.
@@ -27,8 +27,8 @@ export default defineConfig({
     "react/todo": "off",
   },
   ignorePatterns: [
-    "components/ui/**",
-    "app/globals.css",
+    "src/components/ui/**",
+    "src/app/globals.css",
     "vendor/**",
     ".next/**",
     "next-env.d.ts",

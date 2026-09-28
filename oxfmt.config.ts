@@ -4,8 +4,8 @@ export default {
   ...preset,
   ignorePatterns: [
     ...(preset.ignorePatterns ?? []),
-    "components/ui/**",
-    "app/globals.css",
+    "src/components/ui/**",
+    "src/app/globals.css",
     "vendor/**",
     ".next/**",
     "next-env.d.ts",

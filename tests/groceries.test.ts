@@ -2,17 +2,18 @@ import { test } from "bun:test";
 import assert from "node:assert/strict";
 import { setImmediate as settle } from "node:timers/promises";
 
-import { createKitchenSync } from "../lib/kitchen-sync";
+import { createKitchenSync } from "@/lib/kitchen-sync";
 import {
   entryKey,
   ingredientsForEntries,
   missingIngredients,
   updateGroceries,
-} from "../lib/model";
-import { seedState } from "../lib/seed";
+} from "@/lib/model";
+
+import { createState } from "./fixtures";
 
 test("groceries merge, deduplicate ingredients, ignore pantry and preserve concurrent additions", async () => {
-  const initial = seedState();
+  const initial = createState();
   const [first, second, third] = initial.plan;
   const existing = entryKey(first);
   const added = entryKey(second);

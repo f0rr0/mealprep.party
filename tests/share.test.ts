@@ -1,12 +1,16 @@
 import { test } from "bun:test";
 import assert from "node:assert/strict";
 
-import { seedState } from "../lib/seed";
-import { mealShareText, shareText } from "../lib/share";
+import { mealShareText, shareText } from "@/lib/share";
+
+import { createState } from "./fixtures";
 
 test("shares only selected meals in weekday order, with configured names and recipes", () => {
-  const state = seedState();
-  state.names = { sid: "Sam", partner: "Ria" };
+  const state = createState();
+  const ids = Object.keys(state.names);
+  state.names = Object.fromEntries(
+    ids.map((id, index) => [id, ["Sam", "Ria"][index]])
+  );
   const monday = state.plan.find(
     (entry) => entry.day === "Monday" && entry.slot === "Dinner"
   );

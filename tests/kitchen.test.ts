@@ -1,9 +1,9 @@
 import { test } from "bun:test";
 import assert from "node:assert/strict";
 
-import { sameOrigin } from "../lib/auth";
-import { assertAllowed, providerConfig } from "../lib/commerce";
-import { possibleMatch } from "../lib/matching";
+import { sameOrigin } from "@/lib/auth";
+import { assertAllowed, providerConfig } from "@/lib/commerce";
+import { possibleMatch } from "@/lib/matching";
 import {
   weekdayFor,
   weekdays,
@@ -13,16 +13,21 @@ import {
   mealSchema,
   planSchema,
   withNames,
-} from "../lib/model";
-import { seedState } from "../lib/seed";
+} from "@/lib/model";
+
+import { createState } from "./fixtures";
 
 test("recurring weekday content, names, plain groceries and retained cart boundaries", () => {
-  const state = seedState();
+  const state = createState();
   assert.equal(state.plan.length, 28);
-  assert.equal(state.names.partner, "Shreya");
+  assert.ok(Object.keys(state.names).length > 0);
   assert.equal(planSchema.safeParse(state).success, false);
   assert.equal(
-    planSchema.safeParse({ meals: state.meals, plan: state.plan }).success,
+    planSchema.safeParse({
+      names: state.names,
+      meals: state.meals,
+      plan: state.plan,
+    }).success,
     true
   );
   const [meal] = state.meals;
@@ -43,6 +48,7 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
   );
   assert.equal(
     planSchema.safeParse({
+      names: state.names,
       meals: state.meals,
       plan: [{ ...state.plan[0], mealId: "missing" }],
     }).success,
@@ -53,7 +59,10 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
     false
   );
   assert.equal(
-    withNames("{{sid}} & {{partner}}", { sid: "Sam", partner: "Ria" }),
+    withNames("{{member-a}} & {{member-b}}", {
+      "member-a": "Sam",
+      "member-b": "Ria",
+    }),
     "Sam & Ria"
   );
   assert.equal(weekdayFor(new Date(2026, 8, 28)), "Monday");
@@ -64,6 +73,7 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
   }
   assert.equal(
     planSchema.safeParse({
+      names: state.names,
       meals: state.meals,
       plan: [{ ...state.plan[0], date: "2026-09-28" }],
     }).success,
@@ -84,14 +94,12 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
       assert.throws(() => assertAllowed(provider, tool));
     }
   }
+  assert.equal(providerConfig("member-a", "swiggy").token, "test-swiggy-token");
   assert.equal(
-    providerConfig("sid", "swiggy").token,
-    process.env.SWIGGY_SID_ACCESS_TOKEN || undefined
+    providerConfig("member-c", "blinkit").url,
+    "https://blinkit.example/mcp"
   );
-  assert.equal(
-    providerConfig("partner", "swiggy").token,
-    process.env.SWIGGY_PARTNER_ACCESS_TOKEN || undefined
-  );
+  assert.equal(providerConfig("unknown-member", "swiggy").token, undefined);
   assert.equal(
     sameOrigin(
       new Request("https://kitchen.example/api/kitchen", {
@@ -103,10 +111,10 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
 });
 
 test("meal selections stay distinct across days; pantry checks survive rapid taps, conflicts and retry", async () => {
-  const { entryKey, selectEntries } = await import("../lib/model");
-  const { createKitchenSync } = await import("../lib/kitchen-sync");
+  const { entryKey, selectEntries } = await import("@/lib/model");
+  const { createKitchenSync } = await import("@/lib/kitchen-sync");
   const { setImmediate: settle } = await import("node:timers/promises");
-  const initial = seedState();
+  const initial = createState();
   initial.pantry = [];
   const monday = initial.plan.filter((entry) => entry.day === "Monday");
   const tuesday = initial.plan.find((entry) => entry.day === "Tuesday");

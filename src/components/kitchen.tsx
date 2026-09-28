@@ -50,7 +50,8 @@ import {
   tabPanelClass,
 } from "@/lib/ui-styles";
 import { cn } from "@/lib/utils";
-import groceriesEmpty from "@/public/groceries-empty.webp";
+
+import groceriesEmpty from "../../public/groceries-empty.webp";
 
 function WeekStrip({
   today,

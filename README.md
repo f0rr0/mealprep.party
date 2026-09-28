@@ -11,4 +11,4 @@ mise run check
 
 Configure secrets in `.env.local` using `.env.example`; production secrets live in Vercel.
 
-Edit `content/plan.json` and run `bun run plan:sync` to update meals in the database.
+Edit `content/plan.json` and `content/meals.json` and run `bun run plan:sync` to update meals in the database.
