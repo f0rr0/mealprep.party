@@ -16,8 +16,22 @@ test("service worker displays a fallback and opens the notification's day in an 
   const handlers = new Map<string, (event: unknown) => void>();
   const displayed: string[] = [];
   const opened: string[] = [];
+  const messages: { type: string; url: string }[] = [];
   let focused = false;
+  let focusFails = false;
   let existing = true;
+  const client = {
+    id: "home-screen",
+    url: "https://mealprep.party/",
+    focus: () => {
+      focused = true;
+      return focusFails
+        ? Promise.reject(new Error("Cannot focus"))
+        : Promise.resolve();
+    },
+    postMessage: (message: { type: string; url: string }) =>
+      messages.push(message),
+  };
   let pending: Promise<unknown> = Promise.resolve();
   const waitUntil = (promise: Promise<unknown>) => {
     pending = promise;
@@ -41,27 +55,10 @@ test("service worker displays a fallback and opens the notification's day in an 
         },
       },
       clients: {
-        matchAll: () =>
-          Promise.resolve(
-            existing
-              ? [
-                  {
-                    url: "https://mealprep.party/",
-                    navigate: (url: string) => {
-                      opened.push(url);
-                      return Promise.resolve({
-                        focus: () => {
-                          focused = true;
-                        },
-                      });
-                    },
-                  },
-                ]
-              : []
-          ),
+        matchAll: () => Promise.resolve(existing ? [client] : []),
         openWindow: (url: string) => {
           opened.push(url);
-          return Promise.resolve();
+          return Promise.resolve(client);
         },
       },
     },
@@ -84,11 +81,32 @@ test("service worker displays a fallback and opens the notification's day in an 
   click("/?day=wednesday");
   await pending;
   assert.equal(focused, true);
-  assert.equal(opened.pop(), "https://mealprep.party/?day=wednesday");
+  assert.equal(opened.length, 0);
+  assert.equal(messages.at(-1)?.type, "notification-open");
+  assert.equal(messages.pop()?.url, "https://mealprep.party/?day=wednesday");
+  focusFails = true;
+  click("/?day=wednesday");
+  await pending;
+  assert.equal(messages.pop()?.url, "https://mealprep.party/?day=wednesday");
   existing = false;
   click("/?day=sunday");
   await pending;
   assert.equal(opened.pop(), "https://mealprep.party/?day=sunday");
+  // The first message may arrive before React mounts; ready replays it.
+  messages.length = 0;
+  const message = (type: string, source = client, url?: string) =>
+    handlers.get("message")?.({ source, data: { type, url } });
+  message("notification-ready", { ...client, id: "other-window" });
+  message("notification-ready", {
+    ...client,
+    url: "https://elsewhere.example/",
+  });
+  assert.equal(messages.length, 0);
+  message("notification-ready");
+  assert.equal(messages.pop()?.url, "https://mealprep.party/?day=sunday");
+  message("notification-opened", client, "https://mealprep.party/?day=sunday");
+  message("notification-ready");
+  assert.equal(messages.length, 0);
   click("https://elsewhere.example/");
   await pending;
   assert.equal(opened.pop(), "https://mealprep.party");

@@ -1,4 +1,36 @@
+/* oxlint-disable unicorn/require-post-message-target-origin -- Client.postMessage has no targetOrigin; clients are checked against this worker’s origin. */
 declare const self: ServiceWorkerGlobalScope;
+
+let notificationTarget: {
+  url: string;
+  clientId: string | null;
+  expires: number;
+} | null = null;
+
+self.addEventListener("message", (event) => {
+  const client = event.source;
+  if (
+    !client ||
+    !("url" in client) ||
+    URL.parse(client.url)?.origin !== self.location.origin ||
+    !notificationTarget ||
+    notificationTarget.expires < Date.now() ||
+    (notificationTarget.clientId && notificationTarget.clientId !== client.id)
+  ) {
+    return;
+  }
+  if (event.data?.type === "notification-ready") {
+    client.postMessage({
+      type: "notification-open",
+      url: notificationTarget.url,
+    });
+  } else if (
+    event.data?.type === "notification-opened" &&
+    event.data.url === notificationTarget.url
+  ) {
+    notificationTarget = null;
+  }
+});
 
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (event) =>
@@ -43,13 +75,24 @@ self.addEventListener("notificationclick", (event) => {
       const client = windows.find(
         (item) => new URL(item.url).origin === self.location.origin
       );
+      // iOS can resume the app at its start URL. Keep the destination until React is ready.
+      notificationTarget = {
+        url,
+        clientId: client?.id ?? null,
+        expires: Date.now() + 60_000,
+      };
       if (client) {
-        const navigated = await client.navigate(url).catch(() => null);
-        if (navigated) {
-          return navigated.focus();
-        }
+        await client.focus().catch(() => null);
+        client.postMessage({ type: "notification-open", url });
+        return;
       }
-      return self.clients.openWindow(url);
+      const opened = await self.clients.openWindow(url);
+      if (opened) {
+        if (notificationTarget?.url === url) {
+          notificationTarget.clientId = opened.id;
+        }
+        opened.postMessage({ type: "notification-open", url });
+      }
     })()
   );
 });
