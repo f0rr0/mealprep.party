@@ -9,12 +9,20 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Our Kitchen",
+    title: "mealprep.party",
   },
-  description: "Our shared meals, recipes and groceries, in one place.",
+  description: "Meals, sorted.",
+  metadataBase: new URL("https://mealprep.party"),
+  openGraph: {
+    title: "mealprep.party",
+    description: "Meals, sorted.",
+    type: "website",
+    url: "https://mealprep.party",
+  },
+  twitter: { card: "summary_large_image" },
   manifest: "/manifest.webmanifest",
   robots: { follow: false, index: false },
-  title: "Our Kitchen",
+  title: "mealprep.party",
 };
 export const viewport: Viewport = {
   initialScale: 1,
