@@ -5,9 +5,12 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#f5f4ed",
     description: "Meals, sorted.",
     display: "standalone",
-    icons: [
-      { purpose: "any", sizes: "192x192", src: "/icon.png", type: "image/png" },
-    ],
+    icons: (["any", "maskable"] as const).map((purpose) => ({
+      purpose,
+      sizes: "1024x1024",
+      src: purpose === "maskable" ? "/app-icon-maskable.png" : "/app-icon.png",
+      type: "image/png",
+    })),
     name: "mealprep.party",
     short_name: "mealprep.party",
     start_url: "/",
