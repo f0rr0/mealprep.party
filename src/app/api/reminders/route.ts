@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import { env } from "@/env";
 import { sameOrigin } from "@/lib/auth";
@@ -37,13 +37,31 @@ export async function POST(req: Request) {
       );
     }
     const { endpoint, keys } = command.subscription;
-    await db
-      .insert(pushSubscriptions)
-      .values({ endpoint, ...keys })
-      .onConflictDoUpdate({
-        target: pushSubscriptions.endpoint,
-        set: keys,
-      });
+    const saved = await db.transaction(async (tx) => {
+      // ponytail: serialize subscription writes; use a quota row if traffic grows.
+      await tx.execute(
+        sql`lock table ${pushSubscriptions} in share row exclusive mode`
+      );
+      const [existing] = await tx
+        .update(pushSubscriptions)
+        .set(keys)
+        .where(eq(pushSubscriptions.endpoint, endpoint))
+        .returning({ endpoint: pushSubscriptions.endpoint });
+      if (existing) {
+        return true;
+      }
+      if ((await tx.$count(pushSubscriptions)) >= env.PUSH_SUBSCRIPTION_LIMIT) {
+        return false;
+      }
+      await tx.insert(pushSubscriptions).values({ endpoint, ...keys });
+      return true;
+    });
+    if (!saved) {
+      return Response.json(
+        { error: "Reminder subscription limit reached." },
+        { status: 409 }
+      );
+    }
     return Response.json({ enabled: true });
   }
   const where = eq(pushSubscriptions.endpoint, command.endpoint);
