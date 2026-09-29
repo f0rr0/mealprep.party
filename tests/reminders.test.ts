@@ -309,6 +309,65 @@ test("subscription validation rejects arbitrary destinations and malformed keys"
   );
 });
 
+test.each([
+  [env.PUSH_SUBSCRIPTION_LIMIT - 1, false, 200],
+  [env.PUSH_SUBSCRIPTION_LIMIT, false, 409],
+  [env.PUSH_SUBSCRIPTION_LIMIT + 1, false, 409],
+  [env.PUSH_SUBSCRIPTION_LIMIT, true, 200],
+  [env.PUSH_SUBSCRIPTION_LIMIT + 1, true, 200],
+] as const)(
+  "subscription cap: total=%i, existing=%s returns %i",
+  async (total, existing, expected) => {
+    const transaction = spyOn(db, "transaction");
+    const query = spyOn(db.$client, "unsafe");
+    const endpoint = "https://web.push.apple.com/device-token";
+    const keys = { p256dh: `B${"A".repeat(86)}`, auth: "A".repeat(22) };
+    try {
+      transaction.mockImplementation((runTransaction) =>
+        runTransaction(db as unknown as Parameters<typeof runTransaction>[0])
+      );
+      query.mockImplementation((() =>
+        Object.assign(Promise.resolve([{ count: total }]), {
+          values: () => Promise.resolve(existing ? [[endpoint]] : []),
+        })) as unknown as typeof db.$client.unsafe);
+      const response = await subscribe(
+        new Request("https://mealprep.party/api/reminders", {
+          method: "POST",
+          headers: { origin: "https://mealprep.party" },
+          body: JSON.stringify({
+            action: "subscribe",
+            subscription: { endpoint, keys },
+          }),
+        })
+      );
+      assert.equal(response.status, expected);
+      assert.deepEqual(
+        await response.json(),
+        expected === 200
+          ? { enabled: true }
+          : { error: "Reminder subscription limit reached." }
+      );
+      assert.equal(
+        query.mock.calls[0][0],
+        'lock table "meal_prep_party"."push_subscriptions" in share row exclusive mode'
+      );
+      const inserts = query.mock.calls.filter(([sql]) =>
+        sql.startsWith("insert")
+      );
+      assert.equal(inserts.length, !existing && expected === 200 ? 1 : 0);
+      assert.deepEqual(query.mock.calls[1][1], [
+        keys.p256dh,
+        keys.auth,
+        endpoint,
+      ]);
+      assert.equal(transaction.mock.calls.length, 1);
+    } finally {
+      query.mockRestore();
+      transaction.mockRestore();
+    }
+  }
+);
+
 test("push routes reject unauthenticated sends and cross-origin or invalid subscriptions before DB access", async () => {
   const missing = await send(
     new Request("https://mealprep.party/api/reminders/send")

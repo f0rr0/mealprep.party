@@ -12,5 +12,6 @@ export const env = createEnv({
     VAPID_PUBLIC_KEY: z.string().min(1).optional(),
     VAPID_PRIVATE_KEY: z.string().min(1).optional(),
     CRON_SECRET: z.string().min(32).optional(),
+    PUSH_SUBSCRIPTION_LIMIT: z.coerce.number().int().positive().default(50),
   },
 });
