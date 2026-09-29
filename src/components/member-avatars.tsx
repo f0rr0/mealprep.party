@@ -1,6 +1,30 @@
 import { getImageProps } from "next/image";
+import { preload } from "react-dom";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+function avatarImageProps(src: string) {
+  return getImageProps({
+    src,
+    alt: "",
+    width: 22,
+    height: 22,
+    sizes: "22px",
+    loading: "eager",
+  }).props;
+}
+
+export function preloadMemberAvatars(avatars: string[]) {
+  for (const avatar of avatars) {
+    const { src, srcSet, sizes } = avatarImageProps(avatar);
+    preload(src, {
+      as: "image",
+      imageSrcSet: srcSet,
+      imageSizes: sizes,
+      fetchPriority: "low",
+    });
+  }
+}
 
 export function MemberAvatars({
   members,
@@ -17,16 +41,7 @@ export function MemberAvatars({
             className="data-[size=sm]:size-5.5"
           >
             {avatar && (
-              <AvatarImage
-                {...getImageProps({
-                  src: avatar,
-                  alt: "",
-                  width: 22,
-                  height: 22,
-                  sizes: "22px",
-                }).props}
-                draggable={false}
-              />
+              <AvatarImage {...avatarImageProps(avatar)} draggable={false} />
             )}
             <AvatarFallback>{[...name][0]}</AvatarFallback>
           </Avatar>
