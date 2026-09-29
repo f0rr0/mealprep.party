@@ -139,12 +139,49 @@ export default function Kitchen({
         value.toLowerCase() === url.searchParams.get("day")?.toLowerCase()
     );
     // oxlint-disable-next-line react/set-state-in-effect -- Resolve the browser’s local day after hydration, independently of the network.
-    setDay((selected) => selected ?? requestedDay ?? currentDay);
+    setDay((selected) => requestedDay ?? selected ?? currentDay);
     if (url.searchParams.has("day")) {
       url.searchParams.delete("day");
       window.history.replaceState(window.history.state, "", url);
     }
     setToday(currentDay);
+    function openNotification(event: MessageEvent) {
+      if (
+        event.origin !== window.location.origin ||
+        event.data?.type !== "notification-open" ||
+        typeof event.data.url !== "string"
+      ) {
+        return;
+      }
+      const target = URL.parse(event.data.url, window.location.origin);
+      if (target?.origin !== window.location.origin) {
+        return;
+      }
+      const nextDay = weekdays.find(
+        (value) =>
+          value.toLowerCase() === target.searchParams.get("day")?.toLowerCase()
+      );
+      if (nextDay) {
+        setDay(nextDay);
+        setTab("plan");
+        setRecipeOpen(false);
+        setCopyFallback("");
+      }
+      event.source?.postMessage({
+        type: "notification-opened",
+        url: target.href,
+      });
+    }
+    async function notificationReady() {
+      const worker = await navigator.serviceWorker.ready;
+      if (active) {
+        worker.active?.postMessage({ type: "notification-ready" });
+      }
+    }
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("message", openNotification);
+      void notificationReady();
+    }
     async function load() {
       try {
         const data = await initialState;
@@ -194,6 +231,7 @@ export default function Kitchen({
       window.removeEventListener("online", retry);
       window.removeEventListener("beforeunload", beforeUnload);
       document.removeEventListener("visibilitychange", refresh);
+      navigator.serviceWorker?.removeEventListener("message", openNotification);
     };
   }, [initialState]);
 
