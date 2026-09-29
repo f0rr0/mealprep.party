@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCopyFeedback } from "@/hooks/use-copy-feedback";
 import { hapticRef } from "@/lib/haptics";
 import { shareText } from "@/lib/share";
+import { drawerContentClass } from "@/lib/ui-styles";
 import { cn } from "@/lib/utils";
 
 export function ShareMealsButton({
@@ -66,7 +67,7 @@ export function ShareMealsButton({
         )}
       </Button>
       <Drawer open={manual} onOpenChange={setManual} showSwipeHandle>
-        <DrawerContent className="mx-auto w-full max-w-xl motion-reduce:transition-none">
+        <DrawerContent className={drawerContentClass}>
           <DrawerHeader>
             <DrawerTitle className="text-center">Share meals</DrawerTitle>
             <DrawerDescription>Select and copy.</DrawerDescription>

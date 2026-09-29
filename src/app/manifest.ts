@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Meals, sorted.",
     display: "standalone",
     icons: [
-      { purpose: "any", sizes: "192x192", src: "/icon.png", type: "image/png" },
+      { purpose: "any", sizes: "any", src: "/icon.svg", type: "image/svg+xml" },
     ],
     name: "mealprep.party",
     short_name: "mealprep.party",

@@ -48,6 +48,7 @@ import type { PlanEntry, State, Weekday } from "@/lib/model";
 import { mealShareText } from "@/lib/share";
 import {
   actionButtonClass,
+  drawerContentClass,
   headerButtonClass,
   tabPanelClass,
 } from "@/lib/ui-styles";
@@ -239,7 +240,7 @@ export default function Kitchen({
                 width={144}
                 height={30}
                 sizes="144px"
-                className="h-auto w-36 -translate-y-1"
+                className="h-auto w-36 -translate-y-1 dark:hue-rotate-180 dark:invert"
                 loading="eager"
               />
             </HeaderItem>
@@ -425,6 +426,11 @@ export default function Kitchen({
                             }))}
                             selecting={selecting}
                             selected={selected.includes(entryKey(entry))}
+                            open={
+                              recipeOpen &&
+                              recipe !== null &&
+                              entryKey(recipe) === entryKey(entry)
+                            }
                             onOpen={() => {
                               setRecipe(entry);
                               setRecipeOpen(true);
@@ -520,7 +526,9 @@ export default function Kitchen({
         }}
         showSwipeHandle
       >
-        <DrawerContent className="mx-auto min-h-[60dvh] w-full max-w-xl text-base/6 motion-reduce:transition-none">
+        <DrawerContent
+          className={cn(drawerContentClass, "min-h-[60dvh] text-base/6")}
+        >
           <DrawerHeader className="gap-3 md:gap-3">
             <DrawerTitle className="text-center text-lg/6">
               {recipeMeal && state
@@ -612,7 +620,7 @@ export default function Kitchen({
         }}
         showSwipeHandle
       >
-        <DrawerContent className="mx-auto w-full max-w-xl motion-reduce:transition-none">
+        <DrawerContent className={drawerContentClass}>
           <DrawerHeader>
             <DrawerTitle className="text-center text-lg/6">
               Grocery list

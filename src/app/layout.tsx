@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
@@ -25,8 +27,12 @@ export const metadata: Metadata = {
   title: "mealprep.party",
 };
 export const viewport: Viewport = {
+  colorScheme: "light dark",
   initialScale: 1,
-  themeColor: "#f5f4ed",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
   viewportFit: "cover",
   width: "device-width",
 };
@@ -36,11 +42,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${dmSans.variable} bg-background text-foreground font-sans text-sm`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

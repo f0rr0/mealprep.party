@@ -44,6 +44,7 @@ export function MealButton({
   direction,
   selecting,
   selected,
+  open,
   onOpen,
   onSelect,
   onLongPress,
@@ -54,6 +55,7 @@ export function MealButton({
   direction: number;
   selecting: boolean;
   selected: boolean;
+  open: boolean;
   onOpen: () => void;
   onSelect: () => void;
   onLongPress: () => void;
@@ -149,7 +151,7 @@ export function MealButton({
       <motion.span
         className="pointer-events-none absolute inset-0 origin-right"
         initial={false}
-        animate={{ scale: checked ? 1.1 : 1 }}
+        animate={{ scale: checked || open ? 1.1 : 1 }}
         transition={reducedMotion ? { duration: 0 } : selectionSpring}
       >
         <Image

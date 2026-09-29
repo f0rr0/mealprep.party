@@ -3,6 +3,9 @@ export const headerButtonClass =
 
 export const actionButtonClass = "h-12 rounded-full text-base";
 
+export const drawerContentClass =
+  "mx-auto w-full max-w-xl motion-reduce:transition-none dark:[&_[data-slot=drawer-swipe-handle]]:after:bg-muted-foreground/50";
+
 export const selectionSpring = {
   type: "spring",
   duration: 0.45,
