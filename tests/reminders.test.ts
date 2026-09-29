@@ -13,10 +13,11 @@ import { reminderCommand, tomorrowReminder } from "@/lib/reminders";
 import { createState } from "./fixtures";
 
 test("service worker displays a fallback and opens the notification's day in an existing or new window", async () => {
-  const handlers = new Map<string, (event: unknown) => void>();
+  let handlers = new Map<string, (event: unknown) => void>();
   const displayed: string[] = [];
   const opened: string[] = [];
   const messages: { type: string; url: string }[] = [];
+  const cached = new Map<string, Response>();
   let focused = false;
   let focusFails = false;
   let existing = true;
@@ -42,27 +43,43 @@ test("service worker displays a fallback and opens the notification's day in an 
     format: "iife",
   });
   assert.ok(worker.success);
-  runInNewContext(await worker.outputs[0].text(), {
-    URL,
-    self: {
-      addEventListener: (name: string, handler: (event: unknown) => void) =>
-        handlers.set(name, handler),
-      location: { origin: "https://mealprep.party" },
-      registration: {
-        showNotification: (title: string) => {
-          displayed.push(title);
-          return Promise.resolve();
-        },
-      },
-      clients: {
-        matchAll: () => Promise.resolve(existing ? [client] : []),
-        openWindow: (url: string) => {
-          opened.push(url);
-          return Promise.resolve(client);
-        },
+  const script = await worker.outputs[0].text();
+  const self = {
+    addEventListener: (name: string, handler: (event: unknown) => void) =>
+      handlers.set(name, handler),
+    location: { origin: "https://mealprep.party" },
+    registration: {
+      showNotification: (title: string) => {
+        displayed.push(title);
+        return Promise.resolve();
       },
     },
-  });
+    clients: {
+      matchAll: () => Promise.resolve(existing ? [client] : []),
+      openWindow: (url: string) => {
+        opened.push(url);
+        return Promise.resolve(client);
+      },
+    },
+  };
+  const startWorker = () => {
+    handlers = new Map();
+    runInNewContext(script, {
+      URL,
+      Response,
+      caches: {
+        open: () => ({
+          put: (key: string, response: Response) => {
+            cached.set(key, response);
+          },
+          match: (key: string) => cached.get(key)?.clone(),
+          delete: (key: string) => cached.delete(key),
+        }),
+      },
+      self,
+    });
+  };
+  startWorker();
   handlers.get("push")?.({
     data: {
       json: () => {
@@ -92,21 +109,30 @@ test("service worker displays a fallback and opens the notification's day in an 
   click("/?day=sunday");
   await pending;
   assert.equal(opened.pop(), "https://mealprep.party/?day=sunday");
-  // The first message may arrive before React mounts; ready replays it.
+  // A backgrounded iPhone can miss the first message and stop the worker.
+  // Foreground readiness must recover the destination from persistent storage.
+  startWorker();
   messages.length = 0;
-  const message = (type: string, source = client, url?: string) =>
-    handlers.get("message")?.({ source, data: { type, url } });
-  message("notification-ready", { ...client, id: "other-window" });
-  message("notification-ready", {
+  const message = async (type: string, source = client, url?: string) => {
+    handlers.get("message")?.({ source, data: { type, url }, waitUntil });
+    await pending;
+  };
+  await message("notification-ready", { ...client, id: "other-window" });
+  await message("notification-ready", {
     ...client,
     url: "https://elsewhere.example/",
   });
   assert.equal(messages.length, 0);
-  message("notification-ready");
+  await message("notification-ready");
   assert.equal(messages.pop()?.url, "https://mealprep.party/?day=sunday");
-  message("notification-opened", client, "https://mealprep.party/?day=sunday");
-  message("notification-ready");
+  await message(
+    "notification-opened",
+    client,
+    "https://mealprep.party/?day=sunday"
+  );
+  await message("notification-ready");
   assert.equal(messages.length, 0);
+  assert.equal(cached.size, 0);
   click("https://elsewhere.example/");
   await pending;
   assert.equal(opened.pop(), "https://mealprep.party");

@@ -6,30 +6,68 @@ let notificationTarget: {
   clientId: string | null;
   expires: number;
 } | null = null;
+const targetCache = "mealprep-notification-target";
+const targetKey = new URL("/__notification-target", self.location.origin).href;
+
+const saveTarget = async () => {
+  try {
+    const cache = await caches.open(targetCache);
+    /* oxlint-disable unicorn/prefer-response-static-json -- iOS 16.4 supports Web Push but not Response.json. */
+    await cache.put(
+      targetKey,
+      new Response(JSON.stringify(notificationTarget))
+    );
+    /* oxlint-enable unicorn/prefer-response-static-json */
+  } catch {
+    // The in-memory target still covers browsers where storage is unavailable.
+  }
+};
+
+const getTarget = async () => {
+  if (notificationTarget) {
+    return notificationTarget;
+  }
+  try {
+    const cache = await caches.open(targetCache);
+    const saved = await cache.match(targetKey);
+    notificationTarget = saved ? await saved.json() : null;
+  } catch {
+    // Keep navigation available when storage is unavailable.
+  }
+  return notificationTarget;
+};
 
 self.addEventListener("message", (event) => {
-  const client = event.source;
-  if (
-    !client ||
-    !("url" in client) ||
-    URL.parse(client.url)?.origin !== self.location.origin ||
-    !notificationTarget ||
-    notificationTarget.expires < Date.now() ||
-    (notificationTarget.clientId && notificationTarget.clientId !== client.id)
-  ) {
-    return;
-  }
-  if (event.data?.type === "notification-ready") {
-    client.postMessage({
-      type: "notification-open",
-      url: notificationTarget.url,
-    });
-  } else if (
-    event.data?.type === "notification-opened" &&
-    event.data.url === notificationTarget.url
-  ) {
-    notificationTarget = null;
-  }
+  event.waitUntil(
+    (async () => {
+      const client = event.source;
+      const target = await getTarget();
+      if (
+        !client ||
+        !("url" in client) ||
+        URL.parse(client.url)?.origin !== self.location.origin ||
+        !target ||
+        target.expires < Date.now() ||
+        (target.clientId && target.clientId !== client.id)
+      ) {
+        return;
+      }
+      if (event.data?.type === "notification-ready") {
+        client.postMessage({ type: "notification-open", url: target.url });
+      } else if (
+        event.data?.type === "notification-opened" &&
+        event.data.url === target.url
+      ) {
+        notificationTarget = null;
+        try {
+          const cache = await caches.open(targetCache);
+          await cache.delete(targetKey);
+        } catch {
+          // The acknowledged in-memory target is already gone.
+        }
+      }
+    })()
+  );
 });
 
 self.addEventListener("install", () => self.skipWaiting());
@@ -83,14 +121,16 @@ self.addEventListener("notificationclick", (event) => {
       };
       if (client) {
         await client.focus().catch(() => null);
+        await saveTarget();
         client.postMessage({ type: "notification-open", url });
         return;
       }
       const opened = await self.clients.openWindow(url);
+      if (opened && notificationTarget?.url === url) {
+        notificationTarget.clientId = opened.id;
+      }
+      await saveTarget();
       if (opened) {
-        if (notificationTarget?.url === url) {
-          notificationTarget.clientId = opened.id;
-        }
         opened.postMessage({ type: "notification-open", url });
       }
     })()

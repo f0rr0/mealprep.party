@@ -1,7 +1,9 @@
-import "./src/env";
 import type { NextConfig } from "next";
 
+import { env } from "./src/env";
+
 const config: NextConfig = {
+  deploymentId: env.VERCEL_DEPLOYMENT_ID,
   devIndicators: false,
   poweredByHeader: false,
   transpilePackages: ["ios-haptics"],

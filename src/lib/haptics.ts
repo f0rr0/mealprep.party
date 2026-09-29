@@ -11,7 +11,8 @@ export function hapticRef(element: HTMLElement | null) {
   if (nativeInput) {
     // The existing field label supplies Safari's trusted native click.
     element.setAttribute("switch", "");
-  } else {
+  } else if (element.tagName !== "A") {
+    // A label overlay takes over link activation and prevents navigation.
     hapticTrigger(element);
   }
   const overlay = element.querySelector(":scope > [data-haptic-trigger]");

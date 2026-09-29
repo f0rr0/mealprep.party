@@ -6,6 +6,7 @@ export const env = createEnv({
   experimental__runtimeEnv: process.env,
   server: {
     VERCEL_ENV: z.enum(["production", "preview", "development"]).optional(),
+    VERCEL_DEPLOYMENT_ID: z.string().optional(),
     APP_URL: z.url().optional(),
     DATABASE_URL: z.url().startsWith("postgresql://"),
     DIRECT_URL: z.url().startsWith("postgresql://"),

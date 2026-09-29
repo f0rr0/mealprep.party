@@ -104,8 +104,10 @@ function WeekStrip({
 
 export default function Kitchen({
   initialState,
+  deploymentId: currentDeploymentId,
 }: {
   initialState: Promise<State>;
+  deploymentId: string | null;
 }) {
   const [state, setState] = useState<State | null>(null);
   const [day, setDay] = useState<Weekday | null>(null);
@@ -131,7 +133,63 @@ export default function Kitchen({
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [error, setError] = useState("");
   const [copyFallback, setCopyFallback] = useState("");
+  const [updateSeconds, setUpdateSeconds] = useState<number | null>(null);
+  const [pending, setPending] = useState(false);
   const sync = useRef<ReturnType<typeof createKitchenSync> | null>(null);
+
+  useEffect(() => {
+    if (!currentDeploymentId) {
+      return;
+    }
+    let stopped = false;
+    let checking = false;
+    let found = false;
+    async function check() {
+      if (
+        stopped ||
+        checking ||
+        found ||
+        document.hidden ||
+        !navigator.onLine
+      ) {
+        return;
+      }
+      checking = true;
+      try {
+        const response = await fetch("/api/version", {
+          cache: "no-store",
+          signal: AbortSignal.timeout(10_000),
+        });
+        if (response.ok) {
+          const { deploymentId } = (await response.json()) as {
+            deploymentId: string | null;
+          };
+          if (
+            !stopped &&
+            deploymentId &&
+            deploymentId !== currentDeploymentId
+          ) {
+            found = true;
+            setUpdateSeconds(10);
+          }
+        }
+      } catch {
+        // Keep the current app while offline; check again when it reconnects.
+      } finally {
+        checking = false;
+      }
+    }
+    void check();
+    const timer = setInterval(check, 60_000);
+    document.addEventListener("visibilitychange", check);
+    window.addEventListener("online", check);
+    return () => {
+      stopped = true;
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", check);
+      window.removeEventListener("online", check);
+    };
+  }, [currentDeploymentId]);
 
   useEffect(() => {
     let active = true;
@@ -181,8 +239,15 @@ export default function Kitchen({
         worker.active?.postMessage({ type: "notification-ready" });
       }
     }
+    function notificationResumed() {
+      if (document.visibilityState === "visible") {
+        void notificationReady();
+      }
+    }
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("message", openNotification);
+      document.addEventListener("visibilitychange", notificationResumed);
+      window.addEventListener("pageshow", notificationResumed);
       void notificationReady();
     }
     async function load() {
@@ -196,6 +261,7 @@ export default function Kitchen({
         sync.current = createKitchenSync(data, (next, message) => {
           if (active) {
             setState(next);
+            setPending(sync.current?.hasPending() ?? false);
             setError(message);
           }
         });
@@ -236,6 +302,8 @@ export default function Kitchen({
       window.removeEventListener("beforeunload", beforeUnload);
       document.removeEventListener("visibilitychange", refresh);
       navigator.serviceWorker?.removeEventListener("message", openNotification);
+      document.removeEventListener("visibilitychange", notificationResumed);
+      window.removeEventListener("pageshow", notificationResumed);
     };
   }, [initialState]);
 
@@ -257,6 +325,34 @@ export default function Kitchen({
   const wanted = ingredientsForEntries(meals, selectedPlan);
   const added =
     wanted.length > 0 && missingIngredients(wanted, ingredients).length === 0;
+  const updatePaused =
+    pending ||
+    selecting ||
+    (selected.length > 0 && !added) ||
+    recipeOpen ||
+    !!copyFallback;
+
+  useEffect(() => {
+    if (updateSeconds === null) {
+      return;
+    }
+    const timer = setInterval(() => {
+      if (
+        document.hidden ||
+        updatePaused ||
+        sync.current?.hasPending() ||
+        document.querySelector('[role="dialog"], [role="alertdialog"]')
+      ) {
+        return;
+      }
+      if (updateSeconds <= 1) {
+        window.location.reload();
+      } else {
+        setUpdateSeconds(updateSeconds - 1);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [updateSeconds, updatePaused]);
   const pantry = state?.pantry ?? [];
   const text = groceryText(ingredients, pantry);
   const { copied, markCopied } = useCopyFeedback(text);
@@ -296,7 +392,39 @@ export default function Kitchen({
   const selectionMode = selecting && tab === "plan";
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-2 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
+    <main
+      className={cn(
+        "mx-auto flex min-h-dvh max-w-xl flex-col gap-2 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6",
+        updateSeconds !== null && "pb-[calc(11rem+env(safe-area-inset-bottom))]"
+      )}
+    >
+      {updateSeconds !== null && (
+        <aside className="bg-background/95 fixed inset-x-4 bottom-[calc(6.5rem+env(safe-area-inset-bottom))] z-20 mx-auto flex max-w-sm items-center justify-between gap-3 rounded-2xl border p-3 shadow-lg backdrop-blur-xl">
+          <output className="sr-only">
+            New update available. Reload when ready.
+          </output>
+          <div className="min-w-0">
+            <p className="font-medium">Update ready</p>
+            <p className="text-muted-foreground text-xs tabular-nums">
+              {updatePaused
+                ? "Reload when you’re done"
+                : `Reloading in ${updateSeconds}s`}
+            </p>
+          </div>
+          <Button
+            ref={hapticRef}
+            className="h-11 shrink-0 rounded-full px-4"
+            disabled={pending}
+            onClick={() => {
+              if (!sync.current?.hasPending()) {
+                window.location.reload();
+              }
+            }}
+          >
+            Reload
+          </Button>
+        </aside>
+      )}
       <header className="relative flex h-11 shrink-0 -translate-y-1 items-center justify-center">
         <h1 className="sr-only">mealprep.party</h1>
         <AnimatePresence initial={false}>
