@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  CheckIcon,
-  ClipboardListIcon,
-  ListPlusIcon,
-  ShoppingBasketIcon,
-} from "lucide-react";
-import {
   motion,
   useMotionTemplate,
   useReducedMotion,
@@ -22,15 +16,17 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { hapticRef } from "@/lib/haptics";
 
 const tabClass =
-  "z-10 h-16 w-(--dock-item) flex-none rounded-full px-3 py-2.5 text-foreground transition-colors dark:text-foreground data-active:bg-transparent dark:data-active:bg-transparent dark:data-active:border-transparent group-data-[variant=default]/tabs-list:data-active:shadow-none";
+  "z-10 h-16 w-(--dock-item) flex-none rounded-full p-0 text-foreground transition-colors dark:text-foreground data-active:bg-transparent dark:data-active:bg-transparent dark:data-active:border-transparent group-data-[variant=default]/tabs-list:data-active:shadow-none";
 
 export function MealDock({
+  activeTab,
   selectionMode,
   onPlan,
   added,
   empty,
   shareText,
 }: {
+  activeTab: string;
   selectionMode: boolean;
   onPlan: () => void;
   added: boolean;
@@ -83,7 +79,9 @@ export function MealDock({
             className={tabClass}
             onClick={onPlan}
           >
-            <DockLabel icon={ClipboardListIcon}>Plan</DockLabel>
+            <DockLabel icon="plan" selected={activeTab === "plan"}>
+              Plan
+            </DockLabel>
           </TabsTrigger>
           <TabsTrigger
             ref={hapticRef}
@@ -104,16 +102,19 @@ export function MealDock({
                 style={{ opacity: groceriesOpacity }}
                 aria-hidden={hasSelection}
               >
-                <DockLabel icon={ShoppingBasketIcon}>Groceries</DockLabel>
+                <DockLabel
+                  icon="groceries"
+                  selected={activeTab === "groceries"}
+                >
+                  Groceries
+                </DockLabel>
               </motion.span>
               <motion.span
                 className="col-start-1 row-start-1"
                 style={{ opacity: progress }}
                 aria-hidden={!hasSelection}
               >
-                <DockLabel
-                  icon={lastSelection.added ? CheckIcon : ListPlusIcon}
-                >
+                <DockLabel icon={lastSelection.added ? "done" : "add"}>
                   {lastSelection.added ? "Added" : "Add to list"}
                 </DockLabel>
               </motion.span>
@@ -129,7 +130,7 @@ export function MealDock({
           <ShareMealsButton
             dock
             text={lastSelection.shareText}
-            className="h-16 w-(--dock-item) shrink-0 rounded-full border border-transparent px-3 py-2.5"
+            className="h-16 w-(--dock-item) shrink-0 rounded-full border border-transparent p-0 hover:bg-transparent active:not-aria-[haspopup]:translate-y-0"
           />
         </motion.div>
       </nav>

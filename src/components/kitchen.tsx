@@ -9,6 +9,7 @@ import Markdown from "react-markdown";
 import { HeaderItem } from "@/components/header-item";
 import { MealButton } from "@/components/meal-button";
 import { MealDock } from "@/components/meal-dock";
+import { MemberAvatars } from "@/components/member-avatars";
 import { ShareMealsButton } from "@/components/share-meals-button";
 import { TabIndicator } from "@/components/tab-indicator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -52,6 +53,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import groceriesEmpty from "../../public/groceries-empty.webp";
+import wordmark from "../../public/illustrations/wordmark.webp";
 
 function WeekStrip({
   today,
@@ -96,6 +98,18 @@ export default function Kitchen({
 }) {
   const [state, setState] = useState<State | null>(null);
   const [day, setDay] = useState<Weekday | null>(null);
+  const [dayMotion, setDayMotion] = useState({ day, direction: 1 });
+  if (dayMotion.day !== day) {
+    setDayMotion({
+      day,
+      direction:
+        day &&
+        dayMotion.day &&
+        weekdays.indexOf(day) < weekdays.indexOf(dayMotion.day)
+          ? -1
+          : 1,
+    });
+  }
   const [today, setToday] = useState<Weekday>();
   const [tab, setTab] = useState("plan");
   const [selection, setSelection] = useState<string[]>([]);
@@ -215,14 +229,20 @@ export default function Kitchen({
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-5 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
-      <header className="relative flex h-11 shrink-0 items-center justify-center">
-        <h1 className="sr-only">Our kitchen</h1>
+      <header className="relative flex h-11 shrink-0 -translate-y-1 items-center justify-center">
+        <h1 className="sr-only">mealprep.party</h1>
         <AnimatePresence initial={false}>
           {!selectionMode && (
             <HeaderItem key="title">
-              <span aria-hidden="true" className="text-2xl font-medium">
-                Our kitchen
-              </span>
+              <Image
+                src={wordmark}
+                alt="मीलप्रेप.पार्टी"
+                width={160}
+                height={34}
+                sizes="160px"
+                className="h-auto w-40 -translate-y-0.5"
+                loading="eager"
+              />
             </HeaderItem>
           )}
           {selectionMode && (
@@ -317,6 +337,7 @@ export default function Kitchen({
         }}
       >
         <MealDock
+          activeTab={tab}
           selectionMode={selectionMode}
           added={added}
           empty={!wanted.length}
@@ -357,7 +378,7 @@ export default function Kitchen({
           >
             <Tabs
               value={day}
-              className="gap-3"
+              className="gap-6"
               onValueChange={(value) => {
                 const next = weekdays.find((weekday) => weekday === value);
                 if (next) {
@@ -372,61 +393,59 @@ export default function Kitchen({
               <div className="grid items-start" aria-busy={!state}>
                 {!state && (
                   <output
-                    className="col-start-1 row-start-1 flex flex-col gap-3"
+                    className="col-start-1 row-start-1 flex flex-col gap-4"
                     aria-label="Loading meals"
                   >
                     {slots.map((slot) => (
-                      <Skeleton key={slot} className="h-20 w-full rounded-xl" />
+                      <Skeleton key={slot} className="h-28 w-full rounded-xl" />
                     ))}
                   </output>
                 )}
-                {weekdays.map((weekday) => (
+                {day && (
                   <TabsContent
-                    key={weekday}
-                    value={weekday}
-                    aria-label={`${weekday} meals`}
-                    className={cn(tabPanelClass, "flex flex-col gap-3")}
+                    value={day}
+                    aria-label={`${day} meals`}
+                    className="col-start-1 row-start-1 flex w-full flex-col gap-4"
                   >
                     {state &&
-                      plan
-                        .filter((entry) => entry.day === weekday)
-                        .toSorted(
-                          (a, b) =>
-                            slots.indexOf(a.slot) - slots.indexOf(b.slot)
-                        )
-                        .map((entry) => {
-                          const meal = meals.find(
-                            (item) => item.id === entry.mealId
-                          );
-                          if (!meal) {
-                            return null;
-                          }
-                          return (
-                            <MealButton
-                              key={entryKey(entry)}
-                              title={withNames(meal.title, state.names)}
-                              label={`${entry.slot} · ${entry.people.map((person) => state.names[person]).join(" & ")}`}
-                              selecting={selecting}
-                              selected={selected.includes(entryKey(entry))}
-                              onOpen={() => {
-                                setRecipe(entry);
-                                setRecipeOpen(true);
-                              }}
-                              onSelect={() => toggleMeal(entry)}
-                              onLongPress={() => {
-                                setSelection([entryKey(entry)]);
-                                setSelecting(true);
-                              }}
-                            />
-                          );
-                        })}
-                    {state && !plan.some((entry) => entry.day === weekday) && (
+                      dayPlan.map((entry) => {
+                        const meal = meals.find(
+                          (item) => item.id === entry.mealId
+                        );
+                        if (!meal) {
+                          return null;
+                        }
+                        return (
+                          <MealButton
+                            key={entry.slot}
+                            slot={entry.slot}
+                            direction={dayMotion.direction}
+                            title={withNames(meal.title, state.names)}
+                            members={entry.people.map((id) => ({
+                              id,
+                              name: state.names[id],
+                            }))}
+                            selecting={selecting}
+                            selected={selected.includes(entryKey(entry))}
+                            onOpen={() => {
+                              setRecipe(entry);
+                              setRecipeOpen(true);
+                            }}
+                            onSelect={() => toggleMeal(entry)}
+                            onLongPress={() => {
+                              setSelection([entryKey(entry)]);
+                              setSelecting(true);
+                            }}
+                          />
+                        );
+                      })}
+                    {state && !dayPlan.length && (
                       <p className="text-muted-foreground py-8">
                         No meals planned.
                       </p>
                     )}
                   </TabsContent>
-                ))}
+                )}
               </div>
             </Tabs>
           </TabsContent>
@@ -451,6 +470,7 @@ export default function Kitchen({
                       />
                       <span
                         className={cn(
+                          "text-base/6",
                           checked && "text-muted-foreground line-through"
                         )}
                       >
@@ -503,20 +523,28 @@ export default function Kitchen({
         }}
         showSwipeHandle
       >
-        <DrawerContent className="mx-auto min-h-[60dvh] w-full max-w-xl motion-reduce:transition-none">
-          <DrawerHeader>
-            <DrawerTitle className="text-center">
+        <DrawerContent className="mx-auto min-h-[60dvh] w-full max-w-xl text-base/6 motion-reduce:transition-none">
+          <DrawerHeader className="gap-3 md:gap-3">
+            <DrawerTitle className="text-center text-lg/6">
               {recipeMeal && state
                 ? withNames(recipeMeal.title, state.names)
                 : "Recipe"}
             </DrawerTitle>
+            {recipe && state && (
+              <MemberAvatars
+                members={recipe.people.map((id) => ({
+                  id,
+                  name: state.names[id],
+                }))}
+              />
+            )}
             <DrawerDescription className="sr-only">
               Recipe and ingredients.
             </DrawerDescription>
           </DrawerHeader>
           {recipeMeal && state && (
-            <div className="flex min-h-0 flex-col gap-5 overflow-y-auto overscroll-contain p-4">
-              <div className="flex flex-col gap-3 leading-relaxed [&_a]:underline [&_h1]:font-medium [&_h2]:font-medium [&_h3]:font-medium [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5">
+            <div className="flex min-h-0 flex-col gap-6 overflow-y-auto overscroll-contain p-4">
+              <div className="flex flex-col gap-3 [&_a]:underline [&_h1]:font-medium [&_h2]:font-medium [&_h3]:font-medium [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5">
                 <Markdown skipHtml components={{ img: () => null }}>
                   {withNames(recipeMeal.recipe, state.names)}
                 </Markdown>
@@ -536,7 +564,7 @@ export default function Kitchen({
                   rel="noreferrer"
                   className={buttonVariants({
                     variant: "outline",
-                    className: "h-12 rounded-full",
+                    className: actionButtonClass,
                   })}
                 >
                   Source
@@ -589,12 +617,17 @@ export default function Kitchen({
       >
         <DrawerContent className="mx-auto w-full max-w-xl motion-reduce:transition-none">
           <DrawerHeader>
-            <DrawerTitle className="text-center">Grocery list</DrawerTitle>
-            <DrawerDescription>Select and copy.</DrawerDescription>
+            <DrawerTitle className="text-center text-lg/6">
+              Grocery list
+            </DrawerTitle>
+            <DrawerDescription className="text-base/6">
+              Select and copy.
+            </DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
             <Textarea
               aria-label="Grocery list to copy"
+              className="text-base/6 md:text-base"
               readOnly
               rows={10}
               value={copyFallback}

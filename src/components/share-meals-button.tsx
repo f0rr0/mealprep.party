@@ -51,10 +51,7 @@ export function ShareMealsButton({
         }}
       >
         {dock ? (
-          <DockLabel
-            icon={copied ? CheckIcon : ShareIcon}
-            iconClassName={copied ? "size-5" : "size-4.5"}
-          >
+          <DockLabel icon={copied ? "copy" : "share"}>
             {copied ? "Copied" : "Share"}
           </DockLabel>
         ) : (
