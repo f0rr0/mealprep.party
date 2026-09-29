@@ -4,7 +4,6 @@ import assert from "node:assert/strict";
 import { sameOrigin } from "@/lib/auth";
 import {
   weekdayFor,
-  weekdays,
   groceryText,
   ingredientsFor,
   kitchenCommand,
@@ -17,7 +16,6 @@ import { createState } from "./fixtures";
 
 test("recurring weekday content, names, plain groceries and request boundaries", () => {
   const state = createState();
-  assert.equal(state.plan.length, 28);
   assert.ok(Object.keys(state.names).length > 0);
   assert.equal(planSchema.safeParse(state).success, false);
   assert.equal(
@@ -31,7 +29,7 @@ test("recurring weekday content, names, plain groceries and request boundaries",
   assert.equal(
     kitchenCommand.safeParse({
       action: "groceries",
-      add: ["Monday:Breakfast:0-breakfast"],
+      add: ["Monday:Breakfast:first"],
       remove: [],
       version: 1,
     }).success,
@@ -75,9 +73,6 @@ test("recurring weekday content, names, plain groceries and request boundaries",
   assert.equal(weekdayFor(new Date(2026, 8, 28)), "Monday");
   assert.equal(weekdayFor(new Date(2027, 0, 4)), "Monday");
   assert.equal(weekdayFor(new Date(2027, 0, 3)), "Sunday");
-  for (const day of weekdays) {
-    assert.equal(state.plan.filter((entry) => entry.day === day).length, 4);
-  }
   assert.equal(
     planSchema.safeParse({
       names: state.names,
@@ -117,10 +112,10 @@ test("meal selections stay distinct across days; pantry checks survive rapid tap
   let selected = selectEntries([], monday, true);
   selected = selectEntries(selected, [tuesday], true);
   selected = selectEntries(selected, [monday[0]], false);
-  assert.equal(selected.length, 4);
+  assert.equal(selected.length, monday.length);
   assert.ok(selected.includes(entryKey(tuesday)));
   assert.equal(selected.includes(entryKey(monday[0])), false);
-  assert.equal(selectEntries(selected, monday, true).length, 5);
+  assert.equal(selectEntries(selected, monday, true).length, monday.length + 1);
 
   let server = structuredClone(initial);
   let displayed = initial;

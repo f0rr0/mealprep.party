@@ -425,7 +425,7 @@ export default function Kitchen({
         />
         {error && (
           <Alert variant="destructive">
-            <AlertDescription className="flex items-center justify-between gap-3">
+            <AlertDescription className="flex items-center justify-between gap-3 md:text-balance">
               {error}
               <Button
                 ref={hapticRef}
@@ -635,7 +635,7 @@ export default function Kitchen({
             </DrawerDescription>
           </DrawerHeader>
           {state && (
-            <div className="flex min-h-0 flex-col gap-6 overflow-y-auto overscroll-contain p-4">
+            <div className="flex min-h-0 flex-col gap-6 overflow-y-auto overscroll-contain mask-[linear-gradient(to_bottom,transparent,black_24px,black_calc(100%-24px),transparent)] px-4 py-6">
               {recipeMeals.map(({ entry, meal }, index) => (
                 <Fragment key={entryKey(entry)}>
                   {index > 0 && <Separator />}
@@ -664,7 +664,7 @@ export default function Kitchen({
                     </div>
                     <div>
                       <h3 className="mb-2 font-medium">Ingredients</h3>
-                      <ul className="flex list-disc flex-col gap-1 pl-5">
+                      <ul className="grid list-disc grid-cols-2 gap-x-8 gap-y-1 pl-5 sm:grid-cols-3">
                         {meal.ingredients.map((item) => (
                           <li key={item}>{item}</li>
                         ))}
@@ -688,7 +688,7 @@ export default function Kitchen({
               ))}
             </div>
           )}
-          <DrawerFooter className="grid grid-cols-2 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+          <DrawerFooter className="grid grid-cols-2">
             <Button
               ref={hapticRef}
               variant="secondary"

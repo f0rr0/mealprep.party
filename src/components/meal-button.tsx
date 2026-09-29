@@ -63,6 +63,8 @@ export function MealButton({
   onLongPress: () => void;
 }) {
   const reducedMotion = useReducedMotion();
+  const sentenceTitle =
+    title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
   const illustration = illustrations[slot];
   const checked = selecting && selected;
   const press = useRef<{
@@ -87,7 +89,7 @@ export function MealButton({
           "--meal-ink": illustration.ink,
         } as CSSProperties
       }
-      aria-label={`${selecting ? "Select" : "Open"} ${title} for ${members.map((member) => member.name).join(" & ")}`}
+      aria-label={`${selecting ? "Select" : "Open"} ${sentenceTitle} for ${members.map((member) => member.name).join(" & ")}`}
       aria-pressed={selecting ? selected : undefined}
       onPointerDown={(event) => {
         if (event.button !== 0 || !event.isPrimary) {
@@ -173,7 +175,11 @@ export function MealButton({
         className="relative flex w-3/5 min-w-0 flex-col"
       >
         <span className="text-xs/4 font-normal opacity-75">{slot}</span>
-        <FadingText text={title} direction={direction} className="text-sm/5" />
+        <FadingText
+          text={sentenceTitle}
+          direction={direction}
+          className="text-sm/5 text-pretty"
+        />
       </motion.span>
       <motion.span
         aria-hidden="true"

@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} bg-background text-foreground font-sans text-sm`}
+        className={`${dmSans.variable} bg-background text-foreground font-sans text-sm text-balance [&_:is(h1,h2,h3,h4,h5,h6)]:text-pretty`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>

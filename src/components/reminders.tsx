@@ -306,7 +306,7 @@ export function Reminders() {
                   <ShareIcon className="size-6" />
                 </span>
                 <div>
-                  <p className="font-medium">1. Share in Safari</p>
+                  <p className="font-medium text-pretty">1. Share in Safari</p>
                   <p className="text-muted-foreground text-sm/5">
                     Tap Share, or open the ••• menu first.
                   </p>
@@ -320,7 +320,7 @@ export function Reminders() {
                   <ChevronDownIcon className="size-6" />
                 </span>
                 <div>
-                  <p className="font-medium">2. View More</p>
+                  <p className="font-medium text-pretty">2. View More</p>
                   <p className="text-muted-foreground text-sm/5">
                     In the Share menu, tap View More if shown.
                   </p>
@@ -334,7 +334,9 @@ export function Reminders() {
                   <SquarePlusIcon className="size-6" />
                 </span>
                 <div>
-                  <p className="font-medium">3. Add to Home Screen</p>
+                  <p className="font-medium text-pretty">
+                    3. Add to Home Screen
+                  </p>
                   <p className="text-muted-foreground text-sm/5">
                     Keep Open as Web App on, then Add.
                   </p>
@@ -348,7 +350,9 @@ export function Reminders() {
                   className="size-12 shrink-0 rounded-xl"
                 />
                 <div>
-                  <p className="font-medium">4. Open mealprep.party</p>
+                  <p className="font-medium text-pretty">
+                    4. Open mealprep.party
+                  </p>
                   <p className="text-muted-foreground text-sm/5">
                     Tap its new icon on your Home Screen.
                   </p>
@@ -364,7 +368,7 @@ export function Reminders() {
                 sizes="64px"
                 className="size-16 rounded-2xl"
               />
-              <output className="text-muted-foreground max-w-72 text-pretty">
+              <output className="text-muted-foreground max-w-72 text-balance">
                 {status === "loading" && "Checking notifications…"}
                 {status === "blocked" &&
                   "Allow notifications for mealprep.party in your device or browser settings."}
@@ -381,12 +385,14 @@ export function Reminders() {
           )}
           {error && (
             <Alert variant="destructive" className="mt-4">
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription className="md:text-balance">
+                {error}
+              </AlertDescription>
             </Alert>
           )}
         </div>
         {(status === "install" || status === "ready") && (
-          <DrawerFooter className="pb-[calc(1rem+env(safe-area-inset-bottom))]">
+          <DrawerFooter>
             {status === "ready" && (
               <Button
                 ref={hapticRef}
