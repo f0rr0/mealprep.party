@@ -68,6 +68,8 @@ export function Reminders() {
     if (
       (status !== "install" && (status !== "ready" || enabled)) ||
       open ||
+      busy ||
+      (permission !== null && permission !== "default") ||
       !window.isSecureContext ||
       window.self !== window.top ||
       (status === "install" &&
@@ -87,7 +89,7 @@ export function Reminders() {
           document.visibilityState === "visible" &&
           (status === "install"
             ? !window.matchMedia("(display-mode: standalone)").matches
-            : Notification.permission !== "denied") &&
+            : Notification.permission === "default") &&
           !document.querySelector('[role="dialog"], [role="alertdialog"]') &&
           claimPrompt(status === "install" ? "home-screen" : "notifications")
         ) {
@@ -105,7 +107,7 @@ export function Reminders() {
       document.removeEventListener("pointerup", schedule);
       document.removeEventListener("keydown", schedule);
     };
-  }, [status, open, enabled]);
+  }, [status, open, enabled, busy, permission]);
 
   useEffect(() => {
     if (busy) {
@@ -210,10 +212,12 @@ export function Reminders() {
       if (!enabled) {
         const result = await Notification.requestPermission();
         setPermission(result);
+        if (result !== "default") {
+          setOpen(false);
+        }
         if (result !== "granted") {
           if (result === "denied") {
             setStatus("blocked");
-            setOpen(false);
           }
           return;
         }
@@ -245,6 +249,7 @@ export function Reminders() {
       }
     } catch {
       setError("Couldn’t update notifications.");
+      setOpen(true);
     } finally {
       setBusy(false);
     }
@@ -395,7 +400,9 @@ export function Reminders() {
                 onClick={toggle}
               >
                 {busy
-                  ? "Saving…"
+                  ? enabled
+                    ? "Turning off…"
+                    : "Enabling…"
                   : enabled
                     ? "Turn off"
                     : "Enable notifications"}
