@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   boolean,
+  date,
   check,
   integer,
   pgSchema,
@@ -11,6 +12,12 @@ import {
 import { slots, weekdays } from "./model";
 
 export const kitchenSchema = pgSchema("meal_prep_party");
+export const pushSubscriptions = kitchenSchema.table("push_subscriptions", {
+  endpoint: text().primaryKey(),
+  p256dh: text().notNull(),
+  auth: text().notNull(),
+  lastSentDay: date("last_sent_day"),
+});
 export const members = kitchenSchema.table("members", {
   id: text().primaryKey(),
   name: text().notNull(),

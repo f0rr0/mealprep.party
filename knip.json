@@ -1,5 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip/schema.json",
-  "entry": ["src/components/ui/**/*.tsx"],
+  "entry": ["src/components/ui/**/*.tsx", "src/sw.ts"],
   "ignore": ["vendor/**"]
 }

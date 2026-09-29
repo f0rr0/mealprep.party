@@ -9,5 +9,8 @@ export const env = createEnv({
     APP_URL: z.url().optional(),
     DATABASE_URL: z.url().startsWith("postgresql://"),
     DIRECT_URL: z.url().startsWith("postgresql://"),
+    VAPID_PUBLIC_KEY: z.string().min(1).optional(),
+    VAPID_PRIVATE_KEY: z.string().min(1).optional(),
+    CRON_SECRET: z.string().min(32).optional(),
   },
 });

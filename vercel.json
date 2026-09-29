@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun run vercel:build",
+  "crons": [{ "path": "/api/reminders/send", "schedule": "0 17 * * *" }],
   "git": {
     "deploymentEnabled": {
       "main": false
