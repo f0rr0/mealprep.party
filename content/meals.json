@@ -1,7 +1,7 @@
 {
   "bread-omelette": {
     "title": "Vegetable bread omelette",
-    "recipe": "**1 serving**\n\n1. Beat 2 eggs with 25 g chopped onion, 50 g tomato, 25 g capsicum, coriander, black pepper and salt.\n2. Heat 1 tsp oil in a pan, pour in the eggs and place 2 slices of whole-wheat bread (60 g total) on top. Flip, cook until the egg is fully set, then fold into a sandwich.",
+    "recipe": "1. Beat 2 eggs with 25 g chopped onion, 50 g tomato, 25 g capsicum, coriander, black pepper and salt.\n2. Heat 1 tsp oil in a pan, pour in the eggs and place 2 slices of whole-wheat bread (60 g total) on top. Flip, cook until the egg is fully set, then fold into a sandwich.",
     "ingredients": [
       "Eggs",
       "Onion",
@@ -17,7 +17,7 @@
   },
   "paneer-moong-chilla": {
     "title": "Paneer-stuffed moong chilla",
-    "recipe": "**1 serving**\n\n1. Soak 60 g dry moong dal until softened. Drain and blend with 40 g onion, ginger, cumin, salt and enough water for a pourable batter.\n2. Crumble 50 g low-fat paneer and mix with coriander and roasted, ground cumin.\n3. Make 2 chillas in a non-stick pan using 1 tsp oil in total. Cook both sides, add the paneer filling and fold.",
+    "recipe": "1. Soak 60 g dry moong dal until softened. Drain and blend with 40 g onion, ginger, cumin, salt and enough water for a pourable batter.\n2. Crumble 50 g low-fat paneer and mix with coriander and roasted, ground cumin.\n3. Make 2 chillas in a non-stick pan using 1 tsp oil in total. Cook both sides, add the paneer filling and fold.",
     "ingredients": [
       "Moong dal",
       "Onion",
@@ -32,7 +32,7 @@
   },
   "paneer-paratha": {
     "title": "Paneer paratha",
-    "recipe": "**1 serving**\n\n1. Knead 60 g atta with water and a pinch of salt. Mix 75 g crumbled low-fat paneer with 30 g finely chopped onion, coriander and roasted, ground cumin.\n2. Stuff and roll 2 small parathas. Cook both sides on a tawa using 1 tsp oil in total.",
+    "recipe": "1. Knead 60 g atta with water and a pinch of salt. Mix 75 g crumbled low-fat paneer with 30 g finely chopped onion, coriander and roasted, ground cumin.\n2. Stuff and roll 2 small parathas. Cook both sides on a tawa using 1 tsp oil in total.",
     "ingredients": [
       "Atta",
       "Salt",
@@ -46,12 +46,12 @@
   },
   "green-juice": {
     "title": "Green juice",
-    "recipe": "**1 serving**\n\nBlend 100 g cucumber, 100 g apple, a few mint leaves, a small piece of ginger and a squeeze of lemon with enough water to make a glass. Serve fresh.",
+    "recipe": "Blend 100 g cucumber, 100 g apple, a few mint leaves, a small piece of ginger and a squeeze of lemon with enough water to make a glass. Serve fresh.",
     "ingredients": ["Cucumber", "Apple", "Mint", "Ginger", "Lemon"]
   },
   "paneer-bhurji": {
     "title": "Paneer bhurji, phulka & cucumber salad",
-    "recipe": "**1 serving**\n\n1. Heat 1½ tsp oil with cumin. Cook 50 g onion, 100 g tomato and 50 g capsicum with turmeric, coriander powder and salt. Fold in 125 g crumbled low-fat paneer and heat through.\n2. Make 2 small phulkas from 50 g atta and water. Serve with 100 g cucumber, lemon and coriander.",
+    "recipe": "1. Heat 1½ tsp oil with cumin. Cook 50 g onion, 100 g tomato and 50 g capsicum with turmeric, coriander powder and salt. Fold in 125 g crumbled low-fat paneer and heat through.\n2. Make 2 small phulkas from 50 g atta and water. Serve with 100 g cucumber, lemon and coriander.",
     "ingredients": [
       "Oil",
       "Cumin",
@@ -71,7 +71,7 @@
   },
   "lemon-chicken": {
     "title": "Lemon-garlic chicken, vegetables & potato wedges",
-    "recipe": "**1 serving · chicken and vegetables weighed raw**\n\n1. Coat 160 g boneless, skinless chicken breast with garlic, lemon, oregano, black pepper, salt and ½ tsp oil. Pan-cook until the centre reaches 74°C.\n2. Parboil 200 g potato wedges until nearly tender. Toss with ½ tsp oil and air-fry until browned.\n3. Sauté 100 g carrot, 100 g green beans and 50 g capsicum in ½ tsp oil, adding a splash of water to soften. Serve together.",
+    "recipe": "1. Coat 160 g boneless, skinless chicken breast with garlic, lemon, oregano, black pepper, salt and ½ tsp oil. Pan-cook until the centre reaches 74°C.\n2. Parboil 200 g potato wedges until nearly tender. Toss with ½ tsp oil and air-fry until browned.\n3. Sauté 100 g carrot, 100 g green beans and 50 g capsicum in ½ tsp oil, adding a splash of water to soften. Serve together.",
     "ingredients": [
       "Chicken",
       "Garlic",
@@ -89,7 +89,7 @@
   },
   "palak-chicken": {
     "title": "Palak chicken & phulka",
-    "recipe": "**1 serving · chicken weighed raw**\n\n1. Blanch 150 g spinach and blend. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder and salt.\n2. Add 160 g boneless, skinless chicken breast, 50 g plain curd and a splash of water. Simmer until the chicken reaches 74°C, then stir in the spinach and garam masala and heat through.\n3. Serve with 2 small phulkas made from 50 g atta and water.",
+    "recipe": "1. Blanch 150 g spinach and blend. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder and salt.\n2. Add 160 g boneless, skinless chicken breast, 50 g plain curd and a splash of water. Simmer until the chicken reaches 74°C, then stir in the spinach and garam masala and heat through.\n3. Serve with 2 small phulkas made from 50 g atta and water.",
     "ingredients": [
       "Spinach",
       "Oil",
@@ -110,7 +110,7 @@
   },
   "tofu-stir-fry": {
     "title": "Tofu & vegetable stir-fry with rice",
-    "recipe": "**1 serving · rice weighed dry**\n\n1. Cook 45 g rice. Pat dry and cube 200 g firm tofu.\n2. Heat 1 tsp oil in a non-stick pan and brown the tofu. Add garlic, ginger, 100 g cabbage, 100 g carrot and 100 g capsicum; stir-fry until just tender.\n3. Toss with 1 tsp soy sauce, 1 tsp vinegar and a splash of water. Add 15 g crushed roasted peanuts and serve over the rice.",
+    "recipe": "1. Cook 45 g rice. Pat dry and cube 200 g firm tofu.\n2. Heat 1 tsp oil in a non-stick pan and brown the tofu. Add garlic, ginger, 100 g cabbage, 100 g carrot and 100 g capsicum; stir-fry until just tender.\n3. Toss with 1 tsp soy sauce, 1 tsp vinegar and a splash of water. Add 15 g crushed roasted peanuts and serve over the rice.",
     "ingredients": [
       "Rice",
       "Tofu",
@@ -128,7 +128,7 @@
   },
   "dal-palak": {
     "title": "Dal palak, phulka & cucumber raita",
-    "recipe": "**1 serving · dal weighed dry**\n\n1. Rinse 70 g moong dal and simmer in water with turmeric until soft. Add 150 g chopped spinach and cook through.\n2. Heat 1 tsp oil with cumin and garlic, cook 50 g chopped onion, then stir into the dal with salt.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve with the dal and 1 phulka made from 35 g atta and water.",
+    "recipe": "1. Rinse 70 g moong dal and simmer in water with turmeric until soft. Add 150 g chopped spinach and cook through.\n2. Heat 1 tsp oil with cumin and garlic, cook 50 g chopped onion, then stir into the dal with salt.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve with the dal and 1 phulka made from 35 g atta and water.",
     "ingredients": [
       "Moong dal",
       "Turmeric",
@@ -146,7 +146,7 @@
   },
   "chicken-fajita-bowl": {
     "title": "Chicken fajita rice bowl",
-    "recipe": "**1 serving · chicken weighed raw, rice dry**\n\n1. Cook 50 g rice. Cut 160 g boneless, skinless chicken breast into strips and coat with garlic, ground cumin, oregano, lemon and salt.\n2. Heat 1 tsp oil and cook the chicken to 74°C. Add 100 g capsicum and 50 g onion; toss until tender.\n3. Chop 150 g tomato and mix with coriander and lemon for salsa. Serve the chicken, vegetables and salsa over the rice.",
+    "recipe": "1. Cook 50 g rice. Cut 160 g boneless, skinless chicken breast into strips and coat with garlic, ground cumin, oregano, lemon and salt.\n2. Heat 1 tsp oil and cook the chicken to 74°C. Add 100 g capsicum and 50 g onion; toss until tender.\n3. Chop 150 g tomato and mix with coriander and lemon for salsa. Serve the chicken, vegetables and salsa over the rice.",
     "ingredients": [
       "Rice",
       "Chicken",
@@ -165,7 +165,7 @@
   },
   "rajma-rice": {
     "title": "Rajma rice & cucumber raita",
-    "recipe": "**1 serving · beans weighed cooked and drained, rice dry**\n\n1. Use 200 g fully cooked rajma. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder, garam masala and salt. Add the rajma and water; simmer into a thick curry.\n2. Cook 30 g rice. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve together.",
+    "recipe": "1. Use 200 g fully cooked rajma. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder, garam masala and salt. Add the rajma and water; simmer into a thick curry.\n2. Cook 30 g rice. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve together.",
     "ingredients": [
       "Rajma",
       "Oil",
@@ -186,7 +186,7 @@
   },
   "chicken-tomato-pasta": {
     "title": "Chicken tomato pasta",
-    "recipe": "**1 serving · chicken weighed raw, pasta dry**\n\n1. Boil 55 g egg-free whole-wheat pasta in salted water; reserve a little cooking water.\n2. Heat 1 tsp oil and brown 160 g diced boneless, skinless chicken breast. Add garlic, 50 g onion and 100 g capsicum; cook until softened.\n3. Add 150 g finely chopped tomato, oregano, black pepper and salt. Simmer until saucy and the chicken reaches 74°C. Toss in the pasta, loosening with the reserved water.",
+    "recipe": "1. Boil 55 g egg-free whole-wheat pasta in salted water; reserve a little cooking water.\n2. Heat 1 tsp oil and brown 160 g diced boneless, skinless chicken breast. Add garlic, 50 g onion and 100 g capsicum; cook until softened.\n3. Add 150 g finely chopped tomato, oregano, black pepper and salt. Simmer until saucy and the chicken reaches 74°C. Toss in the pasta, loosening with the reserved water.",
     "ingredients": [
       "Pasta (egg-free)",
       "Salt",
@@ -203,7 +203,7 @@
   },
   "matar-paneer": {
     "title": "Matar paneer & phulka",
-    "recipe": "**1 serving**\n\n1. Heat 1 tsp oil with cumin. Cook 50 g onion, 150 g tomato, ginger, garlic, turmeric, coriander powder and salt; blend with a splash of water.\n2. Return to the pan, add 100 g peas and simmer until tender. Add 125 g cubed low-fat paneer and garam masala; heat through.\n3. Serve with 2 small phulkas made from 40 g atta and water.",
+    "recipe": "1. Heat 1 tsp oil with cumin. Cook 50 g onion, 150 g tomato, ginger, garlic, turmeric, coriander powder and salt; blend with a splash of water.\n2. Return to the pan, add 100 g peas and simmer until tender. Add 125 g cubed low-fat paneer and garam masala; heat through.\n3. Serve with 2 small phulkas made from 40 g atta and water.",
     "ingredients": [
       "Oil",
       "Cumin",
@@ -223,7 +223,7 @@
   },
   "chicken-noodles": {
     "title": "Chicken & vegetable noodles",
-    "recipe": "**1 serving · chicken weighed raw, noodles dry**\n\n1. Boil 55 g egg-free whole-wheat noodles according to the packet and drain.\n2. Heat 1 tsp oil with garlic and ginger. Add 160 g thinly sliced boneless, skinless chicken breast and cook to 74°C.\n3. Add 150 g cabbage, 75 g carrot and 75 g capsicum; stir-fry until just tender. Toss with the noodles, 1 tsp soy sauce, 1 tsp vinegar and black pepper.",
+    "recipe": "1. Boil 55 g egg-free whole-wheat noodles according to the packet and drain.\n2. Heat 1 tsp oil with garlic and ginger. Add 160 g thinly sliced boneless, skinless chicken breast and cook to 74°C.\n3. Add 150 g cabbage, 75 g carrot and 75 g capsicum; stir-fry until just tender. Toss with the noodles, 1 tsp soy sauce, 1 tsp vinegar and black pepper.",
     "ingredients": [
       "Noodles (egg-free)",
       "Oil",
@@ -241,7 +241,7 @@
   },
   "paneer-wrap": {
     "title": "Paneer & vegetable curd wraps",
-    "recipe": "**1 serving**\n\n1. Make 2 phulkas from 50 g atta and water. Toss 125 g crumbled low-fat paneer in a pan with 1 tsp oil, ground cumin and salt; let cool slightly.\n2. Mix 100 g thick plain curd with garlic, lemon and coriander. Fold in the paneer, 100 g cucumber, 50 g grated carrot and 50 g finely shredded cabbage.\n3. Divide the filling between the phulkas, roll and serve.",
+    "recipe": "1. Make 2 phulkas from 50 g atta and water. Toss 125 g crumbled low-fat paneer in a pan with 1 tsp oil, ground cumin and salt; let cool slightly.\n2. Mix 100 g thick plain curd with garlic, lemon and coriander. Fold in the paneer, 100 g cucumber, 50 g grated carrot and 50 g finely shredded cabbage.\n3. Divide the filling between the phulkas, roll and serve.",
     "ingredients": [
       "Atta",
       "Low-fat paneer",
@@ -260,7 +260,7 @@
   },
   "roast-chicken": {
     "title": "Pan-roasted chicken, vegetables & toast",
-    "recipe": "**1 serving · chicken and vegetables weighed raw**\n\n1. Coat 160 g boneless, skinless chicken breast in 50 g plain curd, ginger, garlic, ground cumin, coriander powder, salt and ½ tsp oil. Pan-roast until the centre reaches 74°C.\n2. Sauté 100 g carrot, 100 g green beans and 100 g capsicum with ½ tsp oil and a splash of water until tender. Finish with lemon.\n3. Serve with 70 g toasted egg-free whole-wheat bread.",
+    "recipe": "1. Coat 160 g boneless, skinless chicken breast in 50 g plain curd, ginger, garlic, ground cumin, coriander powder, salt and ½ tsp oil. Pan-roast until the centre reaches 74°C.\n2. Sauté 100 g carrot, 100 g green beans and 100 g capsicum with ½ tsp oil and a splash of water until tender. Finish with lemon.\n3. Serve with 70 g toasted egg-free whole-wheat bread.",
     "ingredients": [
       "Chicken",
       "Yogurt",
@@ -280,7 +280,7 @@
   },
   "chicken-pulao": {
     "title": "Chicken & vegetable pulao with raita",
-    "recipe": "**1 serving · chicken weighed raw, rice dry**\n\n1. Heat 1 tsp oil with cumin, a small piece of cinnamon and bay leaf. Cook 50 g onion with ginger and garlic. Add 160 g diced boneless, skinless chicken breast, 50 g carrot and salt; cook until the chicken changes colour.\n2. Add 40 g rinsed rice, 60 g peas and about 100 ml water. Bring to a boil, cover and simmer until the rice is tender and the chicken reaches 74°C, adding water if needed.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve alongside the pulao.",
+    "recipe": "1. Heat 1 tsp oil with cumin, a small piece of cinnamon and bay leaf. Cook 50 g onion with ginger and garlic. Add 160 g diced boneless, skinless chicken breast, 50 g carrot and salt; cook until the chicken changes colour.\n2. Add 40 g rinsed rice, 60 g peas and about 100 ml water. Bring to a boil, cover and simmer until the rice is tender and the chicken reaches 74°C, adding water if needed.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve alongside the pulao.",
     "ingredients": [
       "Oil",
       "Cumin",
@@ -301,7 +301,7 @@
   },
   "chickpea-paneer-salad": {
     "title": "Warm chickpea & paneer salad with toast",
-    "recipe": "**1 serving · chickpeas weighed cooked and drained**\n\n1. Heat 1 tsp oil with cumin and garlic. Add 50 g onion, 100 g capsicum and 100 g cubed low-fat paneer; toss until lightly coloured.\n2. Add 125 g fully cooked chickpeas and 100 g tomato. Toss until warm, then finish with lemon, coriander, chaat masala and salt.\n3. Serve with 1 slice of toasted egg-free whole-wheat bread (30 g).",
+    "recipe": "1. Heat 1 tsp oil with cumin and garlic. Add 50 g onion, 100 g capsicum and 100 g cubed low-fat paneer; toss until lightly coloured.\n2. Add 125 g fully cooked chickpeas and 100 g tomato. Toss until warm, then finish with lemon, coriander, chaat masala and salt.\n3. Serve with 1 slice of toasted egg-free whole-wheat bread (30 g).",
     "ingredients": [
       "Oil",
       "Cumin",
@@ -321,7 +321,7 @@
   },
   "koshimbir": {
     "title": "Cucumber-carrot koshimbir",
-    "recipe": "**1 serving**\n\nMix 200 g plain curd with 100 g chopped cucumber, 100 g grated carrot, 15 g crushed roasted peanuts and salt. Heat ½ tsp oil with mustard seeds, cumin and curry leaves; pour over the salad and mix.",
+    "recipe": "Mix 200 g plain curd with 100 g chopped cucumber, 100 g grated carrot, 15 g crushed roasted peanuts and salt. Heat ½ tsp oil with mustard seeds, cumin and curry leaves; pour over the salad and mix.",
     "ingredients": [
       "Yogurt",
       "Cucumber",
@@ -337,7 +337,7 @@
   },
   "chana-chaat": {
     "title": "Dahi chana chaat",
-    "recipe": "**1 serving · chickpeas weighed cooked and drained**\n\nToss 125 g fully cooked chickpeas with 50 g cucumber, 50 g tomato, coriander, lemon, chaat masala and roasted, ground cumin. Fold through 100 g plain curd and serve.",
+    "recipe": "Toss 125 g fully cooked chickpeas with 50 g cucumber, 50 g tomato, coriander, lemon, chaat masala and roasted, ground cumin. Fold through 100 g plain curd and serve.",
     "ingredients": [
       "Chickpeas",
       "Cucumber",
@@ -351,7 +351,7 @@
   },
   "paneer-salad": {
     "title": "Paneer, cucumber & carrot salad",
-    "recipe": "**1 serving**\n\nToss 80 g cubed low-fat paneer with 100 g cucumber, 100 g grated carrot and 15 g crushed roasted peanuts. Dress with lemon, coriander, roasted, ground cumin and salt.",
+    "recipe": "Toss 80 g cubed low-fat paneer with 100 g cucumber, 100 g grated carrot and 15 g crushed roasted peanuts. Dress with lemon, coriander, roasted, ground cumin and salt.",
     "ingredients": [
       "Low-fat paneer",
       "Cucumber",
@@ -365,7 +365,7 @@
   },
   "guava-chana-chaat": {
     "title": "Guava & roasted chana chaat",
-    "recipe": "**1 serving**\n\nChop 150 g guava and 100 g cucumber. Toss with 35 g roasted chana, 5 g crushed roasted peanuts, lemon and chaat masala. Serve immediately so the chana stays crunchy.",
+    "recipe": "Chop 150 g guava and 100 g cucumber. Toss with 35 g roasted chana, 5 g crushed roasted peanuts, lemon and chaat masala. Serve immediately so the chana stays crunchy.",
     "ingredients": [
       "Guava",
       "Cucumber",
