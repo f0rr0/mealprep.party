@@ -11,7 +11,9 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
-    "check": "tsc --noEmit",
+    "check": "next typegen && tsc --noEmit && bun scripts/check-content.ts",
+    "validate": "bun run check && bun run lint && bun run format:check && bun run knip && bun run lint:commits",
+    "lint:commits": "commitlint --from ${COMMITLINT_FROM:-HEAD~1} --to ${COMMITLINT_TO:-HEAD}",
     "test": "bun test",
     "lint": "oxlint --deny-warnings",
     "format": "oxfmt --write .",
@@ -48,6 +50,8 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "@shadcn/lint": "^0.2.0",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.3",

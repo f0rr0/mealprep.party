@@ -24,6 +24,9 @@ run = "bun run knip"
 [tasks.check]
 run = "hk check --all"
 
+[tasks.validate]
+run = "bun run validate"
+
 [tasks.fix]
 run = "hk fix --all"
 

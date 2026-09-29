@@ -45,6 +45,7 @@ export function MealButton({
   selecting,
   selected,
   open,
+  eager = false,
   onOpen,
   onSelect,
   onLongPress,
@@ -56,6 +57,7 @@ export function MealButton({
   selecting: boolean;
   selected: boolean;
   open: boolean;
+  eager?: boolean;
   onOpen: () => void;
   onSelect: () => void;
   onLongPress: () => void;
@@ -158,7 +160,9 @@ export function MealButton({
           src={illustration.image}
           alt=""
           fill
-          sizes="(max-width: 640px) calc(100vw - 32px), 608px"
+          sizes="(min-width: 640px) 528px, (min-width: 576px) 544px, calc(100vw - 32px)"
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
           draggable={false}
           className="object-cover"
         />

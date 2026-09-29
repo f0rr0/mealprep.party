@@ -39,6 +39,12 @@ export type Meal = z.infer<typeof mealSchema>;
 export const planSchema = z
   .strictObject({
     names: membersSchema,
+    avatars: z
+      .record(
+        memberIdSchema,
+        z.string().regex(/^\/avatars\/[a-z0-9_-]+\.webp$/u)
+      )
+      .optional(),
     meals: z.array(mealSchema).max(1000),
     plan: z
       .array(
@@ -52,6 +58,13 @@ export const planSchema = z
       .max(10_000),
   })
   .superRefine((data, ctx) => {
+    if (
+      Object.keys(data.avatars ?? {}).some(
+        (id) => !Object.hasOwn(data.names, id)
+      )
+    ) {
+      ctx.addIssue({ code: "custom", message: "Unknown avatar member." });
+    }
     const ids = new Set(data.meals.map((meal) => meal.id));
     if (ids.size !== data.meals.length) {
       ctx.addIssue({ code: "custom", message: "Meal IDs must be unique." });
@@ -122,6 +135,28 @@ export function withNames(text: string, members: Members) {
 }
 
 export type PlanEntry = Plan["plan"][number];
+export type PlanSlot = Pick<PlanEntry, "day" | "slot"> & {
+  entries: PlanEntry[];
+};
+
+export function groupPlan(entries: PlanEntry[]): PlanSlot[] {
+  const groups = new Map<string, PlanSlot>();
+  for (const entry of entries) {
+    const key = `${entry.day}:${entry.slot}`;
+    const group = groups.get(key);
+    if (group) {
+      group.entries.push(entry);
+    } else {
+      groups.set(key, { day: entry.day, slot: entry.slot, entries: [entry] });
+    }
+  }
+  return [...groups.values()].toSorted(
+    (a, b) =>
+      weekdays.indexOf(a.day) - weekdays.indexOf(b.day) ||
+      slots.indexOf(a.slot) - slots.indexOf(b.slot)
+  );
+}
+
 export function entryKey(entry: PlanEntry) {
   return `${entry.day}:${entry.slot}:${entry.mealId}`;
 }
