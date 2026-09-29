@@ -1,65 +1,107 @@
 {
   "Monday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "0-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "0-lunch",
     "Snack": "0-snack",
     "Dinner": "0-dinner"
   },
   "Tuesday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "1-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "1-lunch",
     "Snack": "1-snack",
     "Dinner": "1-dinner"
   },
   "Wednesday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "2-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "2-lunch",
     "Snack": "2-snack",
     "Dinner": "2-dinner"
   },
   "Thursday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "3-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "3-lunch",
-    "Snack": "0-snack",
+    "Snack": "3-snack",
     "Dinner": "3-dinner"
   },
   "Friday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "4-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "4-lunch",
-    "Snack": "1-snack",
+    "Snack": "4-snack",
     "Dinner": "4-dinner"
   },
   "Saturday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "5-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "5-lunch",
-    "Snack": "2-snack",
+    "Snack": "5-snack",
     "Dinner": "5-dinner"
   },
   "Sunday": {
-    "Breakfast": {
-      "meal": "0-breakfast",
-      "members": ["member-1"]
-    },
+    "Breakfast": [
+      {
+        "meal": "6-breakfast",
+        "members": ["member-1"]
+      },
+      {
+        "meal": "green-juice",
+        "members": ["member-2"]
+      }
+    ],
     "Lunch": "6-lunch",
-    "Snack": "0-snack",
+    "Snack": "4-snack",
     "Dinner": "6-dinner"
   }
 }

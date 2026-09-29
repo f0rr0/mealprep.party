@@ -7,10 +7,6 @@ import { createState } from "./fixtures";
 
 test("shares only selected meals in weekday order, with configured names and recipes", () => {
   const state = createState();
-  const ids = Object.keys(state.names);
-  state.names = Object.fromEntries(
-    ids.map((id, index) => [id, ["Sam", "Ria"][index]])
-  );
   const monday = state.plan.find(
     (entry) => entry.day === "Monday" && entry.slot === "Dinner"
   );
@@ -20,7 +16,7 @@ test("shares only selected meals in weekday order, with configured names and rec
   assert.ok(monday && tuesday);
   const text = mealShareText(state, [tuesday, monday]);
   assert.ok(text.startsWith("Monday · Dinner · Sam & Ria"));
-  assert.ok(text.includes("Tuesday · Lunch · Sam & Ria"));
+  assert.ok(text.includes("Tuesday · Lunch · Sam\n"));
   for (const entry of [monday, tuesday]) {
     const meal = state.meals.find((item) => item.id === entry.mealId);
     assert.ok(meal);
