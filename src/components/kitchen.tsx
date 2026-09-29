@@ -240,7 +240,7 @@ export default function Kitchen({
                 width={160}
                 height={34}
                 sizes="160px"
-                className="h-auto w-40 -translate-y-0.5"
+                className="h-auto w-40 -translate-y-1"
                 loading="eager"
               />
             </HeaderItem>
