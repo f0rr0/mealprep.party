@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, LinkIcon } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
@@ -17,7 +17,7 @@ import { Reminders } from "@/components/reminders";
 import { ShareMealsButton } from "@/components/share-meals-button";
 import { TabIndicator } from "@/components/tab-indicator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Drawer,
@@ -661,6 +661,32 @@ export default function Kitchen({
                       <Markdown skipHtml components={{ img: () => null }}>
                         {withNames(meal.recipe, state.names)}
                       </Markdown>
+                      {meal.recipeLink && (
+                        <a
+                          ref={hapticRef}
+                          href={meal.recipeLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center gap-2 self-start rounded-sm text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                          {[
+                            "youtube.com",
+                            "www.youtube.com",
+                            "youtu.be",
+                          ].includes(new URL(meal.recipeLink).hostname) ? (
+                            <Image
+                              src="/icons/youtube.svg"
+                              alt=""
+                              width={20}
+                              height={14}
+                              className="shrink-0"
+                            />
+                          ) : (
+                            <LinkIcon aria-hidden="true" className="size-4" />
+                          )}
+                          Recipe link
+                        </a>
+                      )}
                     </div>
                     <div>
                       <h3 className="mb-2 font-medium">Ingredients</h3>
@@ -670,19 +696,6 @@ export default function Kitchen({
                         ))}
                       </ul>
                     </div>
-                    {meal.recipeLink && (
-                      <a
-                        href={meal.recipeLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={buttonVariants({
-                          variant: "outline",
-                          className: actionButtonClass,
-                        })}
-                      >
-                        Source
-                      </a>
-                    )}
                   </section>
                 </Fragment>
               ))}
