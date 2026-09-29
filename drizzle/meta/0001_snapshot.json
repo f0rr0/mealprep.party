@@ -1,0 +1,52 @@
+{
+  "id": "2025b93e-c706-4a81-8a4d-edc718349a69",
+  "prevId": "a77aba63-3f5f-4b57-9c65-62a96a09782f",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "our_kitchen.state": {
+      "name": "state",
+      "schema": "our_kitchen",
+      "columns": {
+        "body": {
+          "name": "body",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {
+    "our_kitchen": "our_kitchen"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
