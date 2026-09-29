@@ -30,7 +30,10 @@ const textMotion = {
   exit: (direction: number) => ({
     opacity: 0,
     y: direction * -12,
-    transition: { duration: direction ? 0.18 : 0 },
+    transition: {
+      duration: direction ? 0.2 : 0,
+      opacity: { duration: direction ? 0.16 : 0, delay: 0 },
+    },
   }),
 };
 
@@ -160,11 +163,15 @@ export function MealButton({
       </motion.span>
       <motion.span
         layout={reducedMotion ? false : "position"}
-        transition={{ duration: 0.28, ease: [0.2, 0, 0, 1] }}
+        transition={{ duration: 0.4, ease: [0.2, 0, 0, 1] }}
         className="relative flex w-3/5 min-w-0 flex-col gap-1"
       >
-        <span className="text-base/6 font-normal opacity-75">{slot}</span>
-        <FadingText text={title} direction={direction} className="text-lg/6" />
+        <span className="text-sm/6 font-normal opacity-75">{slot}</span>
+        <FadingText
+          text={title}
+          direction={direction}
+          className="text-base/6"
+        />
       </motion.span>
       <motion.span
         aria-hidden="true"
@@ -213,10 +220,19 @@ function FadingText({
           initial="enter"
           animate="visible"
           exit="exit"
-          transition={{
-            duration: reducedMotion ? 0 : 0.28,
-            ease: [0.2, 0, 0, 1],
-          }}
+          transition={
+            reducedMotion
+              ? { duration: 0 }
+              : {
+                  duration: 0.4,
+                  ease: [0.2, 0, 0, 1],
+                  opacity: {
+                    duration: 0.34,
+                    delay: 0.06,
+                    ease: [0.4, 0, 0.2, 1],
+                  },
+                }
+          }
         >
           <span className="line-clamp-2">{text}</span>
         </motion.span>

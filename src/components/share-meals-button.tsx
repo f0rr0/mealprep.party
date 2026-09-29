@@ -13,6 +13,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Textarea } from "@/components/ui/textarea";
+import { useCopyFeedback } from "@/hooks/use-copy-feedback";
 import { hapticRef } from "@/lib/haptics";
 import { shareText } from "@/lib/share";
 import { cn } from "@/lib/utils";
@@ -27,9 +28,8 @@ export function ShareMealsButton({
   dock?: boolean;
 }) {
   const [busy, setBusy] = useState(false);
-  const [copiedText, setCopiedText] = useState("");
+  const { copied, markCopied } = useCopyFeedback(text);
   const [manual, setManual] = useState(false);
-  const copied = !!text && copiedText === text;
   return (
     <>
       <Button
@@ -43,7 +43,7 @@ export function ShareMealsButton({
           const result = await shareText(text);
           setBusy(false);
           if (result === "copied") {
-            setCopiedText(text);
+            markCopied();
           }
           if (result === "manual") {
             setManual(true);

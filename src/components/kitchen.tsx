@@ -29,6 +29,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { useCopyFeedback } from "@/hooks/use-copy-feedback";
 import { hapticRef } from "@/lib/haptics";
 import { createKitchenSync } from "@/lib/kitchen-sync";
 import {
@@ -117,7 +118,6 @@ export default function Kitchen({
   const [recipe, setRecipe] = useState<PlanEntry | null>(null);
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [error, setError] = useState("");
-  const [copied, setCopied] = useState(false);
   const [copyFallback, setCopyFallback] = useState("");
   const sync = useRef<ReturnType<typeof createKitchenSync> | null>(null);
 
@@ -201,6 +201,7 @@ export default function Kitchen({
     wanted.length > 0 && missingIngredients(wanted, ingredients).length === 0;
   const pantry = state?.pantry ?? [];
   const text = groceryText(ingredients, pantry);
+  const { copied, markCopied } = useCopyFeedback(text);
   const recipeMeal = meals.find((meal) => meal.id === recipe?.mealId);
   const allDaySelected =
     dayPlan.length > 0 &&
@@ -210,7 +211,6 @@ export default function Kitchen({
     setSelection(
       selectEntries(selected, [entry], !selected.includes(entryKey(entry)))
     );
-    setCopied(false);
   }
   function addMeals(entries: PlanEntry[]) {
     if (
@@ -220,7 +220,6 @@ export default function Kitchen({
       return;
     }
     sync.current?.setGroceries(entries.map(entryKey), []);
-    setCopied(false);
   }
   const recipeAdded =
     !!recipeMeal?.ingredients.length &&
@@ -228,7 +227,7 @@ export default function Kitchen({
   const selectionMode = selecting && tab === "plan";
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-5 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
+    <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-4 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
       <header className="relative flex h-11 shrink-0 -translate-y-1 items-center justify-center">
         <h1 className="sr-only">mealprep.party</h1>
         <AnimatePresence initial={false}>
@@ -237,10 +236,10 @@ export default function Kitchen({
               <Image
                 src={wordmark}
                 alt="मीलप्रेप.पार्टी"
-                width={160}
-                height={34}
-                sizes="160px"
-                className="h-auto w-40 -translate-y-1"
+                width={152}
+                height={32}
+                sizes="152px"
+                className="h-auto w-38 -translate-y-1"
                 loading="eager"
               />
             </HeaderItem>
@@ -293,7 +292,6 @@ export default function Kitchen({
                 aria-label="Clear grocery list"
                 onClick={() => {
                   sync.current?.setGroceries([], groceries);
-                  setCopied(false);
                 }}
               >
                 Clear
@@ -311,7 +309,7 @@ export default function Kitchen({
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(text);
-                    setCopied(true);
+                    markCopied();
                   } catch {
                     setCopyFallback(text);
                   }
@@ -378,7 +376,7 @@ export default function Kitchen({
           >
             <Tabs
               value={day}
-              className="gap-6"
+              className="gap-5"
               onValueChange={(value) => {
                 const next = weekdays.find((weekday) => weekday === value);
                 if (next) {
@@ -393,7 +391,7 @@ export default function Kitchen({
               <div className="grid items-start" aria-busy={!state}>
                 {!state && (
                   <output
-                    className="col-start-1 row-start-1 flex flex-col gap-4"
+                    className="col-start-1 row-start-1 flex flex-col gap-3"
                     aria-label="Loading meals"
                   >
                     {slots.map((slot) => (
@@ -405,7 +403,7 @@ export default function Kitchen({
                   <TabsContent
                     value={day}
                     aria-label={`${day} meals`}
-                    className="col-start-1 row-start-1 flex w-full flex-col gap-4"
+                    className="col-start-1 row-start-1 flex w-full flex-col gap-3"
                   >
                     {state &&
                       dayPlan.map((entry) => {
@@ -464,7 +462,6 @@ export default function Kitchen({
                         className="data-checked:border-muted-foreground/40 data-checked:bg-muted data-checked:text-muted-foreground group-has-focus-visible/field-label:data-checked:border-muted-foreground dark:data-checked:bg-muted pointer-events-none"
                         checked={checked}
                         onCheckedChange={(value) => {
-                          setCopied(false);
                           sync.current?.set(ingredient, value);
                         }}
                       />
