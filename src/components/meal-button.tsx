@@ -76,7 +76,7 @@ export function MealButton({
     <Button
       ref={hapticRef}
       variant="outline"
-      className="relative isolate h-28 min-h-28 w-full shrink-0 touch-pan-y justify-start overflow-hidden rounded-xl border-0 bg-(--meal-surface) px-4 text-left whitespace-normal text-(--meal-ink) [-webkit-touch-callout:none] hover:bg-(--meal-surface) hover:text-(--meal-ink) active:not-aria-[haspopup]:translate-y-0 dark:bg-(--meal-surface) dark:hover:bg-(--meal-surface)"
+      className="relative isolate h-25 min-h-25 w-full shrink-0 touch-pan-y justify-start overflow-hidden rounded-xl border-0 bg-(--meal-surface) px-4 text-left whitespace-normal text-(--meal-ink) [-webkit-touch-callout:none] hover:bg-(--meal-surface) hover:text-(--meal-ink) active:not-aria-[haspopup]:translate-y-0 dark:bg-(--meal-surface) dark:hover:bg-(--meal-surface)"
       style={
         {
           "--meal-surface": illustration.surface,
@@ -164,14 +164,10 @@ export function MealButton({
       <motion.span
         layout={reducedMotion ? false : "position"}
         transition={{ duration: 0.4, ease: [0.2, 0, 0, 1] }}
-        className="relative flex w-3/5 min-w-0 flex-col gap-1"
+        className="relative flex w-3/5 min-w-0 flex-col"
       >
-        <span className="text-sm/6 font-normal opacity-75">{slot}</span>
-        <FadingText
-          text={title}
-          direction={direction}
-          className="text-base/6"
-        />
+        <span className="text-xs/4 font-normal opacity-75">{slot}</span>
+        <FadingText text={title} direction={direction} className="text-sm/5" />
       </motion.span>
       <motion.span
         aria-hidden="true"

@@ -227,7 +227,7 @@ export default function Kitchen({
   const selectionMode = selecting && tab === "plan";
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-4 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
+    <main className="mx-auto flex min-h-dvh max-w-xl flex-col gap-2 px-4 pt-5 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:px-6">
       <header className="relative flex h-11 shrink-0 -translate-y-1 items-center justify-center">
         <h1 className="sr-only">mealprep.party</h1>
         <AnimatePresence initial={false}>
@@ -236,10 +236,10 @@ export default function Kitchen({
               <Image
                 src={wordmark}
                 alt="मीलप्रेप.पार्टी"
-                width={152}
-                height={32}
-                sizes="152px"
-                className="h-auto w-38 -translate-y-1"
+                width={144}
+                height={30}
+                sizes="144px"
+                className="h-auto w-36 -translate-y-1"
                 loading="eager"
               />
             </HeaderItem>
@@ -376,7 +376,7 @@ export default function Kitchen({
           >
             <Tabs
               value={day}
-              className="gap-5"
+              className="gap-4"
               onValueChange={(value) => {
                 const next = weekdays.find((weekday) => weekday === value);
                 if (next) {
@@ -391,11 +391,11 @@ export default function Kitchen({
               <div className="grid items-start" aria-busy={!state}>
                 {!state && (
                   <output
-                    className="col-start-1 row-start-1 flex flex-col gap-3"
+                    className="col-start-1 row-start-1 flex flex-col gap-2"
                     aria-label="Loading meals"
                   >
                     {slots.map((slot) => (
-                      <Skeleton key={slot} className="h-28 w-full rounded-xl" />
+                      <Skeleton key={slot} className="h-25 w-full rounded-xl" />
                     ))}
                   </output>
                 )}
@@ -403,7 +403,7 @@ export default function Kitchen({
                   <TabsContent
                     value={day}
                     aria-label={`${day} meals`}
-                    className="col-start-1 row-start-1 flex w-full flex-col gap-3"
+                    className="col-start-1 row-start-1 flex w-full flex-col gap-2"
                   >
                     {state &&
                       dayPlan.map((entry) => {
