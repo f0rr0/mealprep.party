@@ -1,76 +1,19 @@
 {
-  "id": "a77aba63-3f5f-4b57-9c65-62a96a09782f",
+  "id": "8e5ad93b-8d8c-43f1-a2a1-6d2ecfe5cbdc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "our_kitchen.attempts": {
-      "name": "attempts",
-      "schema": "our_kitchen",
-      "columns": {
-        "key": {
-          "name": "key",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "count": {
-          "name": "count",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "expires": {
-          "name": "expires",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "our_kitchen.cache": {
-      "name": "cache",
-      "schema": "our_kitchen",
-      "columns": {
-        "key": {
-          "name": "key",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "value": {
-          "name": "value",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "our_kitchen.state": {
       "name": "state",
       "schema": "our_kitchen",
       "columns": {
+        "body": {
+          "name": "body",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
         "id": {
           "name": "id",
           "type": "integer",
@@ -80,12 +23,6 @@
         "version": {
           "name": "version",
           "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "body": {
-          "name": "body",
-          "type": "jsonb",
           "primaryKey": false,
           "notNull": true
         }
