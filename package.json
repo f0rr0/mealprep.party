@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
+    "vercel:build": "bun scripts/vercel-build.ts",
     "start": "next start --hostname 127.0.0.1",
     "check": "next typegen && tsc --noEmit && bun scripts/check-content.ts",
     "validate": "bun run check && bun run lint && bun run format:check && bun run knip && bun run lint:commits",
