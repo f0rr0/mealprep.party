@@ -15,6 +15,13 @@
       "when": 1790650396424,
       "tag": "0001_rename_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790652459492,
+      "tag": "0002_separate_groceries",
+      "breakpoints": true
     }
   ]
 }

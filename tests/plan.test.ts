@@ -2,7 +2,6 @@ import { test } from "bun:test";
 import assert from "node:assert/strict";
 
 import {
-  entryKey,
   groupPlan,
   ingredientsForEntries,
   selectEntries,
@@ -90,21 +89,14 @@ test("multiple meals form one selectable slot with separate members and combined
   assert.equal(selected.length, 2);
   assert.deepEqual(selectEntries(selected, breakfast.entries, false), []);
   const state = { ...plan, groceries: [], pantry: ["oranges"], version: 1 };
-  const groceryKeys = updateGroceries(state, selected, []);
-  assert.deepEqual(groceryKeys, selected);
-  assert.deepEqual(
-    updateGroceries({ ...state, groceries: groceryKeys }, selected, []),
-    selected
-  );
-  const entries = plan.plan.filter((e) => groceryKeys.includes(entryKey(e)));
-  const ingredients = ingredientsForEntries(plan.meals, entries);
+  const ingredients = ingredientsForEntries(plan.meals, breakfast.entries);
+  const groceries = updateGroceries(state, ingredients, []);
+  assert.deepEqual(groceries, ingredients);
+  assert.deepEqual(updateGroceries({ groceries }, ingredients, []), groceries);
   assert.ok(ingredients.includes("Oranges"));
   assert.ok(ingredients.includes("Whole-wheat bread"));
   assert.equal(ingredients.filter((i) => i.toLowerCase() === "eggs").length, 1);
-  assert.deepEqual(
-    updateGroceries({ ...state, groceries: groceryKeys }, [], selected),
-    []
-  );
+  assert.deepEqual(updateGroceries({ groceries }, [], groceries), []);
   const shared = mealShareText(state, breakfast.entries);
   assert.ok(shared.includes("Monday · Breakfast · Sid"));
   assert.ok(shared.includes("Monday · Breakfast · Shreya"));

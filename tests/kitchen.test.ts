@@ -28,6 +28,15 @@ test("recurring weekday content, names, plain groceries and request boundaries",
     }).success,
     true
   );
+  assert.equal(
+    kitchenCommand.safeParse({
+      action: "groceries",
+      add: ["Monday:Breakfast:0-breakfast"],
+      remove: [],
+      version: 1,
+    }).success,
+    false
+  );
   const [meal] = state.meals;
   assert.ok(meal);
   assert.deepEqual(Object.keys(meal).toSorted(), [
@@ -101,6 +110,7 @@ test("meal selections stay distinct across days; pantry checks survive rapid tap
   const { setImmediate: settle } = await import("node:timers/promises");
   const initial = createState();
   initial.pantry = [];
+  initial.groceries = ["Rice", "Eggs", "Dal"];
   const monday = initial.plan.filter((entry) => entry.day === "Monday");
   const tuesday = initial.plan.find((entry) => entry.day === "Tuesday");
   assert.ok(tuesday);

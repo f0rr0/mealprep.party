@@ -201,10 +201,7 @@ export default function Kitchen({
     selectedPlan.some((entry) => entry.day === value)
   );
   const groceries = state?.groceries ?? [];
-  const groceryPlan = plan.filter((entry) =>
-    groceries.includes(entryKey(entry))
-  );
-  const ingredients = ingredientsForEntries(meals, groceryPlan);
+  const ingredients = groceries;
   const wanted = ingredientsForEntries(meals, selectedPlan);
   const added =
     wanted.length > 0 && missingIngredients(wanted, ingredients).length === 0;
@@ -239,7 +236,7 @@ export default function Kitchen({
     ) {
       return;
     }
-    sync.current?.setGroceries(entries.map(entryKey), []);
+    sync.current?.setGroceries(ingredientsForEntries(meals, entries), []);
   }
   const recipeAdded =
     !!recipeIngredients.length &&

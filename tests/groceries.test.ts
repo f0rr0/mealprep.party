@@ -4,7 +4,6 @@ import { setImmediate as settle } from "node:timers/promises";
 
 import { createKitchenSync } from "@/lib/kitchen-sync";
 import {
-  entryKey,
   ingredientsForEntries,
   missingIngredients,
   updateGroceries,
@@ -12,33 +11,38 @@ import {
 
 import { createState } from "./fixtures";
 
-test("groceries merge, deduplicate ingredients, ignore pantry and preserve concurrent additions", async () => {
-  const initial = createState();
-  const [first, second, third] = initial.plan;
-  const existing = entryKey(first);
-  const added = entryKey(second);
-  const concurrent = entryKey(third);
-  initial.groceries = [existing];
-  const ingredients = ingredientsForEntries(initial.meals, [first, second]);
-  initial.pantry = ingredients.map((name) => name.toLowerCase());
-  assert.equal(
-    new Set(ingredients.map((name) => name.toLowerCase())).size,
-    ingredients.length
-  );
+test("groceries are ingredient snapshots: deduplicate, ignore checks, survive content edits and clear", () => {
+  const state = createState();
+  const wanted = ingredientsForEntries(state.meals, [state.plan[0]]);
+  state.groceries = updateGroceries(state, wanted, []);
+  state.pantry = wanted.map((name) => name.toLowerCase());
+  assert.deepEqual(missingIngredients(wanted, state.groceries), []);
   assert.deepEqual(missingIngredients([" RICE ", "Dal"], ["rice"]), ["Dal"]);
-  assert.deepEqual(missingIngredients(ingredients, ingredients), []);
-  assert.ok(
-    missingIngredients(
-      ingredients,
-      ingredientsForEntries(initial.meals, [first])
-    ).length > 0
+  assert.deepEqual(
+    updateGroceries({ groceries: ["Rice"] }, [" rice ", "DAL", "dal"], []),
+    ["Rice", "DAL"]
   );
-  assert.deepEqual(updateGroceries(initial, [added, added, "invalid"], []), [
-    existing,
-    added,
-  ]);
-  assert.deepEqual(updateGroceries(initial, [], [existing]), []);
+  state.meals = [];
+  state.plan = [];
+  assert.deepEqual(updateGroceries(state, [], []), wanted);
+  assert.deepEqual(
+    updateGroceries(
+      state,
+      [],
+      wanted.map((name) => name.toUpperCase())
+    ),
+    []
+  );
+  assert.deepEqual(
+    missingIngredients([...wanted, "New ingredient"], state.groceries),
+    ["New ingredient"]
+  );
+});
 
+test("optimistic grocery writes deduplicate, retry conflicts, preserve concurrent additions and clear checks", async () => {
+  const initial = createState();
+  initial.groceries = ["Rice"];
+  initial.pantry = ["rice"];
   let server = structuredClone(initial);
   let shown = initial;
   let error = "";
@@ -63,34 +67,86 @@ test("groceries merge, deduplicate ingredients, ignore pantry and preserve concu
       writes.push(command);
       if (conflict) {
         conflict = false;
-        server.groceries.push(concurrent);
+        server.groceries.push("Eggs");
         server.version += 1;
         return Response.json({}, { status: 409 });
       }
       assert.equal(command.version, server.version);
+      const groceries = updateGroceries(server, command.add, command.remove);
       server = {
         ...server,
-        groceries: updateGroceries(server, command.add, command.remove),
+        groceries,
+        pantry: server.pantry.filter((key) =>
+          groceries.some((name) => name.toLowerCase() === key)
+        ),
         version: server.version + 1,
       };
-      return Response.json(server);
+      return Response.json({
+        version: server.version,
+        groceries: server.groceries,
+        pantry: server.pantry,
+      });
     }
   );
-  sync.setGroceries([added, added], []);
-  assert.deepEqual(shown.groceries, [existing, added]);
-  assert.deepEqual(shown.pantry, initial.pantry);
+  sync.setGroceries(["Dal", "Dal"], []);
+  assert.deepEqual(shown.groceries, ["Rice", "Dal"]);
+  assert.deepEqual(shown.pantry, ["rice"]);
   await settle();
   assert.ok(error);
   assert.equal(sync.hasPending(), true);
   offline = false;
   await sync.retry();
-  assert.deepEqual(shown.groceries, [existing, concurrent, added]);
+  assert.deepEqual(shown.groceries, ["Rice", "Eggs", "Dal"]);
   assert.equal(writes.length, 2);
-  assert.deepEqual(writes[1].add, [added]);
+  assert.deepEqual(writes[1].add, ["Dal"]);
   assert.equal(sync.hasPending(), false);
   assert.equal(error, "");
-
-  sync.setGroceries([], [existing]);
+  assert.deepEqual(shown.meals, initial.meals);
+  assert.deepEqual(shown.plan, initial.plan);
+  sync.setGroceries([], shown.groceries);
+  assert.deepEqual(shown.groceries, []);
+  assert.deepEqual(shown.pantry, []);
   await settle();
-  assert.deepEqual(server.groceries, [concurrent, added]);
+  assert.deepEqual(server.groceries, []);
+  sync.setGroceries(["Rice"], []);
+  await settle();
+  assert.deepEqual(shown.groceries, ["Rice"]);
+  assert.deepEqual(shown.pantry, []);
+});
+
+test("checking a queued ingredient waits for its addition to persist", async () => {
+  let server = createState();
+  let shown = server;
+  const gate = Promise.withResolvers<boolean>();
+  const sync = createKitchenSync(
+    server,
+    (state) => {
+      shown = state;
+    },
+    async (_url, options) => {
+      await gate.promise;
+      const command = JSON.parse(String(options?.body));
+      if (command.action === "grocery-items") {
+        server.groceries = updateGroceries(server, command.add, command.remove);
+      } else {
+        assert.ok(
+          server.groceries.some(
+            (name) => name.toLowerCase() === command.ingredient
+          )
+        );
+        server.pantry.push(command.ingredient);
+      }
+      server = { ...server, version: server.version + 1 };
+      return Response.json(server);
+    }
+  );
+  sync.setGroceries(["Rice"], []);
+  sync.setGroceries(["Dal"], []);
+  sync.set("Dal", true);
+  assert.deepEqual(shown.pantry, ["dal"]);
+  gate.resolve(true);
+  await settle();
+  assert.deepEqual(server.groceries, ["Rice", "Dal"]);
+  assert.deepEqual(server.pantry, ["dal"]);
+  assert.equal(sync.hasPending(), false);
 });
