@@ -3,7 +3,7 @@
 import { CheckIcon } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 
 import { HeaderItem } from "@/components/header-item";
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/drawer";
 import { Empty, EmptyMedia } from "@/components/ui/empty";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,6 +36,7 @@ import { createKitchenSync } from "@/lib/kitchen-sync";
 import {
   entryKey,
   groceryText,
+  groupPlan,
   ingredientKey,
   ingredientsForEntries,
   missingIngredients,
@@ -46,16 +48,19 @@ import {
 } from "@/lib/model";
 import type { PlanEntry, State, Weekday } from "@/lib/model";
 import { mealShareText } from "@/lib/share";
-import {
-  actionButtonClass,
-  drawerContentClass,
-  headerButtonClass,
-  tabPanelClass,
-} from "@/lib/ui-styles";
+import { drawerContentClass } from "@/lib/ui-styles";
 import { cn } from "@/lib/utils";
 
 import groceriesEmpty from "../../public/groceries-empty.webp";
 import wordmark from "../../public/illustrations/wordmark.webp";
+
+const headerButtonClass =
+  "h-11 min-w-16 rounded-full px-3 hover:bg-transparent";
+
+const actionButtonClass = "h-12 rounded-full text-base";
+
+const tabPanelClass =
+  "col-start-1 row-start-1 w-full self-start transition-opacity duration-160 ease-[cubic-bezier(0.2,0,0,1)] data-ending-style:pointer-events-none data-ending-style:opacity-0 data-starting-style:opacity-0 motion-reduce:transition-none";
 
 function WeekStrip({
   today,
@@ -116,7 +121,9 @@ export default function Kitchen({
   const [tab, setTab] = useState("plan");
   const [selection, setSelection] = useState<string[]>([]);
   const [selecting, setSelecting] = useState(false);
-  const [recipe, setRecipe] = useState<PlanEntry | null>(null);
+  const [recipe, setRecipe] = useState<Pick<PlanEntry, "day" | "slot"> | null>(
+    null
+  );
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [error, setError] = useState("");
   const [copyFallback, setCopyFallback] = useState("");
@@ -185,6 +192,7 @@ export default function Kitchen({
   const dayPlan = plan
     .filter((entry) => entry.day === day)
     .toSorted((a, b) => slots.indexOf(a.slot) - slots.indexOf(b.slot));
+  const daySlots = groupPlan(dayPlan);
   const selected = selection;
   const selectedPlan = plan.filter((entry) =>
     selected.includes(entryKey(entry))
@@ -203,14 +211,25 @@ export default function Kitchen({
   const pantry = state?.pantry ?? [];
   const text = groceryText(ingredients, pantry);
   const { copied, markCopied } = useCopyFeedback(text);
-  const recipeMeal = meals.find((meal) => meal.id === recipe?.mealId);
+  const recipeEntries = plan.filter(
+    (entry) => entry.day === recipe?.day && entry.slot === recipe?.slot
+  );
+  const recipeMeals = recipeEntries.flatMap((entry) => {
+    const meal = meals.find((item) => item.id === entry.mealId);
+    return meal ? [{ entry, meal }] : [];
+  });
+  const recipeIngredients = ingredientsForEntries(meals, recipeEntries);
   const allDaySelected =
     dayPlan.length > 0 &&
     dayPlan.every((entry) => selected.includes(entryKey(entry)));
 
-  function toggleMeal(entry: PlanEntry) {
+  function toggleMeals(entries: PlanEntry[]) {
     setSelection(
-      selectEntries(selected, [entry], !selected.includes(entryKey(entry)))
+      selectEntries(
+        selected,
+        entries,
+        !entries.every((entry) => selected.includes(entryKey(entry)))
+      )
     );
   }
   function addMeals(entries: PlanEntry[]) {
@@ -223,8 +242,8 @@ export default function Kitchen({
     sync.current?.setGroceries(entries.map(entryKey), []);
   }
   const recipeAdded =
-    !!recipeMeal?.ingredients.length &&
-    !missingIngredients(recipeMeal.ingredients, ingredients).length;
+    !!recipeIngredients.length &&
+    !missingIngredients(recipeIngredients, ingredients).length;
   const selectionMode = selecting && tab === "plan";
 
   return (
@@ -265,7 +284,7 @@ export default function Kitchen({
           {selectionMode && (
             <HeaderItem key="count">
               <output className="text-sm font-medium tabular-nums">
-                {selectedPlan.length} selected
+                {groupPlan(selectedPlan).length} selected
               </output>
             </HeaderItem>
           )}
@@ -407,37 +426,50 @@ export default function Kitchen({
                     className="col-start-1 row-start-1 flex w-full flex-col gap-2"
                   >
                     {state &&
-                      dayPlan.map((entry) => {
-                        const meal = meals.find(
-                          (item) => item.id === entry.mealId
-                        );
-                        if (!meal) {
-                          return null;
-                        }
+                      daySlots.map((group, index) => {
+                        const title = group.entries
+                          .flatMap((entry) => {
+                            const meal = meals.find(
+                              (item) => item.id === entry.mealId
+                            );
+                            return meal
+                              ? [withNames(meal.title, state.names)]
+                              : [];
+                          })
+                          .join(", ");
+                        const people = [
+                          ...new Set(
+                            group.entries.flatMap((entry) => entry.people)
+                          ),
+                        ];
                         return (
                           <MealButton
-                            key={entry.slot}
-                            slot={entry.slot}
+                            key={group.slot}
+                            eager={index === 0}
+                            slot={group.slot}
                             direction={dayMotion.direction}
-                            title={withNames(meal.title, state.names)}
-                            members={entry.people.map((id) => ({
+                            title={title}
+                            members={people.map((id) => ({
                               id,
                               name: state.names[id],
                             }))}
                             selecting={selecting}
-                            selected={selected.includes(entryKey(entry))}
+                            selected={group.entries.every((entry) =>
+                              selected.includes(entryKey(entry))
+                            )}
                             open={
                               recipeOpen &&
                               recipe !== null &&
-                              entryKey(recipe) === entryKey(entry)
+                              recipe.day === group.day &&
+                              recipe.slot === group.slot
                             }
                             onOpen={() => {
-                              setRecipe(entry);
+                              setRecipe({ day: group.day, slot: group.slot });
                               setRecipeOpen(true);
                             }}
-                            onSelect={() => toggleMeal(entry)}
+                            onSelect={() => toggleMeals(group.entries)}
                             onLongPress={() => {
-                              setSelection([entryKey(entry)]);
+                              setSelection(group.entries.map(entryKey));
                               setSelecting(true);
                             }}
                           />
@@ -531,15 +563,16 @@ export default function Kitchen({
         >
           <DrawerHeader className="gap-3 md:gap-3">
             <DrawerTitle className="text-center text-lg/6">
-              {recipeMeal && state
-                ? withNames(recipeMeal.title, state.names)
-                : "Recipe"}
+              {recipeMeals.length === 1 && state
+                ? withNames(recipeMeals[0].meal.title, state.names)
+                : (recipe?.slot ?? "Recipe")}
             </DrawerTitle>
-            {recipe && state && (
+            {recipeMeals.length === 1 && state && (
               <MemberAvatars
-                members={recipe.people.map((id) => ({
+                members={recipeMeals[0].entry.people.map((id) => ({
                   id,
                   name: state.names[id],
+                  avatar: state.avatars?.[id],
                 }))}
               />
             )}
@@ -547,34 +580,58 @@ export default function Kitchen({
               Recipe and ingredients.
             </DrawerDescription>
           </DrawerHeader>
-          {recipeMeal && state && (
+          {state && (
             <div className="flex min-h-0 flex-col gap-6 overflow-y-auto overscroll-contain p-4">
-              <div className="flex flex-col gap-3 [&_a]:underline [&_h1]:font-medium [&_h2]:font-medium [&_h3]:font-medium [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5">
-                <Markdown skipHtml components={{ img: () => null }}>
-                  {withNames(recipeMeal.recipe, state.names)}
-                </Markdown>
-              </div>
-              <div>
-                <h3 className="mb-2 font-medium">Ingredients</h3>
-                <ul className="flex list-disc flex-col gap-1 pl-5">
-                  {recipeMeal.ingredients.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              {recipeMeal.recipeLink && (
-                <a
-                  href={recipeMeal.recipeLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={buttonVariants({
-                    variant: "outline",
-                    className: actionButtonClass,
-                  })}
-                >
-                  Source
-                </a>
-              )}
+              {recipeMeals.map(({ entry, meal }, index) => (
+                <Fragment key={entryKey(entry)}>
+                  {index > 0 && <Separator />}
+                  <section
+                    className="flex flex-col gap-6"
+                    aria-label={withNames(meal.title, state.names)}
+                  >
+                    {recipeMeals.length > 1 && (
+                      <header className="flex flex-col gap-3">
+                        <h3 className="text-center text-lg/6 font-medium">
+                          {withNames(meal.title, state.names)}
+                        </h3>
+                        <MemberAvatars
+                          members={entry.people.map((id) => ({
+                            id,
+                            name: state.names[id],
+                            avatar: state.avatars?.[id],
+                          }))}
+                        />
+                      </header>
+                    )}
+                    <div className="flex flex-col gap-3 [&_a]:underline [&_h1]:font-medium [&_h2]:font-medium [&_h3]:font-medium [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5">
+                      <Markdown skipHtml components={{ img: () => null }}>
+                        {withNames(meal.recipe, state.names)}
+                      </Markdown>
+                    </div>
+                    <div>
+                      <h3 className="mb-2 font-medium">Ingredients</h3>
+                      <ul className="flex list-disc flex-col gap-1 pl-5">
+                        {meal.ingredients.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    {meal.recipeLink && (
+                      <a
+                        href={meal.recipeLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={buttonVariants({
+                          variant: "outline",
+                          className: actionButtonClass,
+                        })}
+                      >
+                        Source
+                      </a>
+                    )}
+                  </section>
+                </Fragment>
+              ))}
             </div>
           )}
           <DrawerFooter className="grid grid-cols-2 pb-[calc(1rem+env(safe-area-inset-bottom))]">
@@ -585,11 +642,9 @@ export default function Kitchen({
                 actionButtonClass,
                 recipeAdded ? "disabled:opacity-100" : "hover:bg-primary"
               )}
-              disabled={recipeAdded || !recipeMeal?.ingredients.length}
+              disabled={recipeAdded || !recipeIngredients.length}
               onClick={() => {
-                if (recipe) {
-                  addMeals([recipe]);
-                }
+                addMeals(recipeEntries);
               }}
             >
               <span className="inline-flex items-center gap-1.5">
@@ -604,7 +659,7 @@ export default function Kitchen({
               </span>
             </Button>
             <ShareMealsButton
-              text={state && recipe ? mealShareText(state, [recipe]) : ""}
+              text={state ? mealShareText(state, recipeEntries) : ""}
               className={actionButtonClass}
             />
           </DrawerFooter>

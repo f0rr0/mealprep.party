@@ -28,7 +28,9 @@ steps {
 hooks {
   ["commit-msg"] {
     steps {
-      ["conventional-commit"] = Builtins.check_conventional_commit
+      ["conventional-commit"] {
+        check = "bun run --bun commitlint --edit"
+      }
     }
   }
 }
