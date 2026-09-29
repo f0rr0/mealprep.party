@@ -2,7 +2,7 @@
   "Monday": {
     "Breakfast": [
       {
-        "meal": "0-breakfast",
+        "meal": "bread-omelette",
         "members": ["member-1"]
       },
       {
@@ -10,14 +10,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "0-lunch",
-    "Snack": "0-snack",
-    "Dinner": "0-dinner"
+    "Lunch": "paneer-bhurji",
+    "Snack": "guava-chana-chaat",
+    "Dinner": "lemon-chicken"
   },
   "Tuesday": {
     "Breakfast": [
       {
-        "meal": "1-breakfast",
+        "meal": "paneer-moong-chilla",
         "members": ["member-1"]
       },
       {
@@ -25,14 +25,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "1-lunch",
-    "Snack": "1-snack",
-    "Dinner": "1-dinner"
+    "Lunch": "palak-chicken",
+    "Snack": "chana-chaat",
+    "Dinner": "tofu-stir-fry"
   },
   "Wednesday": {
     "Breakfast": [
       {
-        "meal": "2-breakfast",
+        "meal": "paneer-paratha",
         "members": ["member-1"]
       },
       {
@@ -40,14 +40,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "2-lunch",
-    "Snack": "2-snack",
-    "Dinner": "2-dinner"
+    "Lunch": "dal-palak",
+    "Snack": "paneer-salad",
+    "Dinner": "chicken-fajita-bowl"
   },
   "Thursday": {
     "Breakfast": [
       {
-        "meal": "3-breakfast",
+        "meal": "bread-omelette",
         "members": ["member-1"]
       },
       {
@@ -55,14 +55,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "3-lunch",
-    "Snack": "3-snack",
-    "Dinner": "3-dinner"
+    "Lunch": "rajma-rice",
+    "Snack": "koshimbir",
+    "Dinner": "chicken-tomato-pasta"
   },
   "Friday": {
     "Breakfast": [
       {
-        "meal": "4-breakfast",
+        "meal": "paneer-moong-chilla",
         "members": ["member-1"]
       },
       {
@@ -70,14 +70,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "4-lunch",
-    "Snack": "4-snack",
-    "Dinner": "4-dinner"
+    "Lunch": "matar-paneer",
+    "Snack": "koshimbir",
+    "Dinner": "chicken-noodles"
   },
   "Saturday": {
     "Breakfast": [
       {
-        "meal": "5-breakfast",
+        "meal": "bread-omelette",
         "members": ["member-1"]
       },
       {
@@ -85,14 +85,14 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "5-lunch",
-    "Snack": "5-snack",
-    "Dinner": "5-dinner"
+    "Lunch": "paneer-wrap",
+    "Snack": "guava-chana-chaat",
+    "Dinner": "roast-chicken"
   },
   "Sunday": {
     "Breakfast": [
       {
-        "meal": "6-breakfast",
+        "meal": "paneer-moong-chilla",
         "members": ["member-1"]
       },
       {
@@ -100,8 +100,8 @@
         "members": ["member-2"]
       }
     ],
-    "Lunch": "6-lunch",
-    "Snack": "4-snack",
-    "Dinner": "6-dinner"
+    "Lunch": "chicken-pulao",
+    "Snack": "chana-chaat",
+    "Dinner": "chickpea-paneer-salad"
   }
 }

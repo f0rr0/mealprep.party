@@ -1,501 +1,378 @@
 {
-  "0-breakfast": {
-    "title": "Besan chilla, masala chana",
-    "recipe": "Mix besan with water, chopped onion, green chili, cumin and salt. Cook 2 medium chillas in a lightly oiled pan. Blend mint, coriander, green chili and lemon into chutney. Serve with a small bowl of roasted chana tossed with chaat masala.",
+  "bread-omelette": {
+    "title": "Vegetable bread omelette",
+    "recipe": "**1 serving**\n\n1. Beat 2 eggs with 25 g chopped onion, 50 g tomato, 25 g capsicum, coriander, black pepper and salt.\n2. Heat 1 tsp oil in a pan, pour in the eggs and place 2 slices of whole-wheat bread (60 g total) on top. Flip, cook until the egg is fully set, then fold into a sandwich.",
     "ingredients": [
-      "Besan",
+      "Eggs",
       "Onion",
-      "Green chili",
-      "Cumin",
-      "Salt",
-      "Oil",
-      "Mint",
+      "Tomato",
+      "Capsicum",
       "Coriander",
-      "Roasted chana",
-      "Chaat masala",
-      "Lemon"
-    ]
-  },
-  "0-lunch": {
-    "title": "Tandoori chicken, watana sabzi & bajra roti",
-    "recipe": "Marinate 150 g chicken per serving in plain curd, ginger, garlic, lemon, red chili powder, cumin, coriander powder and garam masala in the fridge. Grill or air-fry until the thickest part reaches 74°C. Cook peas with onion, tomato, cumin, turmeric and salt, using 1–2 tsp oil for the sabzi. Serve with 1 bowl of peas and 1 small bajra roti made with bajra flour and water.",
-    "ingredients": [
-      "Chicken",
-      "Yogurt",
-      "Ginger",
-      "Garlic",
-      "Lemon",
-      "Red chili powder",
-      "Cumin",
-      "Coriander powder",
-      "Garam masala",
-      "Peas",
-      "Onion",
-      "Tomato",
-      "Turmeric",
+      "Black pepper",
       "Salt",
       "Oil",
-      "Bajra flour"
-    ]
+      "Bread (egg-free)"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=7-dJ-ioXfBQ"
   },
-  "0-snack": {
-    "title": "Cucumber-tomato chaat, masala chai & makhana",
-    "recipe": "Toss chopped cucumber and tomato with lemon, chaat masala and chili flakes. Dry-roast makhana until crisp. Brew black tea with ginger and cardamom, add milk, and serve without sugar alongside the chaat and makhana.",
-    "ingredients": [
-      "Cucumber",
-      "Tomato",
-      "Lemon",
-      "Chaat masala",
-      "Chili flakes",
-      "Makhana",
-      "Black tea",
-      "Ginger",
-      "Cardamom",
-      "Milk"
-    ]
-  },
-  "0-dinner": {
-    "title": "Tandoori drumsticks, spinach & cucumber salad",
-    "recipe": "Coat 2–3 chicken drumsticks per serving with plain curd, ginger, garlic, lemon, red chili powder, cumin, coriander powder, garam masala and salt; marinate in the fridge. Oven-bake or air-fry until the thickest meat reaches 74°C away from the bone. Sauté spinach with garlic using 1–2 tsp oil. Serve with a cucumber-onion salad dressed with lemon.",
-    "ingredients": [
-      "Chicken",
-      "Yogurt",
-      "Ginger",
-      "Garlic",
-      "Lemon",
-      "Red chili powder",
-      "Cumin",
-      "Coriander powder",
-      "Garam masala",
-      "Salt",
-      "Spinach",
-      "Oil",
-      "Cucumber",
-      "Onion"
-    ]
-  },
-  "1-breakfast": {
-    "title": "Moong chilla, black chana",
-    "recipe": "Soak moong dal until softened, drain and blend with ginger, green chili, cumin, salt and water into a batter. Cook chillas in a lightly oiled pan. Soak black chana, drain and cook in fresh water until fully tender, then simmer with onion, tomato, cumin, turmeric and red chili powder. Serve a small bowl with the chillas and a chutney of coriander, mint, lemon and green chili.",
+  "paneer-moong-chilla": {
+    "title": "Paneer-stuffed moong chilla",
+    "recipe": "**1 serving**\n\n1. Soak 60 g dry moong dal until softened. Drain and blend with 40 g onion, ginger, cumin, salt and enough water for a pourable batter.\n2. Crumble 50 g low-fat paneer and mix with coriander and roasted, ground cumin.\n3. Make 2 chillas in a non-stick pan using 1 tsp oil in total. Cook both sides, add the paneer filling and fold.",
     "ingredients": [
       "Moong dal",
+      "Onion",
       "Ginger",
-      "Green chili",
       "Cumin",
       "Salt",
-      "Oil",
-      "Black chana",
-      "Onion",
-      "Tomato",
-      "Turmeric",
-      "Red chili powder",
+      "Low-fat paneer",
       "Coriander",
-      "Mint",
-      "Lemon"
-    ]
-  },
-  "1-lunch": {
-    "title": "Chicken curry, bhindi & roti",
-    "recipe": "Cook onion, tomato, ginger, garlic, cumin, turmeric, red chili powder, coriander powder, garam masala and salt with 1–2 tsp oil. Add 150 g chicken per serving and water; simmer until chicken reaches 74°C. In a separate wide pan, cook sliced bhindi with cumin, turmeric and a little oil. Serve with 1 bowl of bhindi and 1 small roti made from atta and water.",
-    "ingredients": [
-      "Chicken",
-      "Onion",
-      "Tomato",
-      "Ginger",
-      "Garlic",
-      "Cumin",
-      "Turmeric",
-      "Red chili powder",
-      "Coriander powder",
-      "Garam masala",
-      "Salt",
-      "Oil",
-      "Bhindi",
-      "Atta"
-    ]
-  },
-  "1-snack": {
-    "title": "Masala chaas, peanuts, green tea & khakhra",
-    "recipe": "Whisk plain curd with water, roasted cumin, kala namak and chopped coriander to make chaas. Serve with roasted peanuts, unsweetened green tea and 2–3 whole-wheat khakhra.",
-    "ingredients": [
-      "Yogurt",
-      "Cumin",
-      "Kala namak",
-      "Coriander",
-      "Peanuts",
-      "Green tea",
-      "Khakhra"
-    ]
-  },
-  "1-dinner": {
-    "title": "Chicken & vegetable hakka noodles",
-    "recipe": "Boil egg-free whole-wheat noodles according to the packet and drain. Stir-fry garlic, ginger and green chili in 1–2 tsp oil. Add 150 g chicken per serving and cook to 74°C, then shred. Add plenty of cabbage, carrot, capsicum and green beans; cook until just tender. Toss with noodles and a small splash of soy sauce and vinegar. Serve without extra roti or rice.",
-    "ingredients": [
-      "Noodles (egg-free)",
-      "Chicken",
-      "Garlic",
-      "Ginger",
-      "Green chili",
-      "Oil",
-      "Cabbage",
-      "Carrot",
-      "Capsicum",
-      "Green beans",
-      "Soy sauce",
-      "Vinegar"
-    ]
-  },
-  "2-breakfast": {
-    "title": "Avocado toast, masala makhana",
-    "recipe": "Mash half an avocado per serving with lemon, chili flakes, black pepper and salt. Spread on toasted multigrain bread. Dry-roast makhana and toss with chaat masala; serve alongside.",
-    "ingredients": [
-      "Avocado",
-      "Lemon",
-      "Chili flakes",
-      "Black pepper",
-      "Salt",
-      "Bread",
-      "Makhana",
-      "Chaat masala"
-    ]
-  },
-  "2-lunch": {
-    "title": "Chicken tikka masala, cabbage & brown rice",
-    "recipe": "Marinate 150 g chicken per serving in plain curd, ginger, garlic, lemon, red chili powder and garam masala in the fridge. Grill or air-fry to 74°C. Cook onion and tomato with cumin, coriander powder, turmeric, salt and 1–2 tsp oil; blend into a light gravy without cream. Add the chicken and simmer. Sauté cabbage with cumin and serve 1 bowl alongside a small bowl of cooked brown rice.",
-    "ingredients": [
-      "Chicken",
-      "Yogurt",
-      "Ginger",
-      "Garlic",
-      "Lemon",
-      "Red chili powder",
-      "Garam masala",
-      "Onion",
-      "Tomato",
-      "Cumin",
-      "Coriander powder",
-      "Turmeric",
-      "Salt",
-      "Oil",
-      "Cabbage",
-      "Rice"
-    ]
-  },
-  "2-snack": {
-    "title": "Masala corn chaat, chai & roasted chana",
-    "recipe": "Cook sweetcorn and toss with chopped onion, tomato, coriander, lemon, green chili and chaat masala. Brew black tea with ginger and cardamom, add milk, and serve without sugar with a handful of roasted chana.",
-    "ingredients": [
-      "Sweetcorn",
-      "Onion",
-      "Tomato",
-      "Coriander",
-      "Lemon",
-      "Green chili",
-      "Chaat masala",
-      "Black tea",
-      "Ginger",
-      "Cardamom",
-      "Milk",
-      "Roasted chana"
-    ]
-  },
-  "2-dinner": {
-    "title": "Masala chicken burger & side salad",
-    "recipe": "Mix minced chicken with ginger, garlic, green chili, cumin, garam masala and salt; shape into a patty without egg. Grill in a lightly oiled pan until the centre reaches 74°C. Mix plain curd with mint, lemon and green chili for the sauce. Assemble in a multigrain bun with lettuce and tomato. Serve with a cucumber-onion salad dressed with lemon.",
-    "ingredients": [
-      "Chicken",
-      "Ginger",
-      "Garlic",
-      "Green chili",
-      "Cumin",
-      "Garam masala",
-      "Salt",
-      "Oil",
-      "Yogurt",
-      "Mint",
-      "Lemon",
-      "Burger buns (egg-free)",
-      "Lettuce",
-      "Tomato",
-      "Cucumber",
-      "Onion"
-    ]
-  },
-  "3-breakfast": {
-    "title": "Chia oats, cucumber dip",
-    "recipe": "Mix rolled oats and chia seeds with plain curd and enough milk to loosen. Add a small handful of dry fruits (4–5 pieces per serving), cover and refrigerate overnight without sugar or jaggery. Serve with cucumber sticks and a dip made from hung curd, roasted cumin, salt and mint.",
-    "ingredients": [
-      "Oats",
-      "Chia seeds",
-      "Yogurt",
-      "Milk",
-      "Dry fruits",
-      "Cucumber",
-      "Cumin",
-      "Salt",
-      "Mint"
-    ]
-  },
-  "3-lunch": {
-    "title": "Chicken curry, black chana & roti",
-    "recipe": "Soak black chana, drain and cook in fresh water until fully tender. Make an onion-tomato masala with ginger, garlic, cumin, turmeric, red chili powder, coriander powder, garam masala and salt, using 1–2 tsp oil per dish. Divide the masala between two pans: simmer 150 g chicken per serving with water in one until it reaches 74°C, and the cooked chana in the other. Serve with 1 bowl of chana curry and 1 small roti made from atta and water.",
-    "ingredients": [
-      "Black chana",
-      "Onion",
-      "Tomato",
-      "Ginger",
-      "Garlic",
-      "Cumin",
-      "Turmeric",
-      "Red chili powder",
-      "Coriander powder",
-      "Garam masala",
-      "Salt",
-      "Oil",
-      "Chicken",
-      "Atta"
-    ]
-  },
-  "3-snack": {
-    "title": "Murmura chaat, soya chaat & masala chai",
-    "recipe": "Cook soy chunks according to the packet, drain and squeeze well. Toss with a little oil, cumin and red chili powder, then roast until golden. Mix with onion, tomato, coriander, lemon and chaat masala. Separately toss puffed rice with chopped onion, tomato, coriander, lemon and chaat masala just before serving. Brew black tea with ginger, cardamom and milk; serve without sugar.",
-    "ingredients": [
-      "Soy chunks",
-      "Oil",
-      "Cumin",
-      "Red chili powder",
-      "Onion",
-      "Tomato",
-      "Coriander",
-      "Lemon",
-      "Chaat masala",
-      "Puffed rice",
-      "Black tea",
-      "Ginger",
-      "Cardamom",
-      "Milk"
-    ]
-  },
-  "3-dinner": {
-    "title": "Peri-peri drumsticks & beans-carrot sabzi",
-    "recipe": "Coat 2–3 chicken drumsticks per serving with plain curd, peri-peri seasoning, garlic and lemon; marinate in the fridge. Oven-bake or air-fry until the thickest meat reaches 74°C away from the bone. Sauté green beans and carrot with cumin, salt and 1–2 tsp oil; serve alongside.",
-    "ingredients": [
-      "Chicken",
-      "Yogurt",
-      "Peri-peri seasoning",
-      "Garlic",
-      "Lemon",
-      "Green beans",
-      "Carrot",
-      "Cumin",
-      "Salt",
       "Oil"
-    ]
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=MP3DlW_z9wo"
   },
-  "4-breakfast": {
-    "title": "Avocado toast, masala chana",
-    "recipe": "Mash half an avocado per serving with lemon, chili flakes and chaat masala. Spread on toasted multigrain bread. Toss roasted chana with chaat masala and serve alongside.",
-    "ingredients": [
-      "Avocado",
-      "Lemon",
-      "Chili flakes",
-      "Chaat masala",
-      "Bread",
-      "Roasted chana"
-    ]
-  },
-  "4-lunch": {
-    "title": "Chicken kali mirch, bhindi & bajra roti",
-    "recipe": "Cook onion, ginger, garlic and cumin in 1–2 tsp oil. Add 150 g chicken per serving, crushed black pepper, coriander powder, salt and a spoonful of plain curd; simmer with a little water until chicken reaches 74°C. Cook bhindi separately with cumin, turmeric and a little oil. Serve with 1 bowl of bhindi and 1 small bajra roti made from bajra flour and water.",
-    "ingredients": [
-      "Onion",
-      "Ginger",
-      "Garlic",
-      "Cumin",
-      "Oil",
-      "Chicken",
-      "Black pepper",
-      "Coriander powder",
-      "Salt",
-      "Yogurt",
-      "Bhindi",
-      "Turmeric",
-      "Bajra flour"
-    ]
-  },
-  "4-snack": {
-    "title": "Buttermilk, makhana, chai & khakhra",
-    "recipe": "Whisk plain curd with water, roasted cumin and kala namak to make buttermilk. Serve with dry-roasted makhana. Brew black tea with ginger, cardamom and milk, without sugar, and serve with 2 whole-wheat khakhra.",
-    "ingredients": [
-      "Yogurt",
-      "Cumin",
-      "Kala namak",
-      "Makhana",
-      "Black tea",
-      "Ginger",
-      "Cardamom",
-      "Milk",
-      "Khakhra"
-    ]
-  },
-  "4-dinner": {
-    "title": "Schezwan chicken & vegetable noodles",
-    "recipe": "Boil egg-free whole-wheat noodles according to the packet and drain. Stir-fry ginger, garlic and 150 g sliced chicken per serving in 1–2 tsp oil, cooking the chicken to 74°C. Add plenty of cabbage, carrot, capsicum and green beans. Toss with noodles, a small spoonful of Schezwan sauce and a light splash of soy sauce and vinegar. Serve without extra roti or rice.",
-    "ingredients": [
-      "Noodles (egg-free)",
-      "Ginger",
-      "Garlic",
-      "Chicken",
-      "Oil",
-      "Cabbage",
-      "Carrot",
-      "Capsicum",
-      "Green beans",
-      "Schezwan sauce",
-      "Soy sauce",
-      "Vinegar"
-    ]
-  },
-  "5-breakfast": {
-    "title": "Chia oats, sprouts chaat",
-    "recipe": "Mix rolled oats and chia seeds with plain curd and enough milk to loosen. Add a small handful of dry fruits (4–5 pieces per serving), cover and refrigerate overnight without sugar or jaggery. Cook sprouts until steaming hot, then toss with onion, tomato, coriander, lemon and chaat masala; serve alongside.",
-    "ingredients": [
-      "Oats",
-      "Chia seeds",
-      "Yogurt",
-      "Milk",
-      "Dry fruits",
-      "Sprouts",
-      "Onion",
-      "Tomato",
-      "Coriander",
-      "Lemon",
-      "Chaat masala"
-    ]
-  },
-  "5-lunch": {
-    "title": "Chicken curry, watana curry & brown rice",
-    "recipe": "Cook onion, tomato, ginger, garlic, cumin, turmeric, red chili powder, coriander powder, garam masala and salt with 1–2 tsp oil per dish. Divide the masala between two pans. Add 150 g chicken per serving and water to one pan; simmer until chicken reaches 74°C. Add peas and water to the other and cook until tender. Serve with 1 bowl of peas curry and cooked brown rice.",
-    "ingredients": [
-      "Onion",
-      "Tomato",
-      "Ginger",
-      "Garlic",
-      "Cumin",
-      "Turmeric",
-      "Red chili powder",
-      "Coriander powder",
-      "Garam masala",
-      "Salt",
-      "Oil",
-      "Chicken",
-      "Peas",
-      "Rice"
-    ]
-  },
-  "5-snack": {
-    "title": "Masala corn chaat, green tea & peanuts",
-    "recipe": "Cook sweetcorn and toss with chopped onion, tomato, coriander, lemon, green chili and chaat masala. Serve with unsweetened green tea and roasted peanuts.",
-    "ingredients": [
-      "Sweetcorn",
-      "Onion",
-      "Tomato",
-      "Coriander",
-      "Lemon",
-      "Green chili",
-      "Chaat masala",
-      "Green tea",
-      "Peanuts"
-    ]
-  },
-  "5-dinner": {
-    "title": "Hariyali drumsticks, mixed vegetables & curd",
-    "recipe": "Blend coriander, mint, green chili, ginger, garlic, lemon, plain curd, cumin and salt. Coat 2–3 chicken drumsticks per serving and marinate in the fridge. Oven-bake or air-fry until the thickest meat reaches 74°C away from the bone. Sauté carrot, green beans, capsicum and peas with cumin and 1–2 tsp oil. Serve with a small bowl of plain curd.",
-    "ingredients": [
-      "Coriander",
-      "Mint",
-      "Green chili",
-      "Ginger",
-      "Garlic",
-      "Lemon",
-      "Yogurt",
-      "Cumin",
-      "Salt",
-      "Chicken",
-      "Carrot",
-      "Green beans",
-      "Capsicum",
-      "Peas",
-      "Oil"
-    ]
-  },
-  "6-breakfast": {
-    "title": "Vegetable paratha, curd, chana",
-    "recipe": "Make a dough with atta, grated carrot, finely shredded cabbage, coriander, green chili, cumin, salt and water. Roll and cook 1 paratha per serving in a lightly oiled pan. Serve with plain curd and roasted chana tossed with chaat masala.",
+  "paneer-paratha": {
+    "title": "Paneer paratha",
+    "recipe": "**1 serving**\n\n1. Knead 60 g atta with water and a pinch of salt. Mix 75 g crumbled low-fat paneer with 30 g finely chopped onion, coriander and roasted, ground cumin.\n2. Stuff and roll 2 small parathas. Cook both sides on a tawa using 1 tsp oil in total.",
     "ingredients": [
       "Atta",
-      "Carrot",
-      "Cabbage",
-      "Coriander",
-      "Green chili",
-      "Cumin",
       "Salt",
-      "Oil",
-      "Yogurt",
-      "Roasted chana",
-      "Chaat masala"
-    ]
-  },
-  "6-lunch": {
-    "title": "Chicken & vegetable biryani with raita",
-    "recipe": "Cook onion, ginger, garlic, cumin, cinnamon, cloves, cardamom, turmeric, red chili powder and garam masala in 1–2 tsp oil. Add chicken, plain curd, mint, coriander and salt. Add extra carrot, green beans and peas, then rinsed basmati rice and enough water to cook. Cover and cook until the rice is tender and chicken reaches 74°C. Serve a small bowl with raita made from plain curd, cucumber, roasted cumin and salt.",
-    "ingredients": [
+      "Low-fat paneer",
       "Onion",
-      "Ginger",
-      "Garlic",
-      "Cumin",
-      "Cinnamon",
-      "Cloves",
-      "Cardamom",
-      "Turmeric",
-      "Red chili powder",
-      "Garam masala",
-      "Oil",
-      "Chicken",
-      "Yogurt",
-      "Mint",
       "Coriander",
-      "Salt",
-      "Carrot",
-      "Green beans",
-      "Peas",
-      "Rice",
-      "Cucumber"
-    ]
-  },
-  "6-dinner": {
-    "title": "Spicy chicken burger & coleslaw",
-    "recipe": "Mix minced chicken with ginger, garlic, green chili, cumin, garam masala and salt; shape into a patty without egg. Grill with a little oil until the centre reaches 74°C. Toss shredded cabbage and carrot with lemon and a little egg-free mayonnaise for coleslaw. Mix a small amount of Schezwan sauce with egg-free mayonnaise. Assemble the patty, coleslaw and sauce in a multigrain bun.",
-    "ingredients": [
-      "Chicken",
-      "Ginger",
-      "Garlic",
-      "Green chili",
       "Cumin",
-      "Garam masala",
-      "Salt",
-      "Oil",
-      "Cabbage",
-      "Carrot",
-      "Lemon",
-      "Mayonnaise (egg-free)",
-      "Schezwan sauce",
-      "Burger buns (egg-free)"
-    ]
+      "Oil"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=m8Q-5Uj_5y4"
   },
   "green-juice": {
     "title": "Green juice",
-    "recipe": "**7 AM:** Blend cucumber, spinach, lemon and ginger with water. Serve without added sugar.",
-    "ingredients": ["Cucumber", "Spinach", "Lemon", "Ginger"]
+    "recipe": "**1 serving**\n\nBlend 100 g cucumber, 100 g apple, a few mint leaves, a small piece of ginger and a squeeze of lemon with enough water to make a glass. Serve fresh.",
+    "ingredients": ["Cucumber", "Apple", "Mint", "Ginger", "Lemon"]
+  },
+  "paneer-bhurji": {
+    "title": "Paneer bhurji, phulka & cucumber salad",
+    "recipe": "**1 serving**\n\n1. Heat 1½ tsp oil with cumin. Cook 50 g onion, 100 g tomato and 50 g capsicum with turmeric, coriander powder and salt. Fold in 125 g crumbled low-fat paneer and heat through.\n2. Make 2 small phulkas from 50 g atta and water. Serve with 100 g cucumber, lemon and coriander.",
+    "ingredients": [
+      "Oil",
+      "Cumin",
+      "Onion",
+      "Tomato",
+      "Capsicum",
+      "Turmeric",
+      "Coriander powder",
+      "Salt",
+      "Low-fat paneer",
+      "Atta",
+      "Cucumber",
+      "Lemon",
+      "Coriander"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=tLcPKUgTfBw"
+  },
+  "lemon-chicken": {
+    "title": "Lemon-garlic chicken, vegetables & potato wedges",
+    "recipe": "**1 serving · chicken and vegetables weighed raw**\n\n1. Coat 160 g boneless, skinless chicken breast with garlic, lemon, oregano, black pepper, salt and ½ tsp oil. Pan-cook until the centre reaches 74°C.\n2. Parboil 200 g potato wedges until nearly tender. Toss with ½ tsp oil and air-fry until browned.\n3. Sauté 100 g carrot, 100 g green beans and 50 g capsicum in ½ tsp oil, adding a splash of water to soften. Serve together.",
+    "ingredients": [
+      "Chicken",
+      "Garlic",
+      "Lemon",
+      "Oregano",
+      "Black pepper",
+      "Salt",
+      "Oil",
+      "Potato",
+      "Carrot",
+      "Green beans",
+      "Capsicum"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=BOZd7U_V2Rw"
+  },
+  "palak-chicken": {
+    "title": "Palak chicken & phulka",
+    "recipe": "**1 serving · chicken weighed raw**\n\n1. Blanch 150 g spinach and blend. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder and salt.\n2. Add 160 g boneless, skinless chicken breast, 50 g plain curd and a splash of water. Simmer until the chicken reaches 74°C, then stir in the spinach and garam masala and heat through.\n3. Serve with 2 small phulkas made from 50 g atta and water.",
+    "ingredients": [
+      "Spinach",
+      "Oil",
+      "Cumin",
+      "Onion",
+      "Tomato",
+      "Ginger",
+      "Garlic",
+      "Turmeric",
+      "Coriander powder",
+      "Salt",
+      "Chicken",
+      "Yogurt",
+      "Garam masala",
+      "Atta"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=HG3qpmo-5sw"
+  },
+  "tofu-stir-fry": {
+    "title": "Tofu & vegetable stir-fry with rice",
+    "recipe": "**1 serving · rice weighed dry**\n\n1. Cook 45 g rice. Pat dry and cube 200 g firm tofu.\n2. Heat 1 tsp oil in a non-stick pan and brown the tofu. Add garlic, ginger, 100 g cabbage, 100 g carrot and 100 g capsicum; stir-fry until just tender.\n3. Toss with 1 tsp soy sauce, 1 tsp vinegar and a splash of water. Add 15 g crushed roasted peanuts and serve over the rice.",
+    "ingredients": [
+      "Rice",
+      "Tofu",
+      "Oil",
+      "Garlic",
+      "Ginger",
+      "Cabbage",
+      "Carrot",
+      "Capsicum",
+      "Soy sauce",
+      "Vinegar",
+      "Peanuts"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=ioCJLUSeTiM"
+  },
+  "dal-palak": {
+    "title": "Dal palak, phulka & cucumber raita",
+    "recipe": "**1 serving · dal weighed dry**\n\n1. Rinse 70 g moong dal and simmer in water with turmeric until soft. Add 150 g chopped spinach and cook through.\n2. Heat 1 tsp oil with cumin and garlic, cook 50 g chopped onion, then stir into the dal with salt.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve with the dal and 1 phulka made from 35 g atta and water.",
+    "ingredients": [
+      "Moong dal",
+      "Turmeric",
+      "Spinach",
+      "Oil",
+      "Cumin",
+      "Garlic",
+      "Onion",
+      "Salt",
+      "Yogurt",
+      "Cucumber",
+      "Atta"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=AARQ8IxrXQU"
+  },
+  "chicken-fajita-bowl": {
+    "title": "Chicken fajita rice bowl",
+    "recipe": "**1 serving · chicken weighed raw, rice dry**\n\n1. Cook 50 g rice. Cut 160 g boneless, skinless chicken breast into strips and coat with garlic, ground cumin, oregano, lemon and salt.\n2. Heat 1 tsp oil and cook the chicken to 74°C. Add 100 g capsicum and 50 g onion; toss until tender.\n3. Chop 150 g tomato and mix with coriander and lemon for salsa. Serve the chicken, vegetables and salsa over the rice.",
+    "ingredients": [
+      "Rice",
+      "Chicken",
+      "Garlic",
+      "Cumin",
+      "Oregano",
+      "Lemon",
+      "Salt",
+      "Oil",
+      "Capsicum",
+      "Onion",
+      "Tomato",
+      "Coriander"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=xkt0YKDcpy0"
+  },
+  "rajma-rice": {
+    "title": "Rajma rice & cucumber raita",
+    "recipe": "**1 serving · beans weighed cooked and drained, rice dry**\n\n1. Use 200 g fully cooked rajma. Heat 1 tsp oil with cumin; cook 50 g onion, 100 g tomato, ginger, garlic, turmeric, coriander powder, garam masala and salt. Add the rajma and water; simmer into a thick curry.\n2. Cook 30 g rice. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve together.",
+    "ingredients": [
+      "Rajma",
+      "Oil",
+      "Cumin",
+      "Onion",
+      "Tomato",
+      "Ginger",
+      "Garlic",
+      "Turmeric",
+      "Coriander powder",
+      "Garam masala",
+      "Salt",
+      "Rice",
+      "Yogurt",
+      "Cucumber"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=_dkDko_VFHk"
+  },
+  "chicken-tomato-pasta": {
+    "title": "Chicken tomato pasta",
+    "recipe": "**1 serving · chicken weighed raw, pasta dry**\n\n1. Boil 55 g egg-free whole-wheat pasta in salted water; reserve a little cooking water.\n2. Heat 1 tsp oil and brown 160 g diced boneless, skinless chicken breast. Add garlic, 50 g onion and 100 g capsicum; cook until softened.\n3. Add 150 g finely chopped tomato, oregano, black pepper and salt. Simmer until saucy and the chicken reaches 74°C. Toss in the pasta, loosening with the reserved water.",
+    "ingredients": [
+      "Pasta (egg-free)",
+      "Salt",
+      "Oil",
+      "Chicken",
+      "Garlic",
+      "Onion",
+      "Capsicum",
+      "Tomato",
+      "Oregano",
+      "Black pepper"
+    ],
+    "recipeLink": "https://www.lubzonline.com/chicken-tomato-penne/"
+  },
+  "matar-paneer": {
+    "title": "Matar paneer & phulka",
+    "recipe": "**1 serving**\n\n1. Heat 1 tsp oil with cumin. Cook 50 g onion, 150 g tomato, ginger, garlic, turmeric, coriander powder and salt; blend with a splash of water.\n2. Return to the pan, add 100 g peas and simmer until tender. Add 125 g cubed low-fat paneer and garam masala; heat through.\n3. Serve with 2 small phulkas made from 40 g atta and water.",
+    "ingredients": [
+      "Oil",
+      "Cumin",
+      "Onion",
+      "Tomato",
+      "Ginger",
+      "Garlic",
+      "Turmeric",
+      "Coriander powder",
+      "Salt",
+      "Peas",
+      "Low-fat paneer",
+      "Garam masala",
+      "Atta"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=m-BiLpoyo_o"
+  },
+  "chicken-noodles": {
+    "title": "Chicken & vegetable noodles",
+    "recipe": "**1 serving · chicken weighed raw, noodles dry**\n\n1. Boil 55 g egg-free whole-wheat noodles according to the packet and drain.\n2. Heat 1 tsp oil with garlic and ginger. Add 160 g thinly sliced boneless, skinless chicken breast and cook to 74°C.\n3. Add 150 g cabbage, 75 g carrot and 75 g capsicum; stir-fry until just tender. Toss with the noodles, 1 tsp soy sauce, 1 tsp vinegar and black pepper.",
+    "ingredients": [
+      "Noodles (egg-free)",
+      "Oil",
+      "Garlic",
+      "Ginger",
+      "Chicken",
+      "Cabbage",
+      "Carrot",
+      "Capsicum",
+      "Soy sauce",
+      "Vinegar",
+      "Black pepper"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=lumjG47pfOc"
+  },
+  "paneer-wrap": {
+    "title": "Paneer & vegetable curd wraps",
+    "recipe": "**1 serving**\n\n1. Make 2 phulkas from 50 g atta and water. Toss 125 g crumbled low-fat paneer in a pan with 1 tsp oil, ground cumin and salt; let cool slightly.\n2. Mix 100 g thick plain curd with garlic, lemon and coriander. Fold in the paneer, 100 g cucumber, 50 g grated carrot and 50 g finely shredded cabbage.\n3. Divide the filling between the phulkas, roll and serve.",
+    "ingredients": [
+      "Atta",
+      "Low-fat paneer",
+      "Oil",
+      "Cumin",
+      "Salt",
+      "Yogurt",
+      "Garlic",
+      "Lemon",
+      "Coriander",
+      "Cucumber",
+      "Carrot",
+      "Cabbage"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=eUJz7NcyjiU"
+  },
+  "roast-chicken": {
+    "title": "Pan-roasted chicken, vegetables & toast",
+    "recipe": "**1 serving · chicken and vegetables weighed raw**\n\n1. Coat 160 g boneless, skinless chicken breast in 50 g plain curd, ginger, garlic, ground cumin, coriander powder, salt and ½ tsp oil. Pan-roast until the centre reaches 74°C.\n2. Sauté 100 g carrot, 100 g green beans and 100 g capsicum with ½ tsp oil and a splash of water until tender. Finish with lemon.\n3. Serve with 70 g toasted egg-free whole-wheat bread.",
+    "ingredients": [
+      "Chicken",
+      "Yogurt",
+      "Ginger",
+      "Garlic",
+      "Cumin",
+      "Coriander powder",
+      "Salt",
+      "Oil",
+      "Carrot",
+      "Green beans",
+      "Capsicum",
+      "Lemon",
+      "Bread (egg-free)"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=s13rTGimsWg"
+  },
+  "chicken-pulao": {
+    "title": "Chicken & vegetable pulao with raita",
+    "recipe": "**1 serving · chicken weighed raw, rice dry**\n\n1. Heat 1 tsp oil with cumin, a small piece of cinnamon and bay leaf. Cook 50 g onion with ginger and garlic. Add 160 g diced boneless, skinless chicken breast, 50 g carrot and salt; cook until the chicken changes colour.\n2. Add 40 g rinsed rice, 60 g peas and about 100 ml water. Bring to a boil, cover and simmer until the rice is tender and the chicken reaches 74°C, adding water if needed.\n3. Mix 150 g plain curd with 100 g cucumber and roasted, ground cumin. Serve alongside the pulao.",
+    "ingredients": [
+      "Oil",
+      "Cumin",
+      "Cinnamon",
+      "Bay leaf",
+      "Onion",
+      "Ginger",
+      "Garlic",
+      "Chicken",
+      "Carrot",
+      "Salt",
+      "Rice",
+      "Peas",
+      "Yogurt",
+      "Cucumber"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=-izcbdHE8Ng"
+  },
+  "chickpea-paneer-salad": {
+    "title": "Warm chickpea & paneer salad with toast",
+    "recipe": "**1 serving · chickpeas weighed cooked and drained**\n\n1. Heat 1 tsp oil with cumin and garlic. Add 50 g onion, 100 g capsicum and 100 g cubed low-fat paneer; toss until lightly coloured.\n2. Add 125 g fully cooked chickpeas and 100 g tomato. Toss until warm, then finish with lemon, coriander, chaat masala and salt.\n3. Serve with 1 slice of toasted egg-free whole-wheat bread (30 g).",
+    "ingredients": [
+      "Oil",
+      "Cumin",
+      "Garlic",
+      "Onion",
+      "Capsicum",
+      "Low-fat paneer",
+      "Chickpeas",
+      "Tomato",
+      "Lemon",
+      "Coriander",
+      "Chaat masala",
+      "Salt",
+      "Bread (egg-free)"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=_FYCaqHq8CI"
+  },
+  "koshimbir": {
+    "title": "Cucumber-carrot koshimbir",
+    "recipe": "**1 serving**\n\nMix 200 g plain curd with 100 g chopped cucumber, 100 g grated carrot, 15 g crushed roasted peanuts and salt. Heat ½ tsp oil with mustard seeds, cumin and curry leaves; pour over the salad and mix.",
+    "ingredients": [
+      "Yogurt",
+      "Cucumber",
+      "Carrot",
+      "Peanuts",
+      "Salt",
+      "Oil",
+      "Mustard seeds",
+      "Cumin",
+      "Curry leaves"
+    ],
+    "recipeLink": "https://www.youtube.com/watch?v=Q80KqPsc1vY"
+  },
+  "chana-chaat": {
+    "title": "Dahi chana chaat",
+    "recipe": "**1 serving · chickpeas weighed cooked and drained**\n\nToss 125 g fully cooked chickpeas with 50 g cucumber, 50 g tomato, coriander, lemon, chaat masala and roasted, ground cumin. Fold through 100 g plain curd and serve.",
+    "ingredients": [
+      "Chickpeas",
+      "Cucumber",
+      "Tomato",
+      "Coriander",
+      "Lemon",
+      "Chaat masala",
+      "Cumin",
+      "Yogurt"
+    ]
+  },
+  "paneer-salad": {
+    "title": "Paneer, cucumber & carrot salad",
+    "recipe": "**1 serving**\n\nToss 80 g cubed low-fat paneer with 100 g cucumber, 100 g grated carrot and 15 g crushed roasted peanuts. Dress with lemon, coriander, roasted, ground cumin and salt.",
+    "ingredients": [
+      "Low-fat paneer",
+      "Cucumber",
+      "Carrot",
+      "Peanuts",
+      "Lemon",
+      "Coriander",
+      "Cumin",
+      "Salt"
+    ]
+  },
+  "guava-chana-chaat": {
+    "title": "Guava & roasted chana chaat",
+    "recipe": "**1 serving**\n\nChop 150 g guava and 100 g cucumber. Toss with 35 g roasted chana, 5 g crushed roasted peanuts, lemon and chaat masala. Serve immediately so the chana stays crunchy.",
+    "ingredients": [
+      "Guava",
+      "Cucumber",
+      "Roasted chana",
+      "Peanuts",
+      "Lemon",
+      "Chaat masala"
+    ]
   }
 }
