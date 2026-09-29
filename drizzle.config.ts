@@ -7,5 +7,5 @@ export default defineConfig({
   dialect: "postgresql",
   out: "./drizzle",
   schema: "./src/lib/schema.ts",
-  schemaFilter: ["our_kitchen"],
+  schemaFilter: ["meal_prep_party"],
 });

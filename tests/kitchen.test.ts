@@ -2,8 +2,6 @@ import { test } from "bun:test";
 import assert from "node:assert/strict";
 
 import { sameOrigin } from "@/lib/auth";
-import { assertAllowed, providerConfig } from "@/lib/commerce";
-import { possibleMatch } from "@/lib/matching";
 import {
   weekdayFor,
   weekdays,
@@ -17,7 +15,7 @@ import {
 
 import { createState } from "./fixtures";
 
-test("recurring weekday content, names, plain groceries and retained cart boundaries", () => {
+test("recurring weekday content, names, plain groceries and request boundaries", () => {
   const state = createState();
   assert.equal(state.plan.length, 28);
   assert.ok(Object.keys(state.names).length > 0);
@@ -87,19 +85,6 @@ test("recurring weekday content, names, plain groceries and retained cart bounda
     ["rice", "Eggs", "Yogurt"]
   );
   assert.equal(groceryText(["Rice", "Eggs"], ["eggs"]), "Rice");
-  assert.equal(possibleMatch("Rice", "Basmati rice"), true);
-  for (const provider of ["swiggy", "blinkit"] as const) {
-    assert.doesNotThrow(() => assertAllowed(provider, "get_cart"));
-    for (const tool of ["checkout", "place_order", "make_payment", "login"]) {
-      assert.throws(() => assertAllowed(provider, tool));
-    }
-  }
-  assert.equal(providerConfig("member-a", "swiggy").token, "test-swiggy-token");
-  assert.equal(
-    providerConfig("member-c", "blinkit").url,
-    "https://blinkit.example/mcp"
-  );
-  assert.equal(providerConfig("unknown-member", "swiggy").token, undefined);
   assert.equal(
     sameOrigin(
       new Request("https://kitchen.example/api/kitchen", {

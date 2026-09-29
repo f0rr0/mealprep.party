@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
+    "vercel:build": "bun scripts/vercel-build.ts",
     "start": "next start --hostname 127.0.0.1",
     "check": "next typegen && tsc --noEmit && bun scripts/check-content.ts",
     "validate": "bun run check && bun run lint && bun run format:check && bun run knip && bun run lint:commits",
@@ -27,7 +28,6 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
-    "@modelcontextprotocol/sdk": "^1.30.1",
     "@t3-oss/env-nextjs": "^0.13.11",
     "@tailwindcss/postcss": "^4.3.3",
     "class-variance-authority": "^0.7.1",

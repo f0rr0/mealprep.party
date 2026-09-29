@@ -1,12 +1,12 @@
 {
-  "id": "8e5ad93b-8d8c-43f1-a2a1-6d2ecfe5cbdc",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "aef1a026-6a86-4f45-a342-b74065266a6f",
+  "prevId": "8e5ad93b-8d8c-43f1-a2a1-6d2ecfe5cbdc",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "our_kitchen.state": {
+    "meal_prep_party.state": {
       "name": "state",
-      "schema": "our_kitchen",
+      "schema": "meal_prep_party",
       "columns": {
         "body": {
           "name": "body",
@@ -38,7 +38,7 @@
   },
   "enums": {},
   "schemas": {
-    "our_kitchen": "our_kitchen"
+    "meal_prep_party": "meal_prep_party"
   },
   "sequences": {},
   "roles": {},
