@@ -15,7 +15,10 @@ export function createKitchenSync(
   let saving = false;
   let revision = 0;
   const pending = new Map<string, boolean>();
-  const pendingGroceries = new Map<string, boolean>();
+  const pendingGroceries = new Map<
+    string,
+    { name: string; checked: boolean }
+  >();
   const hasPending = () => pending.size > 0 || pendingGroceries.size > 0;
   function emit(error = "") {
     const pantry = new Set(saved.pantry);
@@ -27,16 +30,18 @@ export function createKitchenSync(
       }
     }
     const add = [...pendingGroceries]
-      .filter(([, checked]) => checked)
-      .map(([key]) => key);
+      .filter(([, item]) => item.checked)
+      .map(([, item]) => item.name);
     const remove = [...pendingGroceries]
-      .filter(([, checked]) => !checked)
+      .filter(([, item]) => !item.checked)
       .map(([key]) => key);
+    const groceries = updateGroceries(saved, add, remove);
+    const included = new Set(groceries.map(ingredientKey));
     publish(
       {
         ...saved,
-        pantry: [...pantry],
-        groceries: updateGroceries(saved, add, remove),
+        pantry: [...pantry].filter((key) => included.has(key)),
+        groceries,
       },
       error
     );
@@ -50,7 +55,9 @@ export function createKitchenSync(
     try {
       let conflicts = 0;
       while (hasPending()) {
-        const pantryChange = pending.entries().next().value;
+        const pantryChange = pendingGroceries.size
+          ? undefined
+          : pending.entries().next().value;
         const groceryChanges = new Map(pendingGroceries);
         const command = pantryChange
           ? {
@@ -59,12 +66,12 @@ export function createKitchenSync(
               checked: pantryChange[1],
             }
           : {
-              action: "groceries",
+              action: "grocery-items",
               add: [...groceryChanges]
-                .filter(([, checked]) => checked)
-                .map(([key]) => key),
+                .filter(([, item]) => item.checked)
+                .map(([, item]) => item.name),
               remove: [...groceryChanges]
-                .filter(([, checked]) => !checked)
+                .filter(([, item]) => !item.checked)
                 .map(([key]) => key),
             };
         const response = await request("/api/kitchen", {
@@ -85,15 +92,15 @@ export function createKitchenSync(
         if (!response.ok) {
           throw new Error("Couldn’t save groceries.");
         }
-        saved = await response.json();
+        saved = { ...saved, ...(await response.json()) };
         conflicts = 0;
         if (pantryChange) {
           if (pending.get(pantryChange[0]) === pantryChange[1]) {
             pending.delete(pantryChange[0]);
           }
         } else {
-          for (const [key, checked] of groceryChanges) {
-            if (pendingGroceries.get(key) === checked) {
+          for (const [key, item] of groceryChanges) {
+            if (pendingGroceries.get(key) === item) {
               pendingGroceries.delete(key);
             }
           }
@@ -116,10 +123,10 @@ export function createKitchenSync(
     setGroceries(add: string[], remove: string[]) {
       revision += 1;
       for (const key of add) {
-        pendingGroceries.set(key, true);
+        pendingGroceries.set(ingredientKey(key), { name: key, checked: true });
       }
       for (const key of remove) {
-        pendingGroceries.set(key, false);
+        pendingGroceries.set(ingredientKey(key), { name: key, checked: false });
       }
       emit();
       void drain();

@@ -10,7 +10,18 @@ test("reads the saved kitchen in one query without seeding, including when missi
   const query = spyOn(db.$client, "unsafe");
   try {
     query.mockReturnValue({
-      values: () => Promise.resolve([[state, 1, 7]]),
+      values: () =>
+        Promise.resolve([
+          [
+            7,
+            state.groceries,
+            state.pantry,
+            state.names,
+            state.avatars,
+            state.meals,
+            state.plan,
+          ],
+        ]),
     } as unknown as ReturnType<typeof db.$client.unsafe>);
     assert.deepEqual(await readState(), { ...state, version: 7 });
     assert.equal(query.mock.calls.length, 1);

@@ -86,7 +86,7 @@ export const planSchema = z
       entries.add(key);
     }
   });
-type Plan = z.infer<typeof planSchema>;
+export type Plan = z.infer<typeof planSchema>;
 export type State = Plan & {
   version: number;
   pantry: string[];
@@ -94,9 +94,9 @@ export type State = Plan & {
 };
 export const kitchenCommand = z.discriminatedUnion("action", [
   z.strictObject({
-    action: z.literal("groceries"),
-    add: z.array(z.string().min(1).max(200)).max(10_000),
-    remove: z.array(z.string().min(1).max(200)).max(10_000),
+    action: z.literal("grocery-items"),
+    add: z.array(shortText).max(10_000),
+    remove: z.array(shortText).max(10_000),
     version: z.number().int(),
   }),
   z.strictObject({
@@ -110,7 +110,7 @@ export function weekdayFor(date: Date): Weekday {
   return weekdays[(date.getDay() + 6) % 7];
 }
 export function ingredientKey(name: string) {
-  return name.trim().toLocaleLowerCase();
+  return name.trim().toLowerCase();
 }
 export function ingredientsFor(meals: Meal[]) {
   return [
@@ -171,15 +171,24 @@ export function selectEntries(
     : selection.filter((key) => !keys.has(key));
 }
 
-export function updateGroceries(state: State, add: string[], remove: string[]) {
-  const valid = new Set(state.plan.map(entryKey));
-  const removed = new Set(remove);
-  return [
-    ...new Set([
-      ...(state.groceries ?? []).filter((key) => !removed.has(key)),
-      ...add,
-    ]),
-  ].filter((key) => valid.has(key));
+export function updateGroceries(
+  state: Pick<State, "groceries">,
+  add: string[],
+  remove: string[]
+) {
+  const items = new Map(
+    state.groceries.map((name) => [ingredientKey(name), name])
+  );
+  for (const name of remove) {
+    items.delete(ingredientKey(name));
+  }
+  for (const name of add) {
+    const key = ingredientKey(name);
+    if (!items.has(key)) {
+      items.set(key, name.trim());
+    }
+  }
+  return [...items.values()];
 }
 
 export function ingredientsForEntries(meals: Meal[], entries: PlanEntry[]) {
