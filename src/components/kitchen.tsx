@@ -10,6 +10,7 @@ import { HeaderItem } from "@/components/header-item";
 import { MealButton } from "@/components/meal-button";
 import { MealDock } from "@/components/meal-dock";
 import { MemberAvatars } from "@/components/member-avatars";
+import { Reminders } from "@/components/reminders";
 import { ShareMealsButton } from "@/components/share-meals-button";
 import { TabIndicator } from "@/components/tab-indicator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -132,8 +133,17 @@ export default function Kitchen({
   useEffect(() => {
     let active = true;
     const currentDay = weekdayFor(new Date());
+    const url = new URL(window.location.href);
+    const requestedDay = weekdays.find(
+      (value) =>
+        value.toLowerCase() === url.searchParams.get("day")?.toLowerCase()
+    );
     // oxlint-disable-next-line react/set-state-in-effect -- Resolve the browser’s local day after hydration, independently of the network.
-    setDay(currentDay);
+    setDay((selected) => selected ?? requestedDay ?? currentDay);
+    if (url.searchParams.has("day")) {
+      url.searchParams.delete("day");
+      window.history.replaceState(window.history.state, "", url);
+    }
     setToday(currentDay);
     async function load() {
       try {
@@ -248,6 +258,11 @@ export default function Kitchen({
       <header className="relative flex h-11 shrink-0 -translate-y-1 items-center justify-center">
         <h1 className="sr-only">mealprep.party</h1>
         <AnimatePresence initial={false}>
+          {tab === "plan" && !selectionMode && (
+            <HeaderItem key="reminders" className="left-0">
+              <Reminders />
+            </HeaderItem>
+          )}
           {!selectionMode && (
             <HeaderItem key="title">
               <Image
@@ -634,10 +649,11 @@ export default function Kitchen({
           <DrawerFooter className="grid grid-cols-2 pb-[calc(1rem+env(safe-area-inset-bottom))]">
             <Button
               ref={hapticRef}
-              variant={recipeAdded ? "secondary" : "default"}
+              variant="secondary"
               className={cn(
                 actionButtonClass,
-                recipeAdded ? "disabled:opacity-100" : "hover:bg-primary"
+                "hover:bg-secondary",
+                recipeAdded && "disabled:opacity-100"
               )}
               disabled={recipeAdded || !recipeIngredients.length}
               onClick={() => {

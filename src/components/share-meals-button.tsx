@@ -35,8 +35,8 @@ export function ShareMealsButton({
     <>
       <Button
         ref={hapticRef}
-        variant={dock ? "ghost" : "secondary"}
-        className={cn(!dock && "hover:bg-secondary", className)}
+        variant={dock ? "ghost" : "default"}
+        className={cn(!dock && "hover:bg-primary", className)}
         disabled={!text || busy}
         aria-label={copied ? "Meals copied" : "Share meals"}
         onClick={async () => {
