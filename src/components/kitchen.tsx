@@ -9,7 +9,10 @@ import Markdown from "react-markdown";
 import { HeaderItem } from "@/components/header-item";
 import { MealButton } from "@/components/meal-button";
 import { MealDock } from "@/components/meal-dock";
-import { MemberAvatars } from "@/components/member-avatars";
+import {
+  MemberAvatars,
+  preloadMemberAvatars,
+} from "@/components/member-avatars";
 import { Reminders } from "@/components/reminders";
 import { ShareMealsButton } from "@/components/share-meals-button";
 import { TabIndicator } from "@/components/tab-indicator";
@@ -189,6 +192,7 @@ export default function Kitchen({
           return;
         }
         setState(data);
+        preloadMemberAvatars(Object.values(data.avatars ?? {}));
         sync.current = createKitchenSync(data, (next, message) => {
           if (active) {
             setState(next);
